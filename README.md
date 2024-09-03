@@ -1,7 +1,8 @@
-- 👋 Hi, I’m Shashwat Upadhyay 
+- 👋 Hi, I’m Shashwat Upadhyay
+- 🧑‍🎓 Student at IIT Madras 
 - 👀 I’m interested in Coding 
 - 🌱 I’m currently learning Python 
-- 💞️ I’m looking to collaborate on 
+
 - 📫 Reach me on shashwatology.s@gmail.com
 - 😄 Pronouns: He/Him
 - ⚡ Fun fact: Pyhton Start with 0 
