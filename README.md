@@ -2,7 +2,7 @@
 <h3 align="center">A passionate developer from India , Student At IIT Madras</h3>
 
 
-<img src="(https://www.google.com/url?sa=i&url=https%3A%2F%2Fgithub.com%2Fokoliechykwuka%2Fokoliechykwuka&psig=AOvVaw3_voXsomBaVA5qbRn3FTp9&ust=1726547883915000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCKi6op7SxogDFQAAAAAdAAAAABAE)" alt="Coding Image " style="float: right; width: 100px; height: auto; margin-left: 10px;">
+<img src="(https://cdn.dribbble.com/users/2131993/screenshots/4948736/thoughtworks-gif_dribbble.gif)" alt="Coding Image " style="float: right; width: 100px; height: auto; margin-left: 10px;">
 
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=shashwatology&label=Profile%20views&color=0e75b6&style=flat" alt="shashwatology" /> </p>
