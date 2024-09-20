@@ -14,7 +14,7 @@
 
 - 📫 How to reach me **shashwatology.s@gmail.com**
 
-- 📄 Know about my experiences [bento.me/shashwatupadhyay](bento.me/shashwatupadhyay)
+- 📄 Know about my experiences [bento.me/shashwatupadhyay]([bento.me/shashwatupadhyay](https://bento.me/shashwatupadhyay))
 
 - ⚡ Fun fact **Python Start with zero**
 
