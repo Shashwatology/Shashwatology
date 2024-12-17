@@ -29,9 +29,17 @@
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)  ![GithubPages](https://img.shields.io/badge/github%20pages-121013?style=for-the-badge&logo=github&logoColor=white) ![Google Cloud](https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=for-the-badge&logo=google-cloud&logoColor=white) ![OpenCV](https://img.shields.io/badge/opencv-%23white.svg?style=for-the-badge&logo=opencv&logoColor=white) ![Canva](https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=Canva&logoColor=white)
 
 # 📊 GitHub Stats:
-![](https://github-readme-stats.vercel.app/api?username=shashwatology&theme=highcontrast&hide_border=false&include_all_commits=false&count_private=false)<br/>
-![](https://github-readme-streak-stats.herokuapp.com/?user=shashwatology&theme=highcontrast&hide_border=false)<br/>
-![](https://github-readme-stats.vercel.app/api/top-langs/?username=shashwatology&theme=highcontrast&hide_border=false&include_all_commits=false&count_private=false&layout=compact)
+
+
+  <h2 align="center">⚡ Current Stats ⚡</h2>
+<br>
+<div align=center>
+    <img width=390 src="https://github-readme-stats.vercel.app/api?username=shashwatology&show_icons=true&theme=react&rank_icon=github&border_radius=10" alt="readme stats" /> <br>
+  <img width=390 src="https://streak-stats.demolab.com/?user=shashwatology&count_private=true&theme=react&border_radius=10" alt="streak stats"/> 
+  <img width=325 align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=shashwatology&theme=highcontrast&hide_border=false&include_all_commits=false&count_private=false&layout=compact" /><Br>
+</div>
+
+  <br/>
 
 <div>
 <!--   <p>
