@@ -50,17 +50,11 @@ jobs:
           GH_PROFILE_USER: shashwatology
         run: python scripts/fetch_github_data.py
 
-      - name: Process Portrait / Generate Multimodal Silhouette Placeholder
+      - name: Process Blue-Duotone Scanline Portrait
         run: python scripts/process_portrait.py
 
-      - name: Render 16:9 Editorial Research Visual
-        run: python scripts/generate_research_visual.py
-
-      - name: Render Cobalt Blue Contribution Heatmap
+      - name: Render Cobalt Blue Contribution Heatmap with Integrated Telemetry
         run: python scripts/generate_heatmap.py
-
-      - name: Render Monthly Activity & Streak Telemetry Card
-        run: python scripts/generate_activity.py
 
       - name: Render All SVG Editorial Cards
         run: python scripts/render_cards.py

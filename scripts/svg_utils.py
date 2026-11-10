@@ -68,16 +68,16 @@ BASE_CSS = """
 @keyframes nudge { 0%, 100% { transform: none; } 50% { transform: translateX(3px); } }
 @keyframes sheen { 0% { transform: translateX(-300px) skewX(-20deg); } 20%, 100% { transform: translateX(500px) skewX(-20deg); } }
 
-.r { opacity: 0; animation: rise .75s cubic-bezier(.2,.7,.2,1) both; transform-box: fill-box; }
-.f { opacity: 0; animation: fade .85s ease-out both; }
-.g { transform-box: fill-box; transform-origin: bottom; transform: scaleY(0); animation: grow .8s cubic-bezier(.2,.7,.2,1) both; }
-.p { opacity: 0; transform-box: fill-box; transform-origin: center; animation: pop .4s ease-out both; }
+.r { opacity: 1; transform-box: fill-box; }
+.f { opacity: 1; }
+.g { transform-box: fill-box; transform-origin: bottom; }
+.p { opacity: 1; transform-box: fill-box; transform-origin: center; }
 .live { animation: pulse 2s ease-in-out infinite; }
 .n { transform-box: fill-box; animation: nudge 2s ease-in-out infinite; }
 .sh { animation: sheen 6s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  .r, .f, .g, .p, .live, .n, .sh { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .live, .n, .sh { animation: none !important; }
 }
 """
 

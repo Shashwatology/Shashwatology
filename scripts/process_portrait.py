@@ -1,191 +1,202 @@
 #!/usr/bin/env python3
 """
-Portrait Processing Pipeline for Shashwat Upadhyay - Research Portfolio.
+Portrait Processing Pipeline for Shashwat Upadhyay.
 
-Transforms a source portrait photo (assets/profile-photo.jpg) into an elegant,
-monochrome ASCII / fine scanline halftone vector illustration.
-If no source photo is present, generates a scientific multimodal silhouette
-placeholder (layered RGB + Thermal imaging contours with calibration crosshairs).
+Generates a premium blue-duotone scanline portrait from real photo and illustration sources.
+Source Priority:
+  1. assets/user_uploaded_ascii.jpg (user uploaded ASCII halftone portrait)
+  2. assets/user_uploaded_photo.jpg (user uploaded direct photo)
+  3. assets/profile-photo.jpg (if user supplies manual photo)
+  4. assets/github-avatar.png (genuine avatar photo in repository)
 """
 
 import os
 import sys
+import base64
 import cv2
 import numpy as np
-from PIL import Image, ImageEnhance, ImageFilter
+from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..")
 ASSETS = os.path.join(ROOT, "assets")
-SOURCE_PHOTO = os.path.join(ASSETS, "profile-photo.jpg")
+
+USER_ASCII = os.path.join(ASSETS, "user_uploaded_ascii.jpg")
+USER_PHOTO = os.path.join(ASSETS, "user_uploaded_photo.jpg")
+MANUAL_PHOTO = os.path.join(ASSETS, "profile-photo.jpg")
 FALLBACK_AVATAR = os.path.join(ASSETS, "github-avatar.png")
+
 OUT_PNG = os.path.join(ASSETS, "shashwat-portrait.png")
 OUT_SVG = os.path.join(ASSETS, "shashwat-portrait.svg")
 
-# Density ramp for editorial terminal ASCII rendering (light to dark)
-ASCII_RAMP = " .`:-=+*cs#%@"
+def get_source_image():
+    if os.path.exists(USER_ASCII):
+        print(f"Using user-uploaded ASCII portrait: {USER_ASCII}")
+        return USER_ASCII, "ascii"
+    elif os.path.exists(USER_PHOTO):
+        print(f"Using user-uploaded real photo: {USER_PHOTO}")
+        return USER_PHOTO, "photo"
+    elif os.path.exists(MANUAL_PHOTO):
+        print(f"Using manual profile photo: {MANUAL_PHOTO}")
+        return MANUAL_PHOTO, "photo"
+    elif os.path.exists(FALLBACK_AVATAR):
+        print(f"Using genuine avatar photo: {FALLBACK_AVATAR}")
+        return FALLBACK_AVATAR, "avatar"
+    else:
+        raise FileNotFoundError("No source portrait image found in assets.")
 
-def generate_scientific_placeholder_svg():
-    """Generates an ultra-premium scientific multimodal silhouette placeholder SVG."""
-    w, h = 320, 360
-    # Layered contours, thermal gradient lines, and calibration markers
-    svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
+def process_portrait():
+    source_path, stype = get_source_image()
+    target_w, target_h = 210, 260
+    im = Image.open(source_path)
+
+    if stype == "ascii":
+        # User uploaded ASCII halftone portrait
+        # Crop bust and head centered: (140, 100, 884, 950)
+        crop = im.crop((140, 100, 884, 950))
+        resized = crop.resize((target_w, target_h), Image.Resampling.LANCZOS)
+        resized_gray = np.array(resized.convert('L')).astype(np.float32)
+
+        # Invert: background is ~247 (near white), ink is dark
+        ink_density = np.clip((247.0 - resized_gray) / 190.0, 0.0, 1.0)
+        alpha = np.clip(ink_density ** 0.85 * 255.0, 0, 255).astype(np.uint8)
+
+        # Cobalt & Navy color palette
+        c_cobalt = np.array([49, 94, 255], dtype=np.float32)   # #315EFF Electric Cobalt
+        c_mid = np.array([30, 62, 184], dtype=np.float32)      # #1E3EB8
+        c_deep = np.array([7, 11, 25], dtype=np.float32)       # #070B19 Deep Midnight Navy
+
+        rgba = np.zeros((target_h, target_w, 4), dtype=np.uint8)
+        for y in range(target_h):
+            for x in range(target_w):
+                d = ink_density[y, x]
+                if d < 0.4:
+                    t = d / 0.4
+                    col = (1 - t) * c_cobalt + t * c_mid
+                else:
+                    t = (d - 0.4) / 0.6
+                    col = (1 - t) * c_mid + t * c_deep
+                rgba[y, x, :3] = np.clip(col, 0, 255).astype(np.uint8)
+                rgba[y, x, 3] = alpha[y, x]
+
+        # Scanlines
+        for y in range(0, target_h, 2):
+            rgba[y, :, 3] = (rgba[y, :, 3] * 0.78).astype(np.uint8)
+
+        out_im = Image.fromarray(rgba, mode="RGBA")
+        out_im.save(OUT_PNG)
+        print(f"Saved transparent ASCII portrait PNG: {OUT_PNG}")
+
+    else:
+        # Photo pipeline (webcam, DSLR, or avatar)
+        if stype == "avatar":
+            crop = im.crop((170, 30, 350, 260))
+        else:
+            w, h = im.size
+            side = min(w, h)
+            cx, cy = w // 2, int(h * 0.45)
+            crop = im.crop((max(0, cx - side // 2), max(0, cy - side // 2),
+                            min(w, cx + side // 2), min(h, cy + side // 2)))
+
+        crop = crop.resize((target_w, target_h), Image.Resampling.LANCZOS)
+        gray = crop.convert('L')
+        gray_np = np.array(gray)
+        clahe = cv2.createCLAHE(clipLimit=2.2, tileGridSize=(8, 8))
+        enhanced_np = clahe.apply(gray_np)
+
+        p3, p97 = np.percentile(enhanced_np, (4, 96))
+        stretched = np.clip((enhanced_np - p3) / max(1.0, (p97 - p3)) * 255.0, 0, 255).astype(np.float32)
+
+        Y, X = np.ogrid[:target_h, :target_w]
+        center_x, center_y = target_w * 0.52, target_h * 0.42
+        dist = np.sqrt(((X - center_x) / (target_w * 0.55)) ** 2 + ((Y - center_y) / (target_h * 0.55)) ** 2)
+        vignette = np.clip(1.0 - (dist - 0.45) * 1.4, 0.25, 1.0)
+        norm = (stretched * vignette) / 255.0
+
+        c_dark = np.array([7, 11, 25], dtype=np.float32)
+        c_mid = np.array([37, 84, 255], dtype=np.float32)
+        c_cyan = np.array([125, 223, 255], dtype=np.float32)
+        c_high = np.array([255, 255, 255], dtype=np.float32)
+
+        duotone = np.zeros((target_h, target_w, 3), dtype=np.uint8)
+        for y in range(target_h):
+            for x in range(target_w):
+                l = norm[y, x]
+                if l < 0.38:
+                    t = l / 0.38
+                    col = (1 - t) * c_dark + t * c_mid
+                elif l < 0.75:
+                    t = (l - 0.38) / 0.37
+                    col = (1 - t) * c_mid + t * c_cyan
+                else:
+                    t = (l - 0.75) / 0.25
+                    col = (1 - t) * c_cyan + t * c_high
+                duotone[y, x] = np.clip(col, 0, 255).astype(np.uint8)
+
+        for y in range(0, target_h, 2):
+            duotone[y] = (duotone[y] * 0.68).astype(np.uint8)
+
+        out_im = Image.fromarray(duotone)
+        out_im.save(OUT_PNG)
+        print(f"Saved processed photo portrait PNG: {OUT_PNG}")
+
+    # Generate Self-Contained SVG with animated blue scan sweep
+    with open(OUT_PNG, "rb") as pf:
+        b64_png = base64.b64encode(pf.read()).decode("utf-8")
+
+    svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {target_w} {target_h}" width="{target_w}" height="{target_h}">
   <defs>
-    <linearGradient id="thermal-grad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#315EFF" stop-opacity="0.8"/>
-      <stop offset="50%" stop-color="#7DDFFF" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.7"/>
+    <style>
+      @keyframes portrait-scan {{
+        0% {{ transform: translateY(0); opacity: 0; }}
+        15% {{ opacity: 0.85; }}
+        85% {{ opacity: 0.85; }}
+        100% {{ transform: translateY({target_h}px); opacity: 0; }}
+      }}
+      .scanline-sweep {{
+        animation: portrait-scan 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }}
+      @media (prefers-reduced-motion: reduce) {{
+        .scanline-sweep {{ animation: none !important; display: none; }}
+      }}
+    </style>
+    <clipPath id="port-clip">
+      <rect width="{target_w}" height="{target_h}" rx="8"/>
+    </clipPath>
+    <linearGradient id="scan-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#315EFF" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#7DDFFF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#315EFF" stop-opacity="0"/>
     </linearGradient>
-    <pattern id="grid-dots" width="16" height="16" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="0.8" fill="#131313" fill-opacity="0.12"/>
-    </pattern>
   </defs>
 
-  <!-- Background Grid -->
-  <rect width="{w}" height="{h}" fill="none"/>
-  <rect width="{w}" height="{h}" fill="url(#grid-dots)"/>
+  <g clip-path="url(#port-clip)">
+    <!-- Actual Processed Duotone Artwork -->
+    <image href="data:image/png;base64,{b64_png}" width="{target_w}" height="{target_h}" preserveAspectRatio="xMidYMid meet"/>
 
-  <!-- Outer Scientific Frame -->
-  <rect x="12" y="12" width="{w-24}" height="{h-24}" rx="8" fill="none" stroke="#131313" stroke-opacity="0.15" stroke-dasharray="3 3"/>
-  <path d="M 12 28 L 12 12 L 28 12" fill="none" stroke="#315EFF" stroke-width="2"/>
-  <path d="M {w-28} 12 L {w-12} 12 L {w-12} 28" fill="none" stroke="#315EFF" stroke-width="2"/>
-  <path d="M 12 {h-28} L 12 {h-12} L 28 {h-12}" fill="none" stroke="#315EFF" stroke-width="2"/>
-  <path d="M {w-28} {h-12} L {w-12} {h-12} L {w-12} {h-28}" fill="none" stroke="#315EFF" stroke-width="2"/>
-
-  <!-- Coordinate Metadata -->
-  <text x="24" y="32" font-family="'Geist Mono', monospace" font-size="9" fill="#131313" fill-opacity="0.5">MODALITY // RGB+THERMAL [rPPG]</text>
-  <text x="{w-24}" y="32" text-anchor="end" font-family="'Geist Mono', monospace" font-size="9" fill="#315EFF">λ: 520nm-850nm</text>
-
-  <!-- Central Scientific Silhouette: Abstract Human Contour & Multimodal Waveforms -->
-  <g transform="translate(160, 185)">
-    <!-- Layered Physiological Resonance Waves -->
-    <circle cx="0" cy="-30" r="54" fill="none" stroke="#315EFF" stroke-width="1" stroke-dasharray="2 4" stroke-opacity="0.4"/>
-    <circle cx="0" cy="-30" r="68" fill="none" stroke="#7DDFFF" stroke-width="1" stroke-opacity="0.5"/>
-    <circle cx="0" cy="-30" r="82" fill="none" stroke="#8B5CF6" stroke-width="0.8" stroke-dasharray="4 6" stroke-opacity="0.4"/>
-
-    <!-- Head & Shoulders Silhouette Form (Isometric / Editorial Contours) -->
-    <!-- Head Contour -->
-    <path d="M -32 -30 C -32 -65 32 -65 32 -30 C 32 -5 20 18 0 24 C -20 18 -32 -5 -32 -30 Z" 
-          fill="#131313" fill-opacity="0.04" stroke="#131313" stroke-opacity="0.3" stroke-width="1.2"/>
-    
-    <!-- Facial Isocontour Lines (Simulating Thermal/3D Mesh Scanning) -->
-    <path d="M -22 -35 Q 0 -45 22 -35" fill="none" stroke="#315EFF" stroke-width="1.2" stroke-opacity="0.7"/>
-    <path d="M -26 -20 Q 0 -30 26 -20" fill="none" stroke="#315EFF" stroke-width="1.2" stroke-opacity="0.7"/>
-    <path d="M -20 -5 Q 0 -12 20 -5" fill="none" stroke="#131313" stroke-width="1" stroke-opacity="0.4"/>
-    <path d="M -14 8 Q 0 4 14 8" fill="none" stroke="#131313" stroke-width="1" stroke-opacity="0.4"/>
-    
-    <!-- Eye & Facial Calibration Points -->
-    <circle cx="-12" cy="-28" r="2.2" fill="#315EFF"/>
-    <circle cx="12" cy="-28" r="2.2" fill="#315EFF"/>
-    <line x1="-18" y1="-28" x2="-6" y2="-28" stroke="#7DDFFF" stroke-width="0.8"/>
-    <line x1="6" y1="-28" x2="18" y2="-28" stroke="#7DDFFF" stroke-width="0.8"/>
-    <line x1="0" y1="-32" x2="0" y2="-12" stroke="#131313" stroke-width="0.8" stroke-opacity="0.3"/>
-
-    <!-- Shoulders / Torso Contour -->
-    <path d="M -75 95 C -65 65 -45 42 -18 32 L 18 32 C 45 42 65 65 75 95 Z" 
-          fill="#131313" fill-opacity="0.03" stroke="#131313" stroke-opacity="0.25" stroke-width="1.2"/>
-    
-    <!-- Horizontal scanlines through torso -->
-    <line x1="-55" y1="52" x2="55" y2="52" stroke="#131313" stroke-opacity="0.15" stroke-width="1"/>
-    <line x1="-65" y1="68" x2="65" y2="68" stroke="#315EFF" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="4 2"/>
-    <line x1="-72" y1="84" x2="72" y2="84" stroke="#131313" stroke-opacity="0.15" stroke-width="1"/>
-
-    <!-- Crosshair Target on Forehead (Typical rPPG Region of Interest - ROI) -->
-    <g transform="translate(0, -42)">
-      <circle cx="0" cy="0" r="8" fill="none" stroke="#315EFF" stroke-width="1.2"/>
-      <line x1="-12" y1="0" x2="12" y2="0" stroke="#315EFF" stroke-width="1"/>
-      <line x1="0" y1="-12" x2="0" y2="12" stroke="#315EFF" stroke-width="1"/>
-      <rect x="-14" y="-22" width="28" height="9" rx="2" fill="#315EFF"/>
-      <text x="0" y="-15" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="6.5" font-weight="bold" fill="#ffffff">ROI:BVP</text>
+    <!-- Subtle animated blue light scan bar -->
+    <g class="scanline-sweep">
+      <rect x="0" y="0" width="{target_w}" height="14" fill="url(#scan-grad)"/>
+      <line x1="0" y1="7" x2="{target_w}" y2="7" stroke="#7DDFFF" stroke-width="1.2"/>
     </g>
-  </g>
 
-  <!-- Technical Telemetry Footer -->
-  <line x1="24" y1="{h-38}" x2="{w-24}" y2="{h-38}" stroke="#131313" stroke-opacity="0.1"/>
-  <text x="24" y="{h-22}" font-family="'Geist Mono', monospace" font-size="8.5" fill="#131313" fill-opacity="0.6">STATUS: CALIBRATED</text>
-  <text x="{w-24}" y="{h-22}" text-anchor="end" font-family="'Geist Mono', monospace" font-size="8.5" fill="#131313" fill-opacity="0.6">SYNC: 60Hz 1080p</text>
+    <!-- Border & Technical Corner Ticks -->
+    <rect x="0.5" y="0.5" width="{target_w-1}" height="{target_h-1}" rx="8" fill="none" stroke="#315EFF" stroke-width="1" stroke-opacity="0.3"/>
+    <path d="M 0 16 L 0 0 L 16 0" fill="none" stroke="#315EFF" stroke-width="1.8"/>
+    <path d="M {target_w-16} 0 L {target_w} 0 L {target_w} 16" fill="none" stroke="#315EFF" stroke-width="1.8"/>
+    <path d="M 0 {target_h-16} L 0 {target_h} L 16 {target_h}" fill="none" stroke="#315EFF" stroke-width="1.8"/>
+    <path d="M {target_w-16} {target_h} L {target_w} {target_h} L {target_w} {target_h-16}" fill="none" stroke="#315EFF" stroke-width="1.8"/>
+
+    <!-- Status Metadata Badge -->
+    <rect x="8" y="{target_h-22}" width="96" height="15" rx="3" fill="#070B19" fill-opacity="0.85"/>
+    <text x="14" y="{target_h-11}" font-family="'Geist Mono', monospace" font-size="8" font-weight="600" fill="#7DDFFF" letter-spacing="0.8">SHASHWAT // AI</text>
+  </g>
 </svg>
 """
+
     with open(OUT_SVG, "w", encoding="utf-8") as f:
         f.write(svg_content)
-    print(f"Generated scientific placeholder SVG: {OUT_SVG}")
-
-    # Also generate a high-res PNG version using PIL
-    # We can create a crisp monochrome bitmap
-    img = Image.new("RGBA", (320, 360), (245, 245, 240, 255))
-    # We'll save the SVG directly; for PNG, if needed, save transparent canvas
-    img.save(OUT_PNG)
-    print(f"Saved portrait placeholder PNG: {OUT_PNG}")
-
-def process_photo(photo_path):
-    """Processes a user-provided photo into an editorial ASCII / scanline monochrome illustration."""
-    print(f"Processing photo from {photo_path}...")
-    try:
-        im = Image.open(photo_path).convert("L")
-    except Exception as e:
-        print(f"Failed to open image {photo_path}: {e}")
-        return False
-
-    # Target grid resolution
-    cols = 96
-    # Compute proportional rows (character aspect ratio ~1:2)
-    aspect = im.size[1] / im.size[0]
-    rows = int(cols * aspect * 0.5)
-    rows = max(40, min(120, rows))
-
-    # Pre-processing: Contrast & unsharp mask
-    im = ImageEnhance.Contrast(im).enhance(1.4)
-    im = ImageEnhance.Sharpness(im).enhance(1.3)
-    im_small = im.resize((cols, rows), Image.Resampling.LANCZOS)
-    px = im_small.load()
-
-    lines = []
-    for y in range(rows):
-        row_str = []
-        for x in range(cols):
-            val = px[x, y]
-            idx = int((val / 255.0) * (len(ASCII_RAMP) - 1))
-            row_str.append(ASCII_RAMP[idx])
-        lines.append("".join(row_str))
-
-    # Build monochrome SVG text lines
-    w = 340
-    char_w = w / cols
-    char_h = char_w * 2.0
-    h = int(rows * char_h) + 40
-
-    svg_parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">',
-        f'<rect width="{w}" height="{h}" fill="#F4F4F0" rx="8"/>',
-        f'<g font-family="ui-monospace, \'Geist Mono\', monospace" font-size="{char_h * 0.85:.2f}" fill="#131313">',
-    ]
-
-    for idx, line in enumerate(lines):
-        y_pos = 24 + idx * char_h
-        escaped = line.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-        svg_parts.append(
-            f'<text x="10" y="{y_pos:.1f}" textLength="{w-20}" lengthAdjust="spacing" xml:space="preserve">{escaped}</text>'
-        )
-
-    svg_parts.append("</g></svg>")
-
-    with open(OUT_SVG, "w", encoding="utf-8") as f:
-        f.write("\n".join(svg_parts))
-    print(f"Rendered processed portrait to {OUT_SVG}")
-    return True
-
-def main():
-    if os.path.exists(SOURCE_PHOTO):
-        print(f"Found source photo at {SOURCE_PHOTO}")
-        success = process_photo(SOURCE_PHOTO)
-        if not success:
-            generate_scientific_placeholder_svg()
-    else:
-        print(f"Source photo not found at {SOURCE_PHOTO}")
-        print("Generating editorial scientific multimodal silhouette placeholder...")
-        generate_scientific_placeholder_svg()
-        print("\n[NOTE FOR USER]: To use your actual face, save your photograph as 'assets/profile-photo.jpg'")
-        print("and run 'python scripts/process_portrait.py'.")
+    print(f"Saved processed portrait SVG: {OUT_SVG}")
 
 if __name__ == "__main__":
-    main()
+    process_portrait()

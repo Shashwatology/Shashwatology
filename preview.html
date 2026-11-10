@@ -36,8 +36,8 @@
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      padding: 36px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     }
     .theme-switch {
       position: fixed;
@@ -46,13 +46,13 @@
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       color: var(--text-color);
-      padding: 8px 16px;
+      padding: 8px 14px;
       border-radius: 20px;
       cursor: pointer;
       font-size: 13px;
       font-weight: 600;
       z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
     a { color: var(--link-color); text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -94,243 +94,159 @@
       color: #58a6ff;
       margin: 0 0 6px 0;
     }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--border-color);
+      margin: 24px 0;
+    }
   </style>
 </head>
 <body>
   <button class="theme-switch" onclick="document.body.classList.toggle('light')">🌓 Toggle Light / Dark</button>
   <div class="container">
-    <div align="center">
-      <!-- 01 · HERO -->
-      <a href="https://github.com/shashwatology">
-        <object data="./cards/hero.svg" type="image/svg+xml" width="100%"></object>
-      </a>
-      <br><br>
-      <!-- 16:9 MASTER EDITORIAL VISUAL -->
-      <a href="https://github.com/shashwatology/PhysioFM">
-        <object data="./assets/research-visual.svg" type="image/svg+xml" width="100%"></object>
-      </a>
-      <br><br>
-      <!-- 02 · RESEARCH DIRECTIONS -->
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./cards/title-research-dark.svg">
-        <img src="./cards/title-research-light.svg" width="100%" alt="Research Directions">
-      </picture>
-      <object data="./cards/research-map.svg" type="image/svg+xml" width="100%"></object>
-    </div>
+    <!--
+  SHASHWAT UPADHYAY — RESEARCH IN MOTION (Version 2.0)
+  Compact Editorial AI Research Portfolio & Automated Design System
+-->
 
-    <br>
-    <h3>🔬 Core Scientific Pillars</h3>
-    <table>
-      <tr>
-        <td width="50%" valign="top">
-          <h4>01 · Multimodal AI &amp; Physiological Computing</h4>
-          <p>Investigating non-contact physiological signal extraction (heart rate, respiration, BVP) from standard video feeds. Bridging spatial hierarchical vision transformers (Swin-V2) with spatio-temporal difference stems (STDS) to overcome gradient starvation in continuous regression tasks.</p>
-          <p><b>Keywords:</b> <code>rPPG</code> · <code>UBFC-rPPG</code> · <code>Swin-V2</code> · <code>Temporal Transformers</code> · <code>RGB+Thermal Fusion</code></p>
-          <p>🔗 <b>Primary Repository:</b> <a href="https://github.com/Shashwatology/PhysioFM"><b>Shashwatology/PhysioFM</b></a></p>
-        </td>
-        <td width="50%" valign="top">
-          <h4>02 · Digital Twins &amp; Intelligent Mobility</h4>
-          <p>Authoring synchronous digital twin environments coupling microscopic traffic simulation with real-time edge computer vision inference. Integrating synthetic sensor streams for dynamic signal phase optimization and urban congestion mitigation.</p>
-          <p><b>Keywords:</b> <code>SUMO Simulation</code> · <code>Unity 3D Engine</code> · <code>YOLO Object Detection</code> · <code>Traffic Telemetry</code></p>
-          <p>🔗 <b>Primary Repository:</b> <a href="https://github.com/Shashwatology/Guardian-Travel-Twin-"><b>Shashwatology/Guardian-Travel-Twin-</b></a></p>
-        </td>
-      </tr>
-      <tr>
-        <td width="50%" valign="top">
-          <h4>03 · Machine Learning Security &amp; Robustness</h4>
-          <p>Auditing silent vulnerability surfaces in machine learning pipelines. Discovered pre-inference semantic drift across Vision-Language Models (VLMs) via alpha-channel transparency exploitation, coupled with zero-label unsupervised anomaly detection platforms.</p>
-          <p><b>Keywords:</b> <code>VLM Preprocessing Attacks</code> · <code>Semantic Drift</code> · <code>Isolation Forests</code> · <code>SSH Threat Intelligence</code></p>
-          <p>🔗 <b>Primary Repositories:</b> <a href="https://github.com/Shashwatology/semantic-drift-vlm-attacks"><b>semantic-drift-vlm-attacks</b></a> · <a href="https://github.com/Shashwatology/SentinelAI"><b>SentinelAI</b></a></p>
-        </td>
-        <td width="50%" valign="top">
-          <h4>04 · Document Intelligence &amp; Visual Search</h4>
-          <p>Decomposing complex visual documents into discrete semantic "visual atoms" vectorized via contrastive vision-language pretraining (CLIP). Enhancing localized image querying and model interpretability with localized explainability frameworks.</p>
-          <p><b>Keywords:</b> <code>Visual Atoms</code> · <code>Contrastive Learning</code> · <code>CLIP Search</code> · <code>SLICE / LIME Interpretability</code></p>
-          <p>🔗 <b>Primary Repository:</b> <a href="https://github.com/Shashwatology/Semantic-Ctrl-F"><b>Semantic-Ctrl-F</b></a></p>
-        </td>
-      </tr>
-    </table>
+<div align="center">
 
-    <br>
-    <div align="center">
-      <!-- 03 · SELECTED RESEARCH -->
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./cards/title-projects-dark.svg">
-        <img src="./cards/title-projects-light.svg" width="100%" alt="Selected Research">
-      </picture>
-      <a href="https://github.com/Shashwatology/PhysioFM"><object data="./cards/project-physiofm.svg" type="image/svg+xml" width="100%"></object></a><br>
-      <a href="https://github.com/Shashwatology/semantic-drift-vlm-attacks"><object data="./cards/project-vlm-security.svg" type="image/svg+xml" width="100%"></object></a><br>
-      <a href="https://github.com/Shashwatology/Guardian-Travel-Twin-"><object data="./cards/project-digital-twins.svg" type="image/svg+xml" width="100%"></object></a><br>
-      <a href="https://github.com/Shashwatology/SentinelAI"><object data="./cards/project-sentinel-ai.svg" type="image/svg+xml" width="100%"></object></a><br>
-      <a href="https://github.com/Shashwatology/BreatheSync"><object data="./cards/project-breathesync.svg" type="image/svg+xml" width="100%"></object></a>
-    </div>
+<!-- 01 · COMPACT HERO CARD -->
+<a href="https://github.com/shashwatology">
+  <img src="./cards/hero.svg" width="100%" alt="Shashwat Upadhyay — Research in Motion. Independent AI Researcher." />
+</a>
 
-    <br>
-    <!-- 04 · PUBLICATIONS -->
-    <div align="center">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./cards/title-publications-dark.svg">
-        <img src="./cards/title-publications-light.svg" width="100%" alt="Publications">
-      </picture>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Manuscript / Research Title</th>
-          <th>Venue / Framework</th>
-          <th>Year</th>
-          <th>Status</th>
-          <th>Verified Link</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><b>01</b></td>
-          <td><b>Fake news detection using deep learning models: A novel approach</b><br><sub>Sachin Kumar, Rohan Asthana, Shashwat Upadhyay, N. Upreti, M. Akbar</sub></td>
-          <td><em>Transactions on Emerging Telecommunications Technologies (Wiley)</em></td>
-          <td>2020</td>
-          <td><code>Published</code></td>
-          <td><a href="https://doi.org/10.1002/ett.3967"><b>DOI: 10.1002/ett.3967</b></a></td>
-        </tr>
-        <tr>
-          <td><b>02</b></td>
-          <td><b>Semantic Drift Before Inference: A Preprocessing Attack Surface in Vision–Language Models</b><br><sub>Shashwat Upadhyay</sub></td>
-          <td><em>Research Working Paper &amp; Reproducible Testbed</em></td>
-          <td>2026</td>
-          <td><code>In Progress</code></td>
-          <td><a href="https://github.com/Shashwatology/semantic-drift-vlm-attacks"><b>Codebase &amp; Paper</b></a></td>
-        </tr>
-        <tr>
-          <td><b>03</b></td>
-          <td><b>PhysioFM: Optimization Diagnostics and Failure Analysis of Hierarchical Foundation Models in rPPG</b><br><sub>Shashwat Anil Kumar Upadhyay</sub></td>
-          <td><em>Master Research Dossier &amp; PyTorch Framework</em></td>
-          <td>2026</td>
-          <td><code>In Progress</code></td>
-          <td><a href="https://github.com/Shashwatology/PhysioFM"><b>Research Dossier</b></a></td>
-        </tr>
-      </tbody>
-    </table>
+<br><br>
 
-    <div class="markdown-alert">
-      <p class="markdown-alert-title">Verified Research Integrity</p>
-      <p>All publications, working papers, and associated experimental artifacts are backed by reproducible code repositories and strictly verified data points. No citations or acceptance statuses are simulated.</p>
-    </div>
+<!-- 02 · RESEARCH DIRECTIONS -->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./cards/title-research-dark.svg" />
+  <img src="./cards/title-research-light.svg" width="100%" alt="Research Directions" />
+</picture>
 
-    <br>
-    <!-- 05 · JOURNEY -->
-    <div align="center">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./cards/title-journey-dark.svg">
-        <img src="./cards/title-journey-light.svg" width="100%" alt="Academic Journey">
-      </picture>
-      <object data="./cards/research-timeline.svg" type="image/svg+xml" width="100%"></object>
-    </div>
+<img src="./cards/research-map.svg" width="100%" alt="Research Directions: Multimodal AI, Digital Twins, ML Security, Document Intelligence" />
 
-    <br>
-    <!-- 06 · STACK -->
-    <div align="center">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./cards/title-stack-dark.svg">
-        <img src="./cards/title-stack-light.svg" width="100%" alt="Technology Toolkit">
-      </picture>
-    </div>
-    <table>
-      <tr>
-        <td width="33%" valign="top">
-          <b>⚡ Core Languages</b><br>
-          • Python <code>3.10+</code><br>
-          • C++ <code>17/20</code><br>
-          • TypeScript / JavaScript<br>
-          • SQL &amp; Dataform<br>
-          • Java &amp; Bash
-        </td>
-        <td width="33%" valign="top">
-          <b>🧠 Machine Learning &amp; AI</b><br>
-          • PyTorch &amp; TorchVision<br>
-          • Hugging Face Transformers<br>
-          • Swin-V2 &amp; TimeSformer<br>
-          • Scikit-learn &amp; NumPy<br>
-          • SciPy &amp; Pandas
-        </td>
-        <td width="33%" valign="top">
-          <b>👁️ Computer Vision &amp; rPPG</b><br>
-          • OpenCV &amp; ImageIO<br>
-          • YOLO (v8 / v9)<br>
-          • CLIP &amp; BLIP Foundations<br>
-          • Waveform Extraction (BVP)<br>
-          • Spectral Analysis (FFT)
-        </td>
-      </tr>
-      <tr>
-        <td width="33%" valign="top">
-          <b>🚦 Digital Twins &amp; Mobility</b><br>
-          • SUMO (Simulation of Urban MObility)<br>
-          • Unity 3D Engine<br>
-          • TraCI Protocol<br>
-          • Microscopic Traffic Telemetry<br>
-          • Spatial Sensor Mapping
-        </td>
-        <td width="33%" valign="top">
-          <b>🛡️ Cyber Security &amp; Robustness</b><br>
-          • Adversarial VLM Attack Auditing<br>
-          • Isolation Forests (Zero-Label)<br>
-          • Threat Modeling &amp; OSINT<br>
-          • Wireshark &amp; BurpSuite<br>
-          • Host Network Log Analysis
-        </td>
-        <td width="33%" valign="top">
-          <b>📐 Scientific Computing &amp; Dev</b><br>
-          • LaTeX &amp; Overleaf<br>
-          • Docker &amp; Containerization<br>
-          • Git &amp; CI/CD GitHub Actions<br>
-          • FastAPI &amp; Node.js<br>
-          • Linux / WSL2 Environments
-        </td>
-      </tr>
-    </table>
+<br><br>
 
-    <br>
-    <!-- 07 · TELEMETRY -->
-    <div align="center">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./cards/title-activity-dark.svg">
-        <img src="./cards/title-activity-light.svg" width="100%" alt="GitHub Activity">
-      </picture>
-      <object data="./cards/heatmap.svg" type="image/svg+xml" width="100%"></object>
-      <br>
-      <object data="./cards/activity.svg" type="image/svg+xml" width="100%"></object>
-    </div>
+<!-- 03 · FEATURED RESEARCH PROJECTS (ROW OF 3) -->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./cards/title-projects-dark.svg" />
+  <img src="./cards/title-projects-light.svg" width="100%" alt="Featured Research Projects" />
+</picture>
 
-    <br><br>
-    <!-- 08 · REPOSITORIES -->
-    <div align="center">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./cards/title-repos-dark.svg">
-        <img src="./cards/title-repos-light.svg" width="100%" alt="Featured Repositories">
-      </picture>
-      <a href="https://github.com/Shashwatology/PhysioFM"><img src="./cards/repo-PhysioFM.svg" width="33%" alt="PhysioFM"></a><a href="https://github.com/Shashwatology/SentinelAI"><img src="./cards/repo-SentinelAI.svg" width="33%" alt="SentinelAI"></a><a href="https://github.com/Shashwatology/BreatheSync"><img src="./cards/repo-BreatheSync.svg" width="33%" alt="BreatheSync"></a><br>
-      <a href="https://github.com/Shashwatology/IITM-Python-Grpa"><img src="./cards/repo-IITM-Python-Grpa.svg" width="33%" alt="IITM-Python-Grpa"></a><a href="https://github.com/Shashwatology/Semantic-Ctrl-F"><img src="./cards/repo-Semantic-Ctrl-F.svg" width="33%" alt="Semantic-Ctrl-F"></a><a href="https://github.com/Shashwatology/semantic-drift-vlm-attacks"><img src="./cards/repo-semantic-drift-vlm-attacks.svg" width="33%" alt="semantic-drift-vlm-attacks"></a>
-    </div>
+<a href="https://github.com/Shashwatology/PhysioFM"><img src="./cards/project-physiofm.svg" width="33.333%" alt="PhysioFM: Foundation Models in rPPG" /></a><a href="https://github.com/Shashwatology/Guardian-Travel-Twin-"><img src="./cards/project-digital-twins.svg" width="33.333%" alt="Digital Twins in Urban Mobility" /></a><a href="https://github.com/Shashwatology/semantic-drift-vlm-attacks"><img src="./cards/project-vlm-security.svg" width="33.333%" alt="Semantic Drift in VLMs" /></a>
 
-    <br><br>
-    <!-- 09 · CONNECT -->
-    <div align="center">
-      <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./cards/title-connect-dark.svg">
-        <img src="./cards/title-connect-light.svg" width="100%" alt="Connect">
-      </picture>
-      <p align="center">
-        <a href="https://github.com/shashwatology"><b>github.com/shashwatology</b></a> &nbsp;·&nbsp;
-        <a href="https://www.linkedin.com/in/shashwat-upadhyay-13abb020b/"><b>linkedin.com/in/shashwat-upadhyay</b></a> &nbsp;·&nbsp;
-        <a href="https://www.researchgate.net/profile/Shashwat-Upadhyay-2"><b>researchgate</b></a> &nbsp;·&nbsp;
-        <a href="mailto:shashwatology.s@gmail.com"><b>shashwatology.s@gmail.com</b></a> &nbsp;·&nbsp;
-        <a href="https://bento.me/shashwatupadhyay"><b>bento.me</b></a>
-      </p>
-      <p align="center">
-        <sub>RESEARCHING INTELLIGENCE. BUILDING SYSTEMS. &copy; 2026 SHASHWAT UPADHYAY.</sub>
-      </p>
-    </div>
+<p align="right">
+  <sub><a href="https://github.com/shashwatology?tab=repositories">Explore all public repositories &#8599;</a></sub>
+</p>
+
+<!-- 04 · PUBLICATIONS & MILESTONES -->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./cards/title-publications-dark.svg" />
+  <img src="./cards/title-publications-light.svg" width="100%" alt="Publications and Milestones" />
+</picture>
+
+</div>
+
+<table class="rendered-table"><thead><tr>
+<th>Manuscript / Publication Title</th>
+<th>Venue / Framework</th>
+<th>Year</th>
+<th>Status</th>
+<th>Verified Link</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Fake news detection using deep learning models: A novel approach</strong><br><sub>Sachin Kumar, Rohan Asthana, Shashwat Upadhyay, N. Upreti, M. Akbar</sub></td>
+<td><em>Transactions on Emerging Telecommunications Technologies (Wiley)</em></td>
+<td>2020</td>
+<td><code>Published</code></td>
+<td><a href="https://doi.org/10.1002/ett.3767"><strong>DOI: 10.1002/ett.3767</strong></a></td>
+</tr>
+<tr>
+<td><strong>Semantic Drift Before Inference: A Preprocessing Attack Surface in Vision–Language Models</strong><br><sub>Shashwat Upadhyay</sub></td>
+<td><em>Research Working Paper &amp; Reproducible Testbed</em></td>
+<td>2026</td>
+<td><code>In Progress</code></td>
+<td><a href="https://github.com/Shashwatology/semantic-drift-vlm-attacks"><strong>Codebase &amp; Paper</strong></a></td>
+</tr>
+<tr>
+<td><strong>PhysioFM: Optimization Diagnostics and Failure Analysis of Hierarchical Foundation Models in rPPG</strong><br><sub>Shashwat Anil Kumar Upadhyay</sub></td>
+<td><em>Master Research Dossier &amp; PyTorch Framework</em></td>
+<td>2026</td>
+<td><code>In Progress</code></td>
+<td><a href="https://github.com/Shashwatology/PhysioFM"><strong>Research Dossier</strong></a></td>
+</tr>
+</tbody></table>
+<br>
+
+<div align="center">
+  <img src="./cards/research-timeline.svg" width="100%" alt="Academic and Research Milestones" />
+</div>
+
+<br>
+
+<!-- 05 · TECHNOLOGY TOOLKIT -->
+<div align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./cards/title-stack-dark.svg" />
+  <img src="./cards/title-stack-light.svg" width="100%" alt="Technology Toolkit" />
+</picture>
+</div>
+
+<table class="rendered-table"><thead><tr>
+<th>Domain</th>
+<th>Core Tools &amp; Frameworks</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Programming</strong></td>
+<td><code>Python 3.10+</code> · <code>C++ 17/20</code> · <code>TypeScript</code> · <code>JavaScript</code> · <code>SQL</code></td>
+</tr>
+<tr>
+<td><strong>AI &amp; Machine Learning</strong></td>
+<td><code>PyTorch</code> · <code>Hugging Face Transformers</code> · <code>Swin-V2</code> · <code>TimeSformer</code> · <code>Scikit-learn</code></td>
+</tr>
+<tr>
+<td><strong>Computer Vision</strong></td>
+<td><code>OpenCV</code> · <code>YOLO (v8/v9)</code> · <code>CLIP</code> · <code>Waveform Extraction (BVP)</code> · <code>Spectral Analysis</code></td>
+</tr>
+<tr>
+<td><strong>Cyber &amp; ML Security</strong></td>
+<td><code>VLM Preprocessing Auditing</code> · <code>Isolation Forests (Zero-Label)</code> · <code>Threat Modeling</code> · <code>OSINT</code></td>
+</tr>
+<tr>
+<td><strong>Research &amp; Engineering</strong></td>
+<td><code>LaTeX</code> · <code>Docker</code> · <code>SUMO Simulation</code> · <code>Unity 3D Engine</code> · <code>Git &amp; CI/CD Actions</code></td>
+</tr>
+</tbody></table>
+<br>
+
+<div align="center">
+
+<!-- 06 · GITHUB TELEMETRY & BLUE HEATMAP -->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./cards/title-activity-dark.svg" />
+  <img src="./cards/title-activity-light.svg" width="100%" alt="GitHub Telemetry and Heatmap" />
+</picture>
+
+<img src="./cards/heatmap.svg" width="100%" alt="Shashwat's contribution calendar in electric cobalt blue, refreshed daily with integrated telemetry" />
+
+<br><br>
+
+<!-- 07 · MINIMAL CONNECT FOOTER -->
+<p align="center">
+  <a href="https://github.com/shashwatology"><b>GitHub</b></a> &nbsp;·&nbsp;
+  <a href="https://www.linkedin.com/in/shashwat-upadhyay-13abb020b/"><b>LinkedIn</b></a> &nbsp;·&nbsp;
+  <a href="https://www.researchgate.net/profile/Shashwat-Upadhyay-2"><b>ResearchGate</b></a> &nbsp;·&nbsp;
+  <a href="mailto:shashwatology.s@gmail.com"><b>Email</b></a> &nbsp;·&nbsp;
+  <a href="https://bento.me/shashwatupadhyay"><b>Bento</b></a>
+</p>
+
+<p align="center">
+  <sub>RESEARCHING INTELLIGENCE. BUILDING SYSTEMS. &copy; 2026 SHASHWAT UPADHYAY.</sub>
+</p>
+
+</div>
+
   </div>
 </body>
 </html>
