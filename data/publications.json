@@ -1,0 +1,36 @@
+[
+  {
+    "title": "Fake news detection using deep learning models: A novel approach",
+    "authors": "Sachin Kumar, Rohan Asthana, Shashwat Upadhyay, N. Upreti, M. Akbar",
+    "venue": "Transactions on Emerging Telecommunications Technologies (Wiley)",
+    "year": 2020,
+    "status": "Published",
+    "doi": "10.1002/ett.3967",
+    "doi_url": "https://doi.org/10.1002/ett.3967",
+    "url": "https://doi.org/10.1002/ett.3967",
+    "type": "Journal Article"
+  },
+  {
+    "title": "Semantic Drift Before Inference: A Preprocessing Attack Surface in Vision–Language Models",
+    "authors": "Shashwat Upadhyay",
+    "venue": "Research Working Paper & Reproducible Implementation",
+    "year": 2026,
+    "status": "In Progress",
+    "doi": null,
+    "doi_url": null,
+    "url": "https://github.com/Shashwatology/semantic-drift-vlm-attacks",
+    "type": "Working Paper"
+  },
+  {
+    "title": "PhysioFM: Optimization Diagnostics and Failure Analysis of Hierarchical Foundation Models in rPPG",
+    "authors": "Shashwat Anil Kumar Upadhyay",
+    "venue": "Research Dossier & PyTorch Framework",
+    "year": 2026,
+    "status": "In Progress",
+    "doi": null,
+    "doi_url": null,
+    "url": "https://github.com/Shashwatology/PhysioFM",
+    "type": "Research Dossier"
+  }
+]
+

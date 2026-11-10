@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 360" width="320" height="360">
+  <defs>
+    <linearGradient id="thermal-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#315EFF" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#7DDFFF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.7"/>
+    </linearGradient>
+    <pattern id="grid-dots" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.8" fill="#131313" fill-opacity="0.12"/>
+    </pattern>
+  </defs>
+
+  <!-- Background Grid -->
+  <rect width="320" height="360" fill="none"/>
+  <rect width="320" height="360" fill="url(#grid-dots)"/>
+
+  <!-- Outer Scientific Frame -->
+  <rect x="12" y="12" width="296" height="336" rx="8" fill="none" stroke="#131313" stroke-opacity="0.15" stroke-dasharray="3 3"/>
+  <path d="M 12 28 L 12 12 L 28 12" fill="none" stroke="#315EFF" stroke-width="2"/>
+  <path d="M 292 12 L 308 12 L 308 28" fill="none" stroke="#315EFF" stroke-width="2"/>
+  <path d="M 12 332 L 12 348 L 28 348" fill="none" stroke="#315EFF" stroke-width="2"/>
+  <path d="M 292 348 L 308 348 L 308 332" fill="none" stroke="#315EFF" stroke-width="2"/>
+
+  <!-- Coordinate Metadata -->
+  <text x="24" y="32" font-family="'Geist Mono', monospace" font-size="9" fill="#131313" fill-opacity="0.5">MODALITY // RGB+THERMAL [rPPG]</text>
+  <text x="296" y="32" text-anchor="end" font-family="'Geist Mono', monospace" font-size="9" fill="#315EFF">λ: 520nm-850nm</text>
+
+  <!-- Central Scientific Silhouette: Abstract Human Contour & Multimodal Waveforms -->
+  <g transform="translate(160, 185)">
+    <!-- Layered Physiological Resonance Waves -->
+    <circle cx="0" cy="-30" r="54" fill="none" stroke="#315EFF" stroke-width="1" stroke-dasharray="2 4" stroke-opacity="0.4"/>
+    <circle cx="0" cy="-30" r="68" fill="none" stroke="#7DDFFF" stroke-width="1" stroke-opacity="0.5"/>
+    <circle cx="0" cy="-30" r="82" fill="none" stroke="#8B5CF6" stroke-width="0.8" stroke-dasharray="4 6" stroke-opacity="0.4"/>
+
+    <!-- Head & Shoulders Silhouette Form (Isometric / Editorial Contours) -->
+    <!-- Head Contour -->
+    <path d="M -32 -30 C -32 -65 32 -65 32 -30 C 32 -5 20 18 0 24 C -20 18 -32 -5 -32 -30 Z" 
+          fill="#131313" fill-opacity="0.04" stroke="#131313" stroke-opacity="0.3" stroke-width="1.2"/>
+    
+    <!-- Facial Isocontour Lines (Simulating Thermal/3D Mesh Scanning) -->
+    <path d="M -22 -35 Q 0 -45 22 -35" fill="none" stroke="#315EFF" stroke-width="1.2" stroke-opacity="0.7"/>
+    <path d="M -26 -20 Q 0 -30 26 -20" fill="none" stroke="#315EFF" stroke-width="1.2" stroke-opacity="0.7"/>
+    <path d="M -20 -5 Q 0 -12 20 -5" fill="none" stroke="#131313" stroke-width="1" stroke-opacity="0.4"/>
+    <path d="M -14 8 Q 0 4 14 8" fill="none" stroke="#131313" stroke-width="1" stroke-opacity="0.4"/>
+    
+    <!-- Eye & Facial Calibration Points -->
+    <circle cx="-12" cy="-28" r="2.2" fill="#315EFF"/>
+    <circle cx="12" cy="-28" r="2.2" fill="#315EFF"/>
+    <line x1="-18" y1="-28" x2="-6" y2="-28" stroke="#7DDFFF" stroke-width="0.8"/>
+    <line x1="6" y1="-28" x2="18" y2="-28" stroke="#7DDFFF" stroke-width="0.8"/>
+    <line x1="0" y1="-32" x2="0" y2="-12" stroke="#131313" stroke-width="0.8" stroke-opacity="0.3"/>
+
+    <!-- Shoulders / Torso Contour -->
+    <path d="M -75 95 C -65 65 -45 42 -18 32 L 18 32 C 45 42 65 65 75 95 Z" 
+          fill="#131313" fill-opacity="0.03" stroke="#131313" stroke-opacity="0.25" stroke-width="1.2"/>
+    
+    <!-- Horizontal scanlines through torso -->
+    <line x1="-55" y1="52" x2="55" y2="52" stroke="#131313" stroke-opacity="0.15" stroke-width="1"/>
+    <line x1="-65" y1="68" x2="65" y2="68" stroke="#315EFF" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="4 2"/>
+    <line x1="-72" y1="84" x2="72" y2="84" stroke="#131313" stroke-opacity="0.15" stroke-width="1"/>
+
+    <!-- Crosshair Target on Forehead (Typical rPPG Region of Interest - ROI) -->
+    <g transform="translate(0, -42)">
+      <circle cx="0" cy="0" r="8" fill="none" stroke="#315EFF" stroke-width="1.2"/>
+      <line x1="-12" y1="0" x2="12" y2="0" stroke="#315EFF" stroke-width="1"/>
+      <line x1="0" y1="-12" x2="0" y2="12" stroke="#315EFF" stroke-width="1"/>
+      <rect x="-14" y="-22" width="28" height="9" rx="2" fill="#315EFF"/>
+      <text x="0" y="-15" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="6.5" font-weight="bold" fill="#ffffff">ROI:BVP</text>
+    </g>
+  </g>
+
+  <!-- Technical Telemetry Footer -->
+  <line x1="24" y1="322" x2="296" y2="322" stroke="#131313" stroke-opacity="0.1"/>
+  <text x="24" y="338" font-family="'Geist Mono', monospace" font-size="8.5" fill="#131313" fill-opacity="0.6">STATUS: CALIBRATED</text>
+  <text x="296" y="338" text-anchor="end" font-family="'Geist Mono', monospace" font-size="8.5" fill="#131313" fill-opacity="0.6">SYNC: 60Hz 1080p</text>
+</svg>

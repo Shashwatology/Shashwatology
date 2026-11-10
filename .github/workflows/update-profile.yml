@@ -1,0 +1,82 @@
+name: Update Profile Portfolio & Visuals
+
+# Daily automation workflow for Shashwat Upadhyay's GitHub Profile README.
+# Fetches real contribution telemetry, regenerates animated SVG cards,
+# validates links, and commits only changed assets with least-privilege tokens.
+
+on:
+  schedule:
+    - cron: "23 4 * * *" # Daily at 04:23 UTC
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/**"
+      - "data/**"
+      - "assets/**"
+      - ".github/workflows/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-update
+  cancel-in-progress: true
+
+jobs:
+  update-profile-art:
+    name: Regenerate Profile Cards & Heatmap
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+
+      - name: Fetch Real Contribution Telemetry & User Profile
+        env:
+          GH_PROFILE_USER: shashwatology
+        run: python scripts/fetch_github_data.py
+
+      - name: Process Portrait / Generate Multimodal Silhouette Placeholder
+        run: python scripts/process_portrait.py
+
+      - name: Render 16:9 Editorial Research Visual
+        run: python scripts/generate_research_visual.py
+
+      - name: Render Cobalt Blue Contribution Heatmap
+        run: python scripts/generate_heatmap.py
+
+      - name: Render Monthly Activity & Streak Telemetry Card
+        run: python scripts/generate_activity.py
+
+      - name: Render All SVG Editorial Cards
+        run: python scripts/render_cards.py
+
+      - name: Render Final Profile README.md
+        run: python scripts/render_readme.py
+
+      - name: Validate Local Assets & SVG Schemas
+        run: python scripts/validate_links.py
+
+      - name: Commit & Push Updated Visuals (Only if Changed)
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: automated telemetry & research card refresh [skip ci]"
+          file_pattern: "cards/*.svg assets/*.svg data/contributions.json data/profile.json README.md"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+

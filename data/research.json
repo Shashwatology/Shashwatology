@@ -1,0 +1,142 @@
+{
+  "domains": [
+    {
+      "id": "multimodal-ai",
+      "number": "01",
+      "title": "Multimodal AI & Physiological Computing",
+      "summary": "Non-contact physiological monitoring through video, spatial-temporal transformers, and multimodal sensor fusion.",
+      "foci": [
+        "PhysioFM foundation models",
+        "RGB & Thermal imaging fusion",
+        "Contactless rPPG & respiration",
+        "SwinV2, STDS & TimeSformer"
+      ],
+      "icon": "wave",
+      "primary_project": "PhysioFM",
+      "repo_url": "https://github.com/Shashwatology/PhysioFM"
+    },
+    {
+      "id": "digital-twins",
+      "number": "02",
+      "title": "Digital Twins & Intelligent Mobility",
+      "summary": "Synchronized simulation architectures and real-time computer vision for connected urban traffic networks.",
+      "foci": [
+        "Urban traffic intelligence",
+        "SUMO + Unity + YOLO integration",
+        "Digital Twin infrastructure",
+        "Real-time sensor calibration"
+      ],
+      "icon": "network",
+      "primary_project": "Digital Twins in Urban Mobility",
+      "repo_url": "https://github.com/Shashwatology/Guardian-Travel-Twin-"
+    },
+    {
+      "id": "ml-security",
+      "number": "03",
+      "title": "Machine Learning Security & Robustness",
+      "summary": "Investigating preprocessing vulnerability surfaces, zero-label intrusion detection, and adversarial resilience.",
+      "foci": [
+        "VLM preprocessing attack surfaces",
+        "Semantic drift in multimodal pipelines",
+        "Zero-label threat intelligence",
+        "Unsupervised anomaly detection"
+      ],
+      "icon": "shield",
+      "primary_project": "Semantic Drift VLM Attacks",
+      "repo_url": "https://github.com/Shashwatology/semantic-drift-vlm-attacks"
+    },
+    {
+      "id": "document-intelligence",
+      "number": "04",
+      "title": "Document Intelligence & Vision-Language",
+      "summary": "Granular visual indexing, multimodal semantic retrieval, and interpretability in vision-language models.",
+      "foci": [
+        "Visual atom segmentation",
+        "Contrastive CLIP embedding search",
+        "Cross-modal document understanding",
+        "Explainable visual AI (SLICE / LIME)"
+      ],
+      "icon": "search",
+      "primary_project": "Semantic Ctrl-F",
+      "repo_url": "https://github.com/Shashwatology/Semantic-Ctrl-F"
+    }
+  ],
+  "projects": [
+    {
+      "id": "physiofm",
+      "title": "PhysioFM",
+      "subtitle": "Hierarchical Foundation Models in rPPG",
+      "objective": "Non-contact heart rate and physiological waveform estimation from video, with failure diagnostics on dual-branch hierarchical transformers.",
+      "methods": [
+        "Swin-V2",
+        "Spatio-Temporal Difference Stems (STDS)",
+        "Temporal Transformers",
+        "UBFC-rPPG Benchmarking"
+      ],
+      "status": "Active Research / Master Dossier",
+      "repo_url": "https://github.com/Shashwatology/PhysioFM",
+      "accent": "#315EFF"
+    },
+    {
+      "id": "vlm-security",
+      "title": "Semantic Drift in VLMs",
+      "subtitle": "Preprocessing Attack Surface in Vision-Language Models",
+      "objective": "Exposing the RGBA-to-RGB flattening attack vector that embeds stealth prompt injections in alpha channels, coupled with Semantic Equivalence Verification (SEV).",
+      "methods": [
+        "Alpha Channel Steganography",
+        "VLM Preprocessing Pipelines",
+        "Semantic Equivalence Verification (SEV)",
+        "PyTorch / PIL"
+      ],
+      "status": "Working Paper / Official Implementation",
+      "repo_url": "https://github.com/Shashwatology/semantic-drift-vlm-attacks",
+      "accent": "#8B5CF6"
+    },
+    {
+      "id": "digital-twins",
+      "title": "Digital Twins in Urban Mobility",
+      "subtitle": "Smart Traffic Intelligence & Simulation Testbeds",
+      "objective": "Building unified digital twin testbeds coupling microscopic traffic simulation with real-time computer vision inference for dynamic signal control.",
+      "methods": [
+        "SUMO (Simulation of Urban MObility)",
+        "Unity 3D Engine",
+        "YOLO Object Detection",
+        "IoT Telemetry"
+      ],
+      "status": "Prototyped / SIH & Academic Research",
+      "repo_url": "https://github.com/Shashwatology/Guardian-Travel-Twin-",
+      "accent": "#00C2A8"
+    },
+    {
+      "id": "sentinel-ai",
+      "title": "SentinelAI",
+      "subtitle": "Adaptive SSH Threat Intelligence Platform",
+      "objective": "Zero-label deployment-first intrusion detection correlating host authentication logs with unsupervised Isolation Forests and behavioral risk scoring.",
+      "methods": [
+        "Isolation Forest",
+        "Behavioral Risk Heuristics",
+        "Host-Network Correlation",
+        "Automated Mitigation"
+      ],
+      "status": "Production-Grade Research Platform",
+      "repo_url": "https://github.com/Shashwatology/SentinelAI",
+      "accent": "#2A70E8"
+    },
+    {
+      "id": "breathesync",
+      "title": "BreatheSync",
+      "subtitle": "Acoustic Respiratory Diagnostics & Digital Twin",
+      "objective": "Predicting respiratory distress 24–48 hours ahead using 6-second vocal biomarkers, environmental air quality data, and predictive digital twins.",
+      "methods": [
+        "Vocal Biomarker Analysis",
+        "FastAPI & React",
+        "Digital Twin Predictive Model",
+        "ABHA Health Protocol"
+      ],
+      "status": "Deployed Platform / Prototype",
+      "repo_url": "https://github.com/Shashwatology/BreatheSync",
+      "accent": "#38BDF8"
+    }
+  ]
+}
+

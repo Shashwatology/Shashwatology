@@ -1,0 +1,17 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Environment and IDE session files
+endpoints.json
+session-census.*.json
+.jarvisignore
+.DS_Store
+Thumbs.db
+*.swp

@@ -1,0 +1,51 @@
+{
+  "name": "Shashwat Upadhyay",
+  "username": "shashwatology",
+  "tagline": "Researching intelligence. Building systems.",
+  "role": "Independent AI Researcher | Undergraduate Researcher | ML Engineer",
+  "bio": "I research intelligent systems, explore multimodal learning, and build technology for real-world problems.",
+  "location": "Mumbai, India",
+  "education": [
+    {
+      "institution": "Indian Institute of Technology Madras (IIT Madras)",
+      "degree": "BS in Data Science and Applications",
+      "period": "2023 — Present",
+      "focus": "Machine Learning, Scientific Computing, Statistical Data Science"
+    },
+    {
+      "institution": "Shah & Anchor Kutchhi Engineering College (SAKEC)",
+      "degree": "BVoc in Cyber Security",
+      "period": "2022 — Present",
+      "focus": "Network Defense, Threat Intelligence, Adversarial Systems"
+    }
+  ],
+  "experience": [
+    {
+      "role": "Research Intern",
+      "organization": "MNIT Jaipur — AMRUT Centre",
+      "focus": "Computer Vision & Remote Photoplethysmography (rPPG), Foundation Models",
+      "period": "2024"
+    },
+    {
+      "role": "Research Association",
+      "organization": "NIT Warangal",
+      "focus": "Intelligent Systems & Computational Research",
+      "period": "2024"
+    },
+    {
+      "role": "Content Research & Developer Intern",
+      "organization": "AWR",
+      "focus": "Technical Research & System Architecture",
+      "period": "2023"
+    }
+  ],
+  "links": {
+    "github": "https://github.com/shashwatology",
+    "linkedin": "https://www.linkedin.com/in/shashwat-upadhyay-13abb020b/",
+    "researchgate": "https://www.researchgate.net/profile/Shashwat-Upadhyay-2",
+    "email": "mailto:shashwatology.s@gmail.com",
+    "academic_email": "mailto:shashwat.upadhyay24@sakec.ac.in",
+    "bento": "https://bento.me/shashwatupadhyay",
+    "tryhackme": "https://tryhackme.com/p/shashwatology"
+  }
+}
