@@ -1,5 +1,21 @@
 [
   {
+    "category": "Book Chapter",
+    "title": "Semantic Drift Before Inference: A Preprocessing Attack Surface in Vision–Language Models",
+    "authors": "S.A.K. Upadhyay, S.B. Sharma, R.A. Borgalli, R. Vairagade",
+    "venue": "Adaptive Defense and Intelligent Security Architectures for AI-Driven Cybersecurity (IGI Global Scientific Publishing)",
+    "chapter": "Chapter 6",
+    "pages": "171–202",
+    "year": 2026,
+    "status": "Accepted / DOI Assigned",
+    "doi": "10.4018/979-8-2600-5116-0.ch006",
+    "doi_url": "https://doi.org/10.4018/979-8-2600-5116-0.ch006",
+    "url": "https://doi.org/10.4018/979-8-2600-5116-0.ch006",
+    "code_url": "https://github.com/Shashwatology/semantic-drift-vlm-attacks",
+    "highlight": true
+  },
+  {
+    "category": "Journal Article",
     "title": "Fake news detection using deep learning models: A novel approach",
     "authors": "Sachin Kumar, Rohan Asthana, Shashwat Upadhyay, N. Upreti, M. Akbar",
     "venue": "Transactions on Emerging Telecommunications Technologies (Wiley)",
@@ -8,28 +24,92 @@
     "doi": "10.1002/ett.3767",
     "doi_url": "https://doi.org/10.1002/ett.3767",
     "url": "https://doi.org/10.1002/ett.3767",
-    "type": "Journal Article"
+    "highlight": false
   },
   {
-    "title": "Semantic Drift Before Inference: A Preprocessing Attack Surface in Vision–Language Models",
-    "authors": "Shashwat Upadhyay",
-    "venue": "Research Working Paper & Reproducible Implementation",
+    "category": "Conference Paper",
+    "title": "Protocol-Driven Framework for Implementing an Integrated Multimodal Transportation System in Jaipur, India",
+    "authors": "S.A.K. Upadhyay (mentor: Prof. Nand Kumar)",
+    "venue": "Proceedings of the 18th International Asian Urbanization Conference (IAUC 2026), p. 122",
     "year": 2026,
-    "status": "In Progress",
+    "status": "Published",
     "doi": null,
     "doi_url": null,
-    "url": "https://github.com/Shashwatology/semantic-drift-vlm-attacks",
-    "type": "Working Paper"
+    "url": "https://github.com/Shashwatology",
+    "highlight": false
   },
   {
-    "title": "PhysioFM: Optimization Diagnostics and Failure Analysis of Hierarchical Foundation Models in rPPG",
-    "authors": "Shashwat Anil Kumar Upadhyay",
-    "venue": "Research Dossier & PyTorch Framework",
+    "category": "Conference Paper",
+    "title": "An IoMT-Based Wearable Prototype for Sustainable Remote Patient Monitoring",
+    "authors": "S.A.K. Upadhyay, A.K. Singh, A.A. Tiwari, R. Borgalli",
+    "venue": "National Conference on Data-Centric AI (DASDA 2025)",
+    "year": 2025,
+    "status": "Published (Best Paper Award)",
+    "doi": null,
+    "doi_url": null,
+    "url": "https://www.researchgate.net/publication/397178065_An_IoMT-Based_Wearable_Prototype_Sustainable_Remote_Patient_Monitoring",
+    "highlight": false
+  },
+  {
+    "category": "Conference Paper",
+    "title": "Technology Intervention for an Efficient Judicial System",
+    "authors": "Y. Jain, S.A.K. Upadhyay",
+    "venue": "Conference Proceedings (ResearchGate Verified)",
+    "year": 2025,
+    "status": "Published",
+    "doi": null,
+    "doi_url": null,
+    "url": "https://www.researchgate.net/publication/394205684_Technology_Intervention_for_an_Efficient_Judicial_System",
+    "highlight": false
+  },
+  {
+    "category": "Under Review",
+    "title": "Attention-Augmented Hybrid Architectures for Low-Resolution Image Classification",
+    "authors": "S.A.K. Upadhyay et al.",
+    "venue": "International Conference on Advanced Networks and Telecommunications Systems (ICAN 2026)",
     "year": 2026,
-    "status": "In Progress",
+    "status": "Under Review",
+    "doi": null,
+    "doi_url": null,
+    "url": "https://github.com/Shashwatology",
+    "highlight": false
+  },
+  {
+    "category": "Under Review",
+    "title": "SentinelAI: Adaptive Behavioral Risk Framework for Real-Time SSH Threat Detection",
+    "authors": "S.A.K. Upadhyay",
+    "venue": "Cybersecurity Systems Venue",
+    "year": 2026,
+    "status": "Under Review",
+    "doi": null,
+    "doi_url": null,
+    "url": "https://github.com/shashwatology/SentinelAI",
+    "code_url": "https://github.com/shashwatology/SentinelAI",
+    "highlight": false
+  },
+  {
+    "category": "In Preparation",
+    "title": "Do Grid-Edge Disturbances Compound? A Factorial Study of NILM under PV, EV, and Voltage Deviation",
+    "authors": "S.A.K. Upadhyay, S. Some, S. Mondal, N. Kumar",
+    "venue": "Target: SANKET 2026, IIT Bombay",
+    "year": 2026,
+    "status": "In Preparation",
+    "doi": null,
+    "doi_url": null,
+    "url": "https://github.com/Shashwatology",
+    "highlight": false
+  },
+  {
+    "category": "Conference Presentation",
+    "title": "PhysioFM: A Diagnostic Framework for Transformer-Based Remote Photoplethysmography",
+    "authors": "S.A.K. Upadhyay, S.B. Sharma, N. Kumar, S. Kumar, Bhoomika",
+    "venue": "Int’l Conf. on Next-Gen Structural Health Monitoring Systems (SHMS-2026), Paper ID 123",
+    "year": 2026,
+    "status": "Presented (Oct 2026)",
     "doi": null,
     "doi_url": null,
     "url": "https://github.com/Shashwatology/PhysioFM",
-    "type": "Research Dossier"
+    "code_url": "https://github.com/Shashwatology/PhysioFM",
+    "highlight": false
   }
 ]

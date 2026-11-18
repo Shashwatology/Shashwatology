@@ -1,51 +1,60 @@
 {
   "name": "Shashwat Upadhyay",
+  "full_name": "Shashwat Anil Kumar Upadhyay",
   "username": "shashwatology",
   "tagline": "Researching intelligence. Building systems.",
-  "role": "Independent AI Researcher | Undergraduate Researcher | ML Engineer",
-  "bio": "I research intelligent systems, explore multimodal learning, and build technology for real-world problems.",
+  "role": "AI Researcher & ML Engineer",
+  "bio": "AI researcher developing trustworthy, deployable intelligent systems across healthcare (physiological foundation models), secure ML (adversarial & behavioral), intelligent infrastructure (multimodal mobility), and quantitative finance (time-series & risk modeling).",
   "location": "Mumbai, India",
   "education": [
     {
       "institution": "Indian Institute of Technology Madras (IIT Madras)",
-      "degree": "BS in Data Science and Applications",
-      "period": "2023 — Present",
-      "focus": "Machine Learning, Scientific Computing, Statistical Data Science"
+      "degree": "B.S. in Data Science and Applications",
+      "period": "2023 — 2028",
+      "focus": "Machine Learning, Statistical Modeling, Scientific Computing"
     },
     {
       "institution": "Shah & Anchor Kutchhi Engineering College (SAKEC)",
-      "degree": "BVoc in Cyber Security",
-      "period": "2022 — Present",
-      "focus": "Network Defense, Threat Intelligence, Adversarial Systems"
+      "degree": "B.Voc. in Cyber Security",
+      "period": "2024 — 2028",
+      "focus": "Behavioral Analytics, Adversarial ML, Network Security"
     }
   ],
   "experience": [
     {
-      "role": "Research Intern",
-      "organization": "MNIT Jaipur — AMRUT Centre",
-      "focus": "Computer Vision & Remote Photoplethysmography (rPPG), Foundation Models",
-      "period": "2024"
+      "role": "Researcher, Dept. of Computer Engineering",
+      "organization": "MNIT Jaipur — AMRUT Centre (MoHUA)",
+      "period": "May 2025 — Present",
+      "highlights": "IMPACT open architecture integrating public transit, digital ticketing, and mobility interoperability; systems proposal for Jaipur City Transport Services Ltd. (JCTSL)."
     },
     {
-      "role": "Research Association",
-      "organization": "NIT Warangal",
-      "focus": "Intelligent Systems & Computational Research",
-      "period": "2024"
+      "role": "Machine Learning Research Intern",
+      "organization": "IIT (ISM) Dhanbad",
+      "period": "Nov 2025 — Dec 2025",
+      "highlights": "Designed YOLOv8 detection & CNN segmentation for 12k+ imaging corpus (81% to 92% acc); built OCR-to-structured parsing pipeline (96% acc across 5,000+ docs; 60% reporting time reduction)."
     },
     {
-      "role": "Content Research & Developer Intern",
-      "organization": "AWR",
-      "focus": "Technical Research & System Architecture",
-      "period": "2023"
+      "role": "Research Consultant, Quantitative Research",
+      "organization": "WorldQuant",
+      "period": "Apr 2025 — Sep 2025",
+      "highlights": "Investigated statistical alpha signals across 10+ indicators; multi-year equity backtests sustained Sharpe > 1.5; cut model variance 22% via systematic feature selection."
+    },
+    {
+      "role": "Summer Research Intern, AMRUT Centre",
+      "organization": "MNIT Jaipur",
+      "period": "May 2024 — Jul 2024",
+      "highlights": "GIS-integrated Unity 3D digital twin of a 25 km Jaipur transport corridor; scenario simulation showed 18% cut in peak load; integrated into smart-mobility proposal."
     }
   ],
   "links": {
-    "github": "https://github.com/shashwatology",
-    "linkedin": "https://www.linkedin.com/in/shashwat-upadhyay-13abb020b/",
+    "github": "https://github.com/Shashwatology",
+    "linkedin": "https://in.linkedin.com/in/shashwatupadhyay",
+    "scholar": "https://scholar.google.com/citations?user=ulC0-soAAAAJ",
     "researchgate": "https://www.researchgate.net/profile/Shashwat-Upadhyay-2",
     "email": "mailto:shashwatology.s@gmail.com",
     "academic_email": "mailto:shashwat.upadhyay24@sakec.ac.in",
     "bento": "https://bento.me/shashwatupadhyay",
+    "instagram": "https://instagram.com/shashwatology",
     "tryhackme": "https://tryhackme.com/p/shashwatology"
   }
 }

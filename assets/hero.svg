@@ -30,14 +30,14 @@
 </style>
 
   <defs>
-    <linearGradient id="text-sheen" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="600" y2="0">
-      <stop offset="0" stop-color="#131313"/>
-      <stop offset=".4" stop-color="#131313"/>
-      <stop offset=".5" stop-color="#315EFF"/>
-      <stop offset=".6" stop-color="#131313"/>
-      <stop offset="1" stop-color="#131313"/>
+    <linearGradient id="upadhyay-blue" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="450" y2="0">
+      <stop offset="0" stop-color="#315EFF"/>
+      <stop offset=".35" stop-color="#315EFF"/>
+      <stop offset=".5" stop-color="#7DDFFF"/>
+      <stop offset=".65" stop-color="#315EFF"/>
+      <stop offset="1" stop-color="#315EFF"/>
       <animateTransform attributeName="gradientTransform" type="translate" 
-        values="-600 0;600 0;600 0" keyTimes="0;.45;1" dur="7s" begin="1.5s" repeatCount="indefinite"/>
+        values="-450 0; 450 0; 450 0" keyTimes="0;.45;1" dur="6s" begin="1s" repeatCount="indefinite"/>
     </linearGradient>
   </defs>
 
@@ -59,20 +59,20 @@
     Shashwat
   </text>
   <text x="40" y="184" 
-        font-family="'Instrument Serif', Georgia, serif" font-style="italic" font-size="74" letter-spacing="-1" fill="url(#text-sheen)">
+        font-family="'Instrument Serif', Georgia, serif" font-style="italic" font-size="74" letter-spacing="-1" fill="url(#upadhyay-blue)">
     Upadhyay.
   </text>
 
-  <!-- Tagline & Core Statement -->
+  <!-- Tagline & Core Statement Grounded in Resume -->
   <g>
     <text x="44" y="218" font-family="'Geist', sans-serif" font-weight="600" font-size="14.5" fill="#363638">
       Researching intelligence. Building systems.
     </text>
     <text x="44" y="238" font-family="'Geist', sans-serif" font-size="12.5" fill="#6E6E73">
-      Multimodal AI · Computer Vision · Digital Twins · ML Security
+      Multimodal AI · Computer Vision · Digital Twins · ML Security · Quant
     </text>
     <text x="44" y="258" font-family="'Geist Mono', monospace" font-size="11" fill="#6E6E73">
-      BVoc Cyber Security (SAKEC) · BS Data Science (IIT Madras)
+      BVoc Cyber Security (SAKEC, 2024–2028) · BS Data Science (IIT Madras, 2023–2028)
     </text>
   </g>
 
@@ -84,21 +84,21 @@
     <text x="44" y="295">GitHub</text>
     <text class="n" x="84" y="295" fill="#315EFF">&#8599;</text>
     
-    <text x="108" y="295" fill="#6E6E73">·</text>
-    <text x="122" y="295">LinkedIn</text>
-    <text class="n" x="174" y="295" fill="#315EFF">&#8599;</text>
+    <text x="102" y="295" fill="#6E6E73">·</text>
+    <text x="114" y="295">LinkedIn</text>
+    <text class="n" x="162" y="295" fill="#315EFF">&#8599;</text>
 
-    <text x="198" y="295" fill="#6E6E73">·</text>
-    <text x="212" y="295">ResearchGate</text>
-    <text class="n" x="296" y="295" fill="#315EFF">&#8599;</text>
+    <text x="180" y="295" fill="#6E6E73">·</text>
+    <text x="192" y="295">Scholar</text>
+    <text class="n" x="236" y="295" fill="#315EFF">&#8599;</text>
 
-    <text x="320" y="295" fill="#6E6E73">·</text>
-    <text x="334" y="295">Publications</text>
-    <text class="n" x="414" y="295" fill="#315EFF">&#8599;</text>
+    <text x="254" y="295" fill="#6E6E73">·</text>
+    <text x="266" y="295">ResearchGate</text>
+    <text class="n" x="346" y="295" fill="#315EFF">&#8599;</text>
 
-    <text x="438" y="295" fill="#6E6E73">·</text>
-    <text x="452" y="295">Email</text>
-    <text class="n" x="486" y="295" fill="#315EFF">&#8599;</text>
+    <text x="364" y="295" fill="#6E6E73">·</text>
+    <text x="376" y="295">Email</text>
+    <text class="n" x="410" y="295" fill="#315EFF">&#8599;</text>
   </g>
 
   <!-- Right Column: Real Blue-Duotone Scanline Portrait (200 x 245) -->

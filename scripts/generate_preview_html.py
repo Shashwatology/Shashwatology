@@ -170,7 +170,24 @@ def build_preview():
   </style>
 </head>
 <body>
-  <button class="theme-switch" onclick="document.body.classList.toggle('light')">🌓 Toggle Light / Dark</button>
+  <button class="theme-switch" onclick="toggleTheme()">🌓 Toggle Light / Dark</button>
+  <script>
+    function toggleTheme() {{
+      document.body.classList.toggle('light');
+      const isLight = document.body.classList.contains('light');
+      document.querySelectorAll('picture').forEach(p => {{
+        const darkSrc = p.querySelector('source[media*="dark"]')?.getAttribute('srcset');
+        const img = p.querySelector('img');
+        if (img) {{
+          if (isLight) {{
+            img.src = img.src.replace('-dark.svg', '-light.svg');
+          }} else if (darkSrc) {{
+            img.src = darkSrc;
+          }}
+        }}
+      }});
+    }}
+  </script>
   <div class="container">
     {rendered_body}
   </div>

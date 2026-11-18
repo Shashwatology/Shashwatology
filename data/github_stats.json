@@ -1,0 +1,93 @@
+{
+  "username": "shashwatology",
+  "public_repos": 45,
+  "total_stars": 63,
+  "total_forks": 18,
+  "languages": [
+    {
+      "name": "TypeScript",
+      "count": 8,
+      "pct": 28.6
+    },
+    {
+      "name": "Python",
+      "count": 8,
+      "pct": 28.6
+    },
+    {
+      "name": "HTML",
+      "count": 5,
+      "pct": 17.9
+    },
+    {
+      "name": "CSS",
+      "count": 4,
+      "pct": 14.3
+    },
+    {
+      "name": "Jupyter Notebook",
+      "count": 1,
+      "pct": 3.6
+    },
+    {
+      "name": "JavaScript",
+      "count": 1,
+      "pct": 3.6
+    },
+    {
+      "name": "C++",
+      "count": 1,
+      "pct": 3.6
+    }
+  ],
+  "top_repos": [
+    {
+      "name": "100DaysOfJava",
+      "desc": "In this challenge, I'm committed to honing my Java programming skills by writing solutions from scratch without referring to any online sources or relying on assistance from chat bots. I believe in the power of self-learning and aim to document my thought process and journey as I tackle each challenge. You`ll find my though process in .md file",
+      "stars": 0,
+      "forks": 0,
+      "lang": "Jupyter Notebook",
+      "url": "https://github.com/Shashwatology/100DaysOfJava"
+    },
+    {
+      "name": "404-page-",
+      "desc": " This repository contains a custom 404 error page designed to enhance user experience when navigating to non-existent URLs",
+      "stars": 0,
+      "forks": 0,
+      "lang": "CSS",
+      "url": "https://github.com/Shashwatology/404-page-"
+    },
+    {
+      "name": "BreatheSync",
+      "desc": "BreathySync is an AI-powered respiratory health platform that uses 6-second voice samples to generate lung metrics, predicts risks 24\u201348 hours ahead with a Digital Twin model, and integrates air quality tracking, sleep monitoring, Lung Gym, and ABHA support.",
+      "stars": 0,
+      "forks": 0,
+      "lang": "TypeScript",
+      "url": "https://github.com/Shashwatology/BreatheSync"
+    },
+    {
+      "name": "cal.com",
+      "desc": "Scheduling infrastructure for absolutely everyone.",
+      "stars": 0,
+      "forks": 0,
+      "lang": "Python",
+      "url": "https://github.com/Shashwatology/cal.com"
+    },
+    {
+      "name": "contactless-respiratory-monitoring",
+      "desc": "",
+      "stars": 0,
+      "forks": 0,
+      "lang": "Python",
+      "url": "https://github.com/Shashwatology/contactless-respiratory-monitoring"
+    },
+    {
+      "name": "CuraSync",
+      "desc": "CuraSync is an AI-powered telemedicine platform that offers intelligent health recommendations, allows online doctor consultations, and securely stores patient records.  It tracks history, analyses symptoms, and provides safe, individualised, and accessible care at any time with its virtual AI doctor.",
+      "stars": 0,
+      "forks": 0,
+      "lang": "TypeScript",
+      "url": "https://github.com/Shashwatology/CuraSync"
+    }
+  ]
+}
