@@ -63,7 +63,6 @@
       <rect class="sh" style="animation-delay:0.90s" x="0" y="0" width="42" height="38" fill="url(#nav-sheen-scholar)"/>
     </g>
     <rect class="card-bg" x="3.5" y="3.5" width="169" height="31" rx="7" fill="none" stroke="#DCDCD7" stroke-width="1"/>
-    <!-- Bespoke Vector Icon -->
     <g transform="translate(16, 12)">
       <path d="M7 1.2L0.5 5l6.5 3.8L13.5 5 7 1.2zm-4.2 5.4v3.1c0 1.2 1.9 2.3 4.2 2.3s4.2-1.1 4.2-2.3V6.6L7 9.1 2.8 6.6z" fill="#315EFF"/>
     </g>

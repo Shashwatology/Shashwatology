@@ -42,6 +42,12 @@
   .r, .f, .g, .p, .live, .ring, .n, .sh, .accent-bar, .twinkle { animation: none !important; }
 }
 
+    @keyframes wave-flow {
+      from { stroke-dashoffset: 320; }
+      to { stroke-dashoffset: 0; }
+    }
+    .signal-wave { stroke-dasharray: 160 160; animation: wave-flow 7s linear infinite; }
+    
 </style>
 
   <defs>
@@ -68,6 +74,12 @@
       <animateTransform attributeName="gradientTransform" type="translate"
         values="-260 0; 940 0" dur="6.5s" repeatCount="indefinite"/>
     </linearGradient>
+    <linearGradient id="wave-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#315EFF" stop-opacity="0"/>
+      <stop offset="35%" stop-color="#315EFF" stop-opacity="0.22"/>
+      <stop offset="70%" stop-color="#7DDFFF" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#315EFF" stop-opacity="0"/>
+    </linearGradient>
     <radialGradient id="hero-ambient" cx="84%" cy="50%" r="36%">
       <stop offset="0%" stop-color="#315EFF" stop-opacity="0.12"/>
       <stop offset="60%" stop-color="#7DDFFF" stop-opacity="0.04"/>
@@ -83,6 +95,11 @@
       <rect class="card-bg" width="880" height="286" rx="12" fill="#F5F5F0" stroke="#DCDCD7" stroke-width="1"/>
       <rect x="520" y="0" width="360" height="286" fill="url(#hero-grid)"/>
       <rect width="880" height="286" fill="url(#hero-ambient)"/>
+      <!-- Subtle Multimodal Research Signal Wave Behind Right-Mid Canvas -->
+      <path d="M 350 155 C 400 120, 430 190, 480 150 S 545 118, 595 154 S 630 180, 660 148"
+            fill="none" stroke="#315EFF" stroke-opacity="0.09" stroke-width="1.2"/>
+      <path class="signal-wave" d="M 350 155 C 400 120, 430 190, 480 150 S 545 118, 595 154 S 630 180, 660 148"
+            fill="none" stroke="url(#wave-grad)" stroke-width="1.6"/>
       <!-- Animated Top Light Beam -->
       <rect x="0" y="0" width="880" height="2.4" fill="url(#top-beam)"/>
     </g>
@@ -187,8 +204,8 @@
     </pattern>
     <linearGradient id="scan-grad" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#315EFF" stop-opacity="0"/>
-      <stop offset="72%" stop-color="#315EFF" stop-opacity="0.14"/>
-      <stop offset="96%" stop-color="#7DDFFF" stop-opacity="0.45"/>
+      <stop offset="72%" stop-color="#315EFF" stop-opacity="0.08"/>
+      <stop offset="96%" stop-color="#7DDFFF" stop-opacity="0.28"/>
       <stop offset="100%" stop-color="#7DDFFF" stop-opacity="0"/>
     </linearGradient>
     <linearGradient id="sheen-grad" x1="0" y1="0" x2="1" y2="0">
@@ -210,7 +227,7 @@
     <!-- Subtle Silky Cyan Laser Scan Sweep -->
     <g class="scanline-sweep">
       <rect x="0" y="0" width="210" height="24" fill="url(#scan-grad)"/>
-      <line x1="0" y1="23.5" x2="210" y2="23.5" stroke="#315EFF" stroke-opacity="0.55" stroke-width="0.9"/>
+      <line x1="0" y1="23.5" x2="210" y2="23.5" stroke="#315EFF" stroke-opacity="0.38" stroke-width="0.8"/>
     </g>
 
     <!-- Diagonal Glassmorphic Sheen Sweep -->

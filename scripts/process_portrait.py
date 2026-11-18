@@ -195,8 +195,8 @@ def process_portrait():
     </pattern>
     <linearGradient id="scan-grad" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#315EFF" stop-opacity="0"/>
-      <stop offset="72%" stop-color="#315EFF" stop-opacity="0.14"/>
-      <stop offset="96%" stop-color="#7DDFFF" stop-opacity="0.45"/>
+      <stop offset="72%" stop-color="#315EFF" stop-opacity="0.08"/>
+      <stop offset="96%" stop-color="#7DDFFF" stop-opacity="0.28"/>
       <stop offset="100%" stop-color="#7DDFFF" stop-opacity="0"/>
     </linearGradient>
     <linearGradient id="sheen-grad" x1="0" y1="0" x2="1" y2="0">
@@ -218,7 +218,7 @@ def process_portrait():
     <!-- Subtle Silky Cyan Laser Scan Sweep -->
     <g class="scanline-sweep">
       <rect x="0" y="0" width="{display_w}" height="24" fill="url(#scan-grad)"/>
-      <line x1="0" y1="23.5" x2="{display_w}" y2="23.5" stroke="#315EFF" stroke-opacity="0.55" stroke-width="0.9"/>
+      <line x1="0" y1="23.5" x2="{display_w}" y2="23.5" stroke="#315EFF" stroke-opacity="0.38" stroke-width="0.8"/>
     </g>
 
     <!-- Diagonal Glassmorphic Sheen Sweep -->

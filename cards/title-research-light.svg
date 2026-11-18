@@ -48,7 +48,7 @@
   <text x="42" y="26" font-family="'Instrument Serif', Georgia, serif" font-size="27" fill="#131313">
     Research <tspan font-style="italic" fill="#315EFF">Directions</tspan>
   </text>
-  <line x1="291" y1="20" x2="804" y2="20" stroke="#DCDCD7" stroke-width="0.9"/>
+  <line x1="276" y1="20" x2="804" y2="20" stroke="#DCDCD7" stroke-width="0.9"/>
   <circle cx="810" cy="20" r="2" fill="#315EFF"/>
   <text x="878" y="23.5" text-anchor="end" font-family="'Geist Mono', monospace" font-size="9.5" letter-spacing="0.8" fill="#6E6E73">
     5 PILLARS

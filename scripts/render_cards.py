@@ -1,10 +1,18 @@
 #!/usr/bin/env python3
 """
-Render all custom SVG cards for Shashwat Upadhyay's GitHub Profile README (Master Revision V3.3).
+Render all custom SVG cards for Shashwat Upadhyay's GitHub Profile README (Master Revision V3.4).
 
-Ultra-tight Swiss editorial rhythm (zero wasted vertical space), bespoke vector icons on
-clickable nav buttons, subtle drop-shadow depth on the 2x-retina portrait, indexed hairline
-section headers, live GitHub-native SVG animations, and CSS :hover micro-interactions.
+Flagship Studio Polish:
+- cards/hero.svg: 2x-retina floating studio portrait, permanent cobalt Upadhyay with cyan sweep,
+                  subtle animated multimodal signal spline, radar pulse, ambient blueprint dot field
+- cards/nav-*.svg: 5 clickable icon-equipped buttons with staggered wave & sheen
+- cards/domain-01..05.svg: 5 clickable research cards with rounded micro-chip tags & zero internal void
+- cards/project-*.svg: 3 clickable project cards with animated scientific micro-diagrams
+                       (rPPG waveform, transit twin graph, VLM alpha-layer drift)
+- cards/badge-*.svg: 5 crisp local editorial status badges for Publications table (zero ugly line-wrap)
+- cards/research-timeline.svg: tight 96px 6-milestone strip with traveling cyan signal pulse
+- cards/title-*.svg: indexed Swiss hairline section headers
+- cards/footer-bar.svg: subtle animated editorial monograph signature rule
 """
 
 import os
@@ -35,6 +43,30 @@ def load_json(name):
     return {}
 
 
+def render_chips(start_x, y, tags, max_x, pill_fill="#EAECE6", text_fill=INK_SOFT, border_fill="#D7D9D2"):
+    """Render compact rounded micro-chips cleanly on one row without ever exceeding max_x."""
+    svg_parts = []
+    cx = start_x
+    h = 17
+    for idx, t in enumerate(tags):
+        # Geist Mono 8.6px is ~5.2px per char + 11px horizontal padding
+        tw = int(len(t) * 5.25 + 12)
+        if cx + tw > max_x:
+            break
+        # First chip subtly cobalt-tinted for focal hierarchy
+        if idx == 0:
+            pf, bf, tf = "#E7EDFF", "#C2D2FF", COBALT
+        else:
+            pf, bf, tf = pill_fill, border_fill, text_fill
+        svg_parts.append(
+            f'<rect x="{cx}" y="{y}" width="{tw}" height="{h}" rx="4" fill="{pf}" stroke="{bf}" stroke-width="0.6"/>'
+            f'<text x="{cx + tw / 2:.1f}" y="{y + 11.6:.1f}" text-anchor="middle" '
+            f'font-family="\'Geist Mono\', monospace" font-size="8.6" font-weight="600" fill="{tf}">{escape(t)}</text>'
+        )
+        cx += tw + 5
+    return "".join(svg_parts)
+
+
 # ==============================================================================
 # 1. COMPACT HERO CARD (880 x 286)
 # ==============================================================================
@@ -48,6 +80,14 @@ def render_hero():
             m = re.search(r"<svg[^>]*>(.*?)</svg>", p_content, re.DOTALL)
             if m:
                 portrait_inner = m.group(1)
+
+    extra_css = """
+    @keyframes wave-flow {
+      from { stroke-dashoffset: 320; }
+      to { stroke-dashoffset: 0; }
+    }
+    .signal-wave { stroke-dasharray: 160 160; animation: wave-flow 7s linear infinite; }
+    """
 
     body = f"""
   <defs>
@@ -74,6 +114,12 @@ def render_hero():
       <animateTransform attributeName="gradientTransform" type="translate"
         values="-260 0; 940 0" dur="6.5s" repeatCount="indefinite"/>
     </linearGradient>
+    <linearGradient id="wave-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="{COBALT}" stop-opacity="0"/>
+      <stop offset="35%" stop-color="{COBALT}" stop-opacity="0.22"/>
+      <stop offset="70%" stop-color="{CYAN}" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="{COBALT}" stop-opacity="0"/>
+    </linearGradient>
     <radialGradient id="hero-ambient" cx="84%" cy="50%" r="36%">
       <stop offset="0%" stop-color="{COBALT}" stop-opacity="0.12"/>
       <stop offset="60%" stop-color="{CYAN}" stop-opacity="0.04"/>
@@ -89,6 +135,11 @@ def render_hero():
       <rect class="card-bg" width="{W}" height="{h}" rx="12" fill="{PAPER}" stroke="{RULE}" stroke-width="1"/>
       <rect x="520" y="0" width="360" height="{h}" fill="url(#hero-grid)"/>
       <rect width="{W}" height="{h}" fill="url(#hero-ambient)"/>
+      <!-- Subtle Multimodal Research Signal Wave Behind Right-Mid Canvas -->
+      <path d="M 350 155 C 400 120, 430 190, 480 150 S 545 118, 595 154 S 630 180, 660 148"
+            fill="none" stroke="{COBALT}" stroke-opacity="0.09" stroke-width="1.2"/>
+      <path class="signal-wave" d="M 350 155 C 400 120, 430 190, 480 150 S 545 118, 595 154 S 630 180, 660 148"
+            fill="none" stroke="url(#wave-grad)" stroke-width="1.6"/>
       <!-- Animated Top Light Beam -->
       <rect x="0" y="0" width="{W}" height="2.4" fill="url(#top-beam)"/>
     </g>
@@ -146,7 +197,8 @@ def render_hero():
     svg_out = make_card_svg(
         W, h, body,
         font_keys=["serif", "serif-i", "sans", "sans-b", "mono"],
-        label="Shashwat Upadhyay — Research in Motion. Independent AI Researcher."
+        label="Shashwat Upadhyay — Research in Motion. Independent AI Researcher.",
+        extra_css=extra_css
     )
     with open(os.path.join(CARDS_DIR, "hero.svg"), "w", encoding="utf-8") as f:
         f.write(svg_out)
@@ -159,7 +211,6 @@ def render_hero():
 # 1B. FIVE INDIVIDUAL CLICKABLE QUICK-LINK BUTTONS WITH VECTOR ICONS (176 x 38)
 # ==============================================================================
 def render_nav_links():
-    # Clean crisp 14x14 monochrome vector icons (origin 0,0)
     icons = {
         "github": '<path d="M7 0.5a6.5 6.5 0 0 0-2.05 12.67c.32.06.44-.14.44-.31v-1.1c-1.8.39-2.18-.87-2.18-.87-.3-.75-.72-.95-.72-.95-.59-.4.04-.39.04-.39.65.05 1 .67 1 .67.58 1 1.52.71 1.89.54.06-.42.23-.71.41-.87-1.44-.16-2.95-.72-2.95-3.2 0-.71.25-1.29.67-1.74-.07-.16-.29-.82.06-1.71 0 0 .55-.18 1.79.66a6.2 6.2 0 0 1 3.26 0c1.24-.84 1.79-.66 1.79-.66.35.89.13 1.55.06 1.71.42.45.67 1.03.67 1.74 0 2.49-1.52 3.04-2.96 3.2.23.2.44.6.44 1.21v1.79c0 .17.12.38.44.31A6.5 6.5 0 0 0 7 0.5z" fill="#315EFF"/>',
         "scholar": '<path d="M7 1.2L0.5 5l6.5 3.8L13.5 5 7 1.2zm-4.2 5.4v3.1c0 1.2 1.9 2.3 4.2 2.3s4.2-1.1 4.2-2.3V6.6L7 9.1 2.8 6.6z" fill="#315EFF"/>',
@@ -205,7 +256,6 @@ def render_nav_links():
       <rect class="sh" style="animation-delay:{sheen_delay:.2f}s" x="0" y="0" width="42" height="{ph}" fill="url(#nav-sheen-{slug})"/>
     </g>
     <rect class="card-bg" x="3.5" y="3.5" width="{pw - 7}" height="{ph - 7}" rx="7" fill="none" stroke="{RULE}" stroke-width="1"/>
-    <!-- Bespoke Vector Icon -->
     <g transform="translate(16, 12)">
       {icons[slug]}
     </g>
@@ -222,19 +272,18 @@ def render_nav_links():
         )
         with open(os.path.join(CARDS_DIR, f"nav-{slug}.svg"), "w", encoding="utf-8") as f:
             f.write(svg_out)
-    print("wrote cards/nav-*.svg (5 icon-equipped clickable nav buttons)")
+    print("wrote cards/nav-*.svg")
 
 
 # ==============================================================================
-# 2. FIVE INDIVIDUAL CLICKABLE RESEARCH DOMAIN CARDS (Zero Wasted Air)
+# 2. FIVE INDIVIDUAL CLICKABLE RESEARCH DOMAIN CARDS WITH MICRO-CHIP PILLS
 # ==============================================================================
 def render_research_domains():
-    # Row 1: tight 150px height
     r1_w = 293
-    r1_h = 150
+    r1_h = 152
     pad = 4
     inner_w = r1_w - 2 * pad  # 285
-    inner_h = r1_h - 2 * pad  # 142
+    inner_h = r1_h - 2 * pad  # 144
 
     row1_domains = [
         {
@@ -243,7 +292,7 @@ def render_research_domains():
             "title_1": "Multimodal AI &",
             "title_2": "Physiological Computing",
             "summary": "Non-contact vital monitoring via video, spatial-temporal models, and multimodal sensor fusion.",
-            "foci": "PhysioFM · rPPG · WardOS · Fusion",
+            "tags": ["PhysioFM", "rPPG", "WardOS", "Fusion"],
             "delay": 0.4,
         },
         {
@@ -252,7 +301,7 @@ def render_research_domains():
             "title_1": "Intelligent Infrastructure",
             "title_2": "& Digital Twins",
             "summary": "Synchronized 3D simulation testbeds and edge computer vision for connected urban transit.",
-            "foci": "IMPACT · SUMO · Unity 3D · YOLO",
+            "tags": ["IMPACT", "SUMO", "Unity 3D", "YOLO"],
             "delay": 1.6,
         },
         {
@@ -261,7 +310,7 @@ def render_research_domains():
             "title_1": "Trustworthy AI &",
             "title_2": "ML Security",
             "summary": "Auditing VLM preprocessing attack surfaces, alpha-channel drift, and zero-label behavioral risk.",
-            "foci": "VLM Security · SEV · SentinelAI",
+            "tags": ["VLM Security", "SEV", "SentinelAI"],
             "delay": 2.8,
         }
     ]
@@ -270,6 +319,7 @@ def render_research_domains():
         summary_lines = wrap_text(d["summary"], 35)
         slug = d["slug"]
         delay = d["delay"]
+        chips_svg = render_chips(pad + 16, pad + inner_h - 24, d["tags"], pad + inner_w - 14)
         body = f"""
   <defs>
     <clipPath id="clip-{slug}">
@@ -296,20 +346,16 @@ def render_research_domains():
     </g>
     <rect class="card-bg" x="{pad + 0.5}" y="{pad + 0.5}" width="{inner_w - 1}" height="{inner_h - 1}" rx="8" fill="none" stroke="{RULE}" stroke-width="1"/>
 
-    <!-- Header number & arrow -->
     <text x="{pad + 16}" y="{pad + 22}" font-family="'Geist Mono', monospace" font-size="10" font-weight="600" fill="{COBALT}">{d['num']} //</text>
     <text class="n" style="animation-delay:{delay * 0.4:.1f}s" x="{pad + inner_w - 16}" y="{pad + 22}" text-anchor="end" font-family="'Geist Mono', monospace" font-size="11.5" fill="{COBALT}">&#8599;</text>
 
-    <!-- 2-line title -->
     <text x="{pad + 16}" y="{pad + 40}" font-family="'Geist', sans-serif" font-weight="600" font-size="13.5" fill="{INK}">{escape(d['title_1'])}</text>
     <text x="{pad + 16}" y="{pad + 56}" font-family="'Geist', sans-serif" font-weight="600" font-size="13.5" fill="{INK}">{escape(d['title_2'])}</text>
 
-    <!-- Complete 3-line summary -->
-    {render_lines(pad + 16, pad + 75, summary_lines, 14.5, f'font-family="\'Geist\', sans-serif" font-size="11" fill="{INK_SOFT}"')}
+    {render_lines(pad + 16, pad + 75, summary_lines, 14.2, f'font-family="\'Geist\', sans-serif" font-size="11" fill="{INK_SOFT}"')}
 
-    <!-- Divider & technical tags -->
-    <line x1="{pad + 16}" y1="{pad + inner_h - 25}" x2="{pad + inner_w - 16}" y2="{pad + inner_h - 25}" stroke="{RULE}" stroke-width="0.7"/>
-    <text x="{pad + 16}" y="{pad + inner_h - 9}" font-family="'Geist Mono', monospace" font-size="9.5" fill="{MUTED}">{escape(d['foci'])}</text>
+    <!-- Crisp Micro-Chip Tags -->
+    <g>{chips_svg}</g>
   </g>
 """
         svg_out = make_card_svg(
@@ -320,11 +366,11 @@ def render_research_domains():
         with open(os.path.join(CARDS_DIR, f"{slug}.svg"), "w", encoding="utf-8") as f:
             f.write(svg_out)
 
-    # Row 2: tight 114px height (eliminates the 35px empty internal void!)
+    # Row 2: 2 cards (440 x 116)
     r2_w = 440
-    r2_h = 114
+    r2_h = 116
     inner2_w = r2_w - 2 * pad  # 432
-    inner2_h = r2_h - 2 * pad  # 106
+    inner2_h = r2_h - 2 * pad  # 108
 
     row2_domains = [
         {
@@ -332,7 +378,7 @@ def render_research_domains():
             "num": "04",
             "title": "Computer Vision & Document Intelligence",
             "summary": "Object detection, CNN scientific image segmentation, and end-to-end OCR document parsing pipelines.",
-            "foci": "YOLOv8 12k+ (92% acc) · OCR (96% acc) · CLIP",
+            "tags": ["YOLOv8 (92% acc)", "OCR (96% acc)", "CLIP Retrieval", "IIT Dhanbad"],
             "delay": 1.0,
         },
         {
@@ -340,7 +386,7 @@ def render_research_domains():
             "num": "05",
             "title": "Quantitative Research & Financial Modelling",
             "summary": "Statistical alpha signal discovery, multi-year equity backtesting, and systematic variance reduction.",
-            "foci": "Alpha Signals · Sharpe > 1.5 · 22% Variance Cut",
+            "tags": ["Alpha Signals", "Sharpe > 1.5", "-22% Variance", "WorldQuant"],
             "delay": 2.2,
         }
     ]
@@ -349,6 +395,7 @@ def render_research_domains():
         summary_lines = wrap_text(d["summary"], 54)
         slug = d["slug"]
         delay = d["delay"]
+        chips_svg = render_chips(pad + 18, pad + inner2_h - 24, d["tags"], pad + inner2_w - 16)
         body = f"""
   <defs>
     <clipPath id="clip-{slug}">
@@ -375,22 +422,18 @@ def render_research_domains():
     </g>
     <rect class="card-bg" x="{pad + 0.5}" y="{pad + 0.5}" width="{inner2_w - 1}" height="{inner2_h - 1}" rx="8" fill="none" stroke="{RULE}" stroke-width="1"/>
 
-    <!-- Subtle Technical XY Grid Motif in Corner -->
     <path d="M {pad + inner2_w - 34} {pad + 12} L {pad + inner2_w - 12} {pad + 12} M {pad + inner2_w - 12} {pad + 12} L {pad + inner2_w - 12} {pad + 32}"
           fill="none" stroke="{COBALT}" stroke-width="1.2" stroke-opacity="0.45"/>
     <circle class="live" style="animation-delay:{delay * 0.5:.1f}s" cx="{pad + inner2_w - 12}" cy="{pad + 12}" r="2.2" fill="{COBALT}"/>
 
-    <!-- Header Number & Title -->
     <text x="{pad + 18}" y="{pad + 24}" font-family="'Geist Mono', monospace" font-size="10.5" font-weight="600" fill="{COBALT}">{d['num']} //</text>
     <text x="{pad + 52}" y="{pad + 24}" font-family="'Geist', sans-serif" font-weight="600" font-size="13.5" fill="{INK}">{escape(d['title'])}</text>
     <text class="n" style="animation-delay:{delay * 0.4:.1f}s" x="{pad + inner2_w - 40}" y="{pad + 24}" font-family="'Geist Mono', monospace" font-size="11.5" fill="{COBALT}">&#8599;</text>
 
-    <!-- Complete 2-line description -->
-    {render_lines(pad + 18, pad + 46, summary_lines, 16, f'font-family="\'Geist\', sans-serif" font-size="11.5" fill="{INK_SOFT}"')}
+    {render_lines(pad + 18, pad + 45, summary_lines, 15.5, f'font-family="\'Geist\', sans-serif" font-size="11.5" fill="{INK_SOFT}"')}
 
-    <!-- Divider & focus tags -->
-    <line x1="{pad + 18}" y1="{pad + inner2_h - 24}" x2="{pad + inner2_w - 18}" y2="{pad + inner2_h - 24}" stroke="{RULE}" stroke-width="0.7"/>
-    <text x="{pad + 18}" y="{pad + inner2_h - 9}" font-family="'Geist Mono', monospace" font-size="9.5" fill="{MUTED}">{escape(d['foci'])}</text>
+    <!-- Crisp Micro-Chip Tags -->
+    <g>{chips_svg}</g>
   </g>
 """
         svg_out = make_card_svg(
@@ -401,18 +444,50 @@ def render_research_domains():
         with open(os.path.join(CARDS_DIR, f"{slug}.svg"), "w", encoding="utf-8") as f:
             f.write(svg_out)
 
-    print("wrote cards/domain-01..05.svg (tightened, zero internal void)")
+    print("wrote cards/domain-01..05.svg (with micro-chip tags)")
 
 
 # ==============================================================================
-# 3. THREE COMPACT FEATURED PROJECT CARDS (293 x 168 EACH, TIGHT & PUNCHY)
+# 3. THREE FEATURED PROJECT CARDS WITH ANIMATED SCIENTIFIC MICRO-VISUALS
 # ==============================================================================
 def render_three_featured_projects():
     tile_w = 293
-    tile_h = 168
+    tile_h = 172
     pad = 4
     inner_w = tile_w - 2 * pad  # 285
-    inner_h = tile_h - 2 * pad  # 160
+    inner_h = tile_h - 2 * pad  # 164
+
+    # Animated domain-specific scientific micro-motifs positioned top-right (origin 0,0, ~56x20)
+    motifs = {
+        "physiofm": f"""
+      <!-- Animated rPPG Physiological Waveform -->
+      <path d="M 0 11 L 10 11 L 14 4 L 18 17 L 23 1 L 28 15 L 32 11 L 46 11"
+            fill="none" stroke="{COBALT}" stroke-opacity="0.22" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 0 11 L 10 11 L 14 4 L 18 17 L 23 1 L 28 15 L 32 11 L 46 11"
+            fill="none" stroke="{COBALT}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            stroke-dasharray="28 60">
+        <animate attributeName="stroke-dashoffset" from="88" to="0" dur="2.6s" repeatCount="indefinite"/>
+      </path>
+        """,
+        "digital-twins": """
+      <!-- Animated Connected Urban Transit Digital Twin Graph -->
+      <path d="M 4 14 L 22 4 L 42 13 M 4 14 L 42 13" fill="none" stroke="#00A896" stroke-opacity="0.35" stroke-width="1.1"/>
+      <circle cx="4" cy="14" r="2.3" fill="#00A896"/>
+      <circle cx="22" cy="4" r="2.3" fill="#00A896"/>
+      <circle cx="42" cy="13" r="2.3" fill="#00A896"/>
+      <circle r="2" fill="#00C2A8">
+        <animateMotion dur="3.2s" repeatCount="indefinite" path="M 4 14 L 22 4 L 42 13 L 4 14"/>
+      </circle>
+        """,
+        "vlm-security": f"""
+      <!-- Animated RGBA-to-RGB Alpha-Layer Semantic Drift Motif -->
+      <rect x="6" y="3" width="16" height="12" rx="2" fill="none" stroke="{VIOLET}" stroke-opacity="0.4" stroke-width="1.1"/>
+      <rect x="14" y="6" width="16" height="12" rx="2" fill="{VIOLET}" fill-opacity="0.14" stroke="{VIOLET}" stroke-width="1.2">
+        <animateTransform attributeName="transform" type="translate" values="0 0; 6 -2; 0 0" dur="3.4s" repeatCount="indefinite"/>
+      </rect>
+      <circle cx="38" cy="10" r="2" fill="{VIOLET}" class="live"/>
+        """
+    }
 
     projects = [
         {
@@ -422,6 +497,7 @@ def render_three_featured_projects():
             "desc": "Hierarchical Swin-V2 + STDS framework diagnosing optimization mode collapse in continuous physiological waveforms.",
             "tech": "Swin-V2 · STDS · UBFC-rPPG · SHMS",
             "color": COBALT,
+            "pill_bg": "#E7EDFF",
             "delay": 0.3,
         },
         {
@@ -430,16 +506,18 @@ def render_three_featured_projects():
             "subtitle": "Smart Mobility & Transit Testbeds",
             "desc": "GIS-integrated Unity 3D twin of a 25 km Jaipur corridor coupling SUMO traffic with edge YOLO (18% peak load cut).",
             "tech": "SUMO · Unity 3D · YOLO · IMPACT",
-            "color": "#00A896",
+            "color": "#009E8C",
+            "pill_bg": "#E3F6F3",
             "delay": 1.5,
         },
         {
             "id": "vlm-security",
             "name": "Semantic Drift in VLMs",
-            "subtitle": "Preprocessing Attack Surface (IGI Global)",
+            "subtitle": "Preprocessing Attack (IGI Global)",
             "desc": "Exposing RGBA-to-RGB alpha-channel flattening vulnerabilities in VLMs with SEV defense verification (Accepted Chapter).",
             "tech": "VLM Security · SEV · DOI: 10.4018",
             "color": VIOLET,
+            "pill_bg": "#EFE9FF",
             "delay": 2.7,
         }
     ]
@@ -483,15 +561,18 @@ def render_three_featured_projects():
       </text>
       <text class="n" style="animation-delay:{delay * 0.4:.1f}s" x="{pad + inner_w - 16}" y="{pad + 26}" text-anchor="end" font-family="'Geist Mono', monospace" font-size="12" fill="{c}">&#8599;</text>
 
-      <!-- Subtitle -->
-      <text x="{pad + 16}" y="{pad + 43}" font-family="'Geist Mono', monospace" font-size="9.5" fill="{MUTED}">{escape(p['subtitle'])}</text>
+      <!-- Subtitle + Subtle Animated Scientific Micro-Diagram -->
+      <text x="{pad + 16}" y="{pad + 44}" font-family="'Geist Mono', monospace" font-size="9.2" fill="{MUTED}">{escape(p['subtitle'])}</text>
+      <g transform="translate({pad + inner_w - 64}, {pad + 32})">
+        {motifs[pid]}
+      </g>
 
       <!-- Description -->
-      {render_lines(pad + 16, pad + 62, desc_lines, 15, f'font-family="\'Geist\', sans-serif" font-size="11" fill="{INK_SOFT}"')}
+      {render_lines(pad + 16, pad + 65, desc_lines, 15, f'font-family="\'Geist\', sans-serif" font-size="11" fill="{INK_SOFT}"')}
 
-      <!-- Divider & Tech Label -->
-      <line x1="{pad + 16}" y1="{pad + inner_h - 28}" x2="{pad + inner_w - 16}" y2="{pad + inner_h - 28}" stroke="{RULE}" stroke-width="0.8"/>
-      <text x="{pad + 16}" y="{pad + inner_h - 11}" font-family="'Geist Mono', monospace" font-size="9.5" font-weight="600" fill="{c}">{escape(p['tech'])}</text>
+      <!-- Tinted Tech Pill Strip -->
+      <rect x="{pad + 16}" y="{pad + inner_h - 27}" width="{inner_w - 32}" height="19" rx="5" fill="{p['pill_bg']}"/>
+      <text x="{pad + inner_w / 2:.1f}" y="{pad + inner_h - 14.2:.1f}" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="9.2" font-weight="600" fill="{c}">{escape(p['tech'])}</text>
     </g>
   </g>
 """
@@ -503,7 +584,35 @@ def render_three_featured_projects():
         )
         with open(os.path.join(CARDS_DIR, f"project-{pid}.svg"), "w", encoding="utf-8") as f:
             f.write(svg_out)
-        print(f"wrote cards/project-{pid}.svg")
+        print(f"wrote cards/project-{pid}.svg (with animated micro-diagram)")
+
+
+# ==============================================================================
+# 3B. CRISP LOCAL EDITORIAL STATUS BADGES FOR PUBLICATIONS TABLE (NEVER WRAP)
+# ==============================================================================
+def render_status_badges():
+    badges = [
+        ("accepted", "ACCEPTED · DOI", 118, "#1E46E8", "#E8EEFF", "#B8CAFF"),
+        ("published", "PUBLISHED", 96, "#00897B", "#E2F6F3", "#A6E3DA"),
+        ("award", "★ BEST PAPER", 114, "#B45309", "#FEF3C7", "#FCD34D"),
+        ("review", "UNDER REVIEW", 112, "#374151", "#F3F4F6", "#D1D5DB"),
+        ("presented", "PRESENTED", 96, "#7C3AED", "#EFE9FF", "#C4B5FD"),
+    ]
+    bh = 24
+    for slug, text, bw, fg, bg, border in badges:
+        dot = "" if text.startswith("★") else f'<circle cx="11" cy="{bh / 2:.1f}" r="3" fill="{fg}"/>'
+        tx = bw / 2 if text.startswith("★") else (bw / 2 + 5)
+        body = f"""
+  <rect x="0.75" y="0.75" width="{bw - 1.5}" height="{bh - 1.5}" rx="12" fill="{bg}" stroke="{border}" stroke-width="1"/>
+  {dot}
+  <text x="{tx:.1f}" y="15.6" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="9.8" font-weight="600" letter-spacing="0.3" fill="{fg}">
+    {escape(text)}
+  </text>
+"""
+        svg_out = make_card_svg(bw, bh, body, font_keys=["mono"], label=text)
+        with open(os.path.join(CARDS_DIR, f"badge-{slug}.svg"), "w", encoding="utf-8") as f:
+            f.write(svg_out)
+    print("wrote cards/badge-*.svg (5 crisp publication status badges)")
 
 
 # ==============================================================================
@@ -567,19 +676,18 @@ def render_timeline():
     )
     with open(os.path.join(CARDS_DIR, "research-timeline.svg"), "w", encoding="utf-8") as f:
         f.write(svg_out)
-    print("wrote cards/research-timeline.svg (tight 96px height)")
+    print("wrote cards/research-timeline.svg")
 
 
 # ==============================================================================
-# 5. INDEXED SWISS EDITORIAL SECTION HEADERS (880 x 36, WITH HAIRLINE RULE & TAG)
+# 5. INDEXED SWISS EDITORIAL SECTION HEADERS (880 x 34) + ANIMATED FOOTER BAR
 # ==============================================================================
 def render_section_title(slug, index_num, title, italic, badge, dark_fg="#E6EDF3", light_fg=INK):
     for theme, fg, rule_c, muted_c in [
         ("light", light_fg, "#DCDCD7", "#6E6E73"),
         ("dark", dark_fg, "#30363D", "#8B949E"),
     ]:
-        # Approximate width of the heading so the hairline starts cleanly right after the text
-        approx_text_w = 46 + int((len(title) + len(italic) + 1) * 12.2)
+        approx_text_w = 46 + int((len(title) + len(italic) + 1) * 11.4)
         rule_x1 = min(640, approx_text_w + 14)
         rule_x2 = W - (len(badge) * 6.5 + 18)
 
@@ -605,6 +713,27 @@ def render_section_title(slug, index_num, title, italic, badge, dark_fg="#E6EDF3
             f.write(svg_out)
 
 
+def render_footer_bar():
+    body = f"""
+  <defs>
+    <linearGradient id="foot-pulse" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="220" y2="0">
+      <stop offset="0" stop-color="{COBALT}" stop-opacity="0"/>
+      <stop offset=".5" stop-color="{COBALT}" stop-opacity="0.95"/>
+      <stop offset=".75" stop-color="{CYAN}" stop-opacity="1"/>
+      <stop offset="1" stop-color="{CYAN}" stop-opacity="0"/>
+      <animateTransform attributeName="gradientTransform" type="translate"
+        values="-220 0; 960 0" dur="5.5s" repeatCount="indefinite"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="2.5" width="{W}" height="1" fill="{COBALT}" fill-opacity="0.22"/>
+  <rect x="0" y="2" width="{W}" height="2" rx="1" fill="url(#foot-pulse)"/>
+"""
+    svg_out = make_card_svg(W, 6, body, font_keys=[], label="Editorial footer accent bar")
+    with open(os.path.join(CARDS_DIR, "footer-bar.svg"), "w", encoding="utf-8") as f:
+        f.write(svg_out)
+    print("wrote cards/footer-bar.svg")
+
+
 def render_all_titles():
     titles = [
         ("research", "01", "Research", "Directions", "5 PILLARS"),
@@ -626,9 +755,11 @@ def main():
     render_nav_links()
     render_research_domains()
     render_three_featured_projects()
+    render_status_badges()
     render_timeline()
     render_all_titles()
-    print("Rendered Master Revision V3.3 cards successfully.")
+    render_footer_bar()
+    print("Rendered Master Revision V3.4 cards successfully.")
 
 
 if __name__ == "__main__":
