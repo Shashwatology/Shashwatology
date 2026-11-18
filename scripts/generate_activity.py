@@ -15,6 +15,12 @@ DATA_FILE = os.path.join(ROOT, "data", "contributions.json")
 STATS_FILE = os.path.join(ROOT, "data", "github_stats.json")
 OUT_FILE = os.path.join(ROOT, "cards", "activity.svg")
 
+SHORT_LANG = {
+    "TypeScript": "TS",
+    "JavaScript": "JS",
+    "Jupyter Notebook": "Jupyter",
+}
+
 def generate():
     if not os.path.exists(DATA_FILE):
         print(f"Error: {DATA_FILE} not found. Run fetch_github_data.py first.")
@@ -34,7 +40,7 @@ def generate():
         return
 
     w = 880
-    h = 375
+    h = 378
     monthly = monthly_raw[-12:]
     
     # Identify highest month
@@ -51,7 +57,6 @@ def generate():
     bars_svg = []
     for i, m in enumerate(monthly):
         is_best = (m["total"] == best_month["total"] and m["month"] == best_month["month"])
-        # Minimum bar height so months with 0 still show subtle baseline indicator
         bh = max(3, round((m["total"] / top_total) * max_bar_h))
         x = chart_x0 + i * (bar_w + gap)
         y = base_y - bh
@@ -91,8 +96,9 @@ def generate():
     best_day_count = best_day.get("count", 0)
     best_day_date = best_day.get("date", "")
 
-    streak_note = "current streak, and the longest" if cs >= ls and cs > 0 else f"current streak, longest {ls} days"
-    if cs == 0:
+    if cs > 0:
+        streak_note = f"current streak {cs} days · longest {ls} days"
+    else:
         streak_note = f"longest streak was {ls} days"
 
     stats_items = [
@@ -120,38 +126,50 @@ def generate():
     total_c = data.get("total_contributions", 0)
 
     # Repository & Language Telemetry
-    public_repos = stats.get("public_repos", 45)
+    public_repos = stats.get("public_repos", 46)
     total_stars = stats.get("total_stars", 63)
     total_forks = stats.get("total_forks", 18)
 
-    # Stacked language bar calculation
     lang_colors = {
-        "TypeScript": "#3178C6",
         "Python": "#3572A5",
+        "TypeScript": "#3178C6",
         "HTML": "#E34C26",
         "CSS": "#563D7C",
         "C++": "#F34B7D",
         "Jupyter Notebook": "#DA5B0B",
-        "JavaScript": "#F1E05A"
+        "JavaScript": "#F1E05A",
+        "Other": "#8E8E93",
     }
-    
-    langs = stats.get("languages", [
-        {"name": "TypeScript", "pct": 28.6},
-        {"name": "Python", "pct": 28.6},
-        {"name": "HTML", "pct": 17.9},
-        {"name": "CSS", "pct": 14.3},
-        {"name": "C++", "pct": 3.6}
-    ])[:5]
 
+    raw_langs = stats.get("languages", [
+        {"name": "Python", "pct": 30.0},
+        {"name": "TypeScript", "pct": 30.0},
+        {"name": "HTML", "pct": 16.7},
+        {"name": "CSS", "pct": 13.3},
+        {"name": "C++", "pct": 3.3},
+    ])
+
+    # Top 5 languages + aggregate remainder as Other so bar fills 100% cleanly
+    display_langs = list(raw_langs[:5])
+    top_sum = sum(l["pct"] for l in display_langs)
+    rem = round(max(0.0, 100.0 - top_sum), 1)
+    if rem >= 1.0:
+        display_langs.append({"name": "Other", "pct": rem})
+
+    # Normalize segment widths to fill lang_bar_w completely
+    total_pct = sum(l["pct"] for l in display_langs) or 100.0
     lang_bar_x = 450
     lang_bar_w = 386
     lang_bar_y = 328
-    lang_bar_h = 6
-    
+    lang_bar_h = 7
+
     bar_segments = []
     cur_x = lang_bar_x
-    for l in langs:
-        seg_w = (l["pct"] / 100.0) * lang_bar_w
+    for idx, l in enumerate(display_langs):
+        if idx == len(display_langs) - 1:
+            seg_w = max(0.0, (lang_bar_x + lang_bar_w) - cur_x)
+        else:
+            seg_w = (l["pct"] / total_pct) * lang_bar_w
         c = lang_colors.get(l["name"], COBALT)
         bar_segments.append(
             f'<rect x="{cur_x:.1f}" y="{lang_bar_y}" width="{seg_w:.1f}" height="{lang_bar_h}" fill="{c}">'
@@ -159,7 +177,11 @@ def generate():
         )
         cur_x += seg_w
 
-    lang_labels = " · ".join([f"{l['name']} {l['pct']}%" for l in langs])
+    # Compact, guaranteed-non-overflowing caption (rounded whole %)
+    lang_labels = " · ".join(
+        f"{SHORT_LANG.get(l['name'], l['name'])} {round(l['pct'])}%"
+        for l in display_langs
+    )
 
     body = f"""
   <!-- Card Background -->
@@ -192,29 +214,28 @@ def generate():
 
   <!-- Bottom Strip: Repository Stats on Left -->
   <g font-family="'Geist Mono', monospace" font-size="11" fill="{INK}">
-    <text x="44" y="333">
+    <text x="44" y="335">
       <tspan font-weight="600" fill="{COBALT}">{public_repos}</tspan> Repositories
       <tspan fill="{MUTED}">·</tspan>
       <tspan font-weight="600" fill="{COBALT}">{total_stars}</tspan> Stars
       <tspan fill="{MUTED}">·</tspan>
       <tspan font-weight="600" fill="{COBALT}">{total_forks}</tspan> Forks
     </text>
-    <text x="44" y="354" font-family="'Geist', sans-serif" font-size="11" fill="{MUTED}">
+    <text x="44" y="356" font-family="'Geist', sans-serif" font-size="11" fill="{MUTED}">
       Primary ecosystems: Research prototypes, AI tooling, multimodal digital twins
     </text>
   </g>
 
   <!-- Bottom Strip: Stacked Language Bar on Right -->
   <g>
-    <!-- Background pill for language bar -->
-    <rect x="{lang_bar_x}" y="{lang_bar_y}" width="{lang_bar_w}" height="{lang_bar_h}" rx="3" fill="#E2E2DE"/>
+    <rect x="{lang_bar_x}" y="{lang_bar_y}" width="{lang_bar_w}" height="{lang_bar_h}" rx="3.5" fill="#E2E2DE"/>
     <g clip-path="url(#lang-clip)">
       <clipPath id="lang-clip">
-        <rect x="{lang_bar_x}" y="{lang_bar_y}" width="{lang_bar_w}" height="{lang_bar_h}" rx="3"/>
+        <rect x="{lang_bar_x}" y="{lang_bar_y}" width="{lang_bar_w}" height="{lang_bar_h}" rx="3.5"/>
       </clipPath>
       {''.join(bar_segments)}
     </g>
-    <text x="{lang_bar_x}" y="354" font-family="'Geist Mono', monospace" font-size="9.5" fill="{MUTED}">
+    <text x="{lang_bar_x + lang_bar_w}" y="356" text-anchor="end" font-family="'Geist Mono', monospace" font-size="9.5" fill="{MUTED}">
       {lang_labels}
     </text>
   </g>

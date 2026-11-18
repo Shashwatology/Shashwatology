@@ -15,7 +15,7 @@ USERNAME = os.environ.get("GH_PROFILE_USER", "shashwatology")
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTRIB_URL = f"https://github.com/users/{USERNAME}/contributions"
 OUT_CONTRIB = os.path.join(BASE_DIR, "data", "contributions.json")
-OUT_PROFILE = os.path.join(BASE_DIR, "data", "profile.json")
+OUT_GITHUB_USER = os.path.join(BASE_DIR, "data", "github_user.json")
 
 def fetch_contributions():
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
@@ -145,9 +145,10 @@ def main():
 
     print(f"Fetching user profile for {USERNAME}...")
     profile = fetch_user_profile()
-    with open(OUT_PROFILE, "w", encoding="utf-8") as f:
-        json.dump(profile, f, indent=2)
-    print(f"Saved {OUT_PROFILE}")
+    if profile:
+        with open(OUT_GITHUB_USER, "w", encoding="utf-8") as f:
+            json.dump(profile, f, indent=2)
+        print(f"Saved {OUT_GITHUB_USER}")
 
 if __name__ == "__main__":
     main()

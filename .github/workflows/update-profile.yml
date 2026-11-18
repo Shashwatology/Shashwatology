@@ -1,7 +1,7 @@
 name: Update Profile Portfolio & Visuals
 
 # Daily automation workflow for Shashwat Upadhyay's GitHub Profile README.
-# Fetches real contribution telemetry, regenerates animated SVG cards,
+# Fetches real contribution & repo telemetry, regenerates animated SVG cards,
 # validates links, and commits only changed assets with least-privilege tokens.
 
 on:
@@ -45,16 +45,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r scripts/requirements.txt
 
-      - name: Fetch Real Contribution Telemetry & User Profile
+      - name: Fetch Real Contribution Telemetry & Repo Stats
         env:
           GH_PROFILE_USER: shashwatology
-        run: python scripts/fetch_github_data.py
+        run: |
+          python scripts/fetch_github_data.py
+          python scripts/fetch_repo_stats.py
 
       - name: Process Blue-Duotone Scanline Portrait
         run: python scripts/process_portrait.py
 
-      - name: Render Cobalt Blue Contribution Heatmap with Integrated Telemetry
-        run: python scripts/generate_heatmap.py
+      - name: Render Cobalt Blue Contribution Heatmap & Activity Bars
+        run: |
+          python scripts/generate_heatmap.py
+          python scripts/generate_activity.py
 
       - name: Render All SVG Editorial Cards
         run: python scripts/render_cards.py
@@ -69,8 +73,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: automated telemetry & research card refresh [skip ci]"
-          file_pattern: "cards/*.svg assets/*.svg data/contributions.json data/profile.json README.md"
+          file_pattern: "cards/*.svg assets/*.svg data/contributions.json data/github_stats.json data/github_user.json README.md"
           commit_user_name: "github-actions[bot]"
           commit_user_email: "github-actions[bot]@users.noreply.github.com"
           commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
-

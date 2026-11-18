@@ -1,42 +1,54 @@
 #!/usr/bin/env python3
 """
-Generate the streamlined, compact Master Revision V3.0 GitHub Profile README.md for Shashwat Upadhyay.
-Strictly grounded in resume data, verified Crossref/DOI publications, and real GitHub statistics.
+Generate the streamlined, compact Master Revision V3.1 GitHub Profile README.md for Shashwat Upadhyay.
+Every navigation pill, research direction card, project card, publication DOI, and repository link
+is natively clickable on GitHub and verified against resume/API ground truth.
 """
 
 import os
+import json
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..")
 README_PATH = os.path.join(ROOT, "README.md")
+STATS_PATH = os.path.join(ROOT, "data", "github_stats.json")
 
 def generate_readme():
-    readme_content = """<!--
-  SHASHWAT UPADHYAY — RESEARCH IN MOTION (Master Revision V3.0)
+    public_repos = 46
+    if os.path.exists(STATS_PATH):
+        with open(STATS_PATH, "r", encoding="utf-8") as sf:
+            stats = json.load(sf)
+            public_repos = stats.get("public_repos", 46)
+
+    readme_content = f"""<!--
+  SHASHWAT UPADHYAY — RESEARCH IN MOTION (Master Revision V3.1)
   Compact Editorial AI Research Portfolio & Automated Design System
   Ground Truth: Shashwat_Research_Resume_2026-10-28.pdf
 -->
 
 <div align="center">
 
-<!-- 01 · COMPACT HERO CARD -->
-<a href="https://github.com/shashwatology">
+<!-- 01 · COMPACT HERO CARD + CLICKABLE QUICK-LINK BAR -->
+<a href="https://github.com/Shashwatology">
   <img src="./cards/hero.svg" width="100%" alt="Shashwat Upadhyay — Research in Motion. Independent AI Researcher." />
 </a>
 
+<a href="https://github.com/Shashwatology"><img src="./cards/nav-github.svg" width="20%" alt="GitHub" /></a><a href="https://scholar.google.com/citations?user=ulC0-soAAAAJ"><img src="./cards/nav-scholar.svg" width="20%" alt="Google Scholar" /></a><a href="https://www.linkedin.com/in/shashwatupadhyay/"><img src="./cards/nav-linkedin.svg" width="20%" alt="LinkedIn" /></a><a href="https://www.researchgate.net/profile/Shashwat-Upadhyay-2"><img src="./cards/nav-researchgate.svg" width="20%" alt="ResearchGate" /></a><a href="mailto:shashwatology.s@gmail.com"><img src="./cards/nav-email.svg" width="20%" alt="Email" /></a>
+
 <br><br>
 
-<!-- 02 · 5 CORE RESEARCH DIRECTIONS -->
+<!-- 02 · 5 CORE RESEARCH DIRECTIONS (INDIVIDUALLY CLICKABLE) -->
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./cards/title-research-dark.svg" />
   <img src="./cards/title-research-light.svg" width="100%" alt="Research Directions" />
 </picture>
 
-<img src="./cards/research-map.svg" width="100%" alt="Five Research Pillars: Multimodal AI, Intelligent Infrastructure, Trustworthy AI, Computer Vision, Quantitative Research" />
+<a href="https://github.com/Shashwatology/PhysioFM"><img src="./cards/domain-01.svg" width="33.333%" alt="01 Multimodal AI & Physiological Computing" /></a><a href="https://github.com/Shashwatology/Guardian-Travel-Twin-"><img src="./cards/domain-02.svg" width="33.333%" alt="02 Intelligent Infrastructure & Digital Twins" /></a><a href="https://github.com/Shashwatology/semantic-drift-vlm-attacks"><img src="./cards/domain-03.svg" width="33.333%" alt="03 Trustworthy AI & ML Security" /></a>
+<a href="https://github.com/Shashwatology/Semantic-Ctrl-F"><img src="./cards/domain-04.svg" width="50%" alt="04 Computer Vision & Document Intelligence" /></a><a href="https://github.com/Shashwatology?tab=repositories"><img src="./cards/domain-05.svg" width="50%" alt="05 Quantitative Research & Financial Modelling" /></a>
 
 <br><br>
 
-<!-- 03 · FEATURED RESEARCH PROJECTS (ROW OF 3) -->
+<!-- 03 · FEATURED RESEARCH PROJECTS (ROW OF 3 CLICKABLE CARDS) -->
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./cards/title-projects-dark.svg" />
   <img src="./cards/title-projects-light.svg" width="100%" alt="Featured Research Projects" />
@@ -45,7 +57,7 @@ def generate_readme():
 <a href="https://github.com/Shashwatology/PhysioFM"><img src="./cards/project-physiofm.svg" width="33.333%" alt="PhysioFM: Foundation Models in rPPG" /></a><a href="https://github.com/Shashwatology/Guardian-Travel-Twin-"><img src="./cards/project-digital-twins.svg" width="33.333%" alt="Digital Twins in Urban Mobility" /></a><a href="https://github.com/Shashwatology/semantic-drift-vlm-attacks"><img src="./cards/project-vlm-security.svg" width="33.333%" alt="Semantic Drift in VLMs" /></a>
 
 <p align="right">
-  <sub><a href="https://github.com/shashwatology?tab=repositories">Explore all 45 public repositories &#8599;</a></sub>
+  <sub><a href="https://github.com/Shashwatology?tab=repositories">Explore all {public_repos} public repositories &#8599;</a></sub>
 </p>
 
 <!-- 04 · PUBLICATIONS & SCHOLARLY MILESTONES -->
@@ -60,10 +72,10 @@ def generate_readme():
 | :-- | :-- | :-: | :-: | :-: |
 | **Semantic Drift Before Inference: A Preprocessing Attack Surface in Vision–Language Models**<br><sub>S.A.K. Upadhyay, S.B. Sharma, R.A. Borgalli, R. Vairagade</sub> | *Adaptive Defense and Intelligent Security Architectures for AI-Driven Cybersecurity (IGI Global)*, Ch. 6, pp. 171–202 | 2026 | `Accepted / DOI Assigned` | [**DOI: 10.4018/979-8-2600-5116-0.ch006**](https://doi.org/10.4018/979-8-2600-5116-0.ch006) · [Code](https://github.com/Shashwatology/semantic-drift-vlm-attacks) |
 | **Fake news detection using deep learning models: A novel approach**<br><sub>Sachin Kumar, Rohan Asthana, Shashwat Upadhyay, N. Upreti, M. Akbar</sub> | *Transactions on Emerging Telecommunications Technologies (Wiley)* | 2020 | `Published` | [**DOI: 10.1002/ett.3767**](https://doi.org/10.1002/ett.3767) |
-| **Protocol-Driven Framework for Implementing an Integrated Multimodal Transportation System in Jaipur, India**<br><sub>S.A.K. Upadhyay (mentor: Prof. Nand Kumar)</sub> | *Proceedings of the 18th International Asian Urbanization Conference (IAUC 2026)*, p. 122 | 2026 | `Published` | [**IAUC Proceedings**](https://github.com/Shashwatology) |
+| **Protocol-Driven Framework for Implementing an Integrated Multimodal Transportation System in Jaipur, India**<br><sub>S.A.K. Upadhyay (mentor: Prof. Nand Kumar)</sub> | *Proceedings of the 18th International Asian Urbanization Conference (IAUC 2026)*, p. 122 | 2026 | `Published` | [**JUMTA Framework**](https://github.com/Shashwatology/JUMTA) |
 | **An IoMT-Based Wearable Prototype for Sustainable Remote Patient Monitoring**<br><sub>S.A.K. Upadhyay, A.K. Singh, A.A. Tiwari, R. Borgalli</sub> | *National Conference on Data-Centric AI (DASDA 2025)* | 2025 | `Best Paper Award` | [**ResearchGate**](https://www.researchgate.net/publication/397178065_An_IoMT-Based_Wearable_Prototype_Sustainable_Remote_Patient_Monitoring) |
 | **Technology Intervention for an Efficient Judicial System**<br><sub>Y. Jain, S.A.K. Upadhyay</sub> | *Conference Proceedings (ResearchGate Verified)* | 2025 | `Published` | [**ResearchGate**](https://www.researchgate.net/publication/394205684_Technology_Intervention_for_an_Efficient_Judicial_System) |
-| **SentinelAI: Adaptive Behavioral Risk Framework for Real-Time SSH Threat Detection**<br><sub>S.A.K. Upadhyay</sub> | *Cybersecurity Systems Venue* | 2026 | `Under Review` | [**SentinelAI Code**](https://github.com/shashwatology/SentinelAI) |
+| **SentinelAI: Adaptive Behavioral Risk Framework for Real-Time SSH Threat Detection**<br><sub>S.A.K. Upadhyay</sub> | *Cybersecurity Systems Venue* | 2026 | `Under Review` | [**SentinelAI Code**](https://github.com/Shashwatology/SentinelAI) |
 | **PhysioFM: A Diagnostic Framework for Transformer-Based Remote Photoplethysmography**<br><sub>S.A.K. Upadhyay, S.B. Sharma, N. Kumar, S. Kumar, Bhoomika</sub> | *Int’l Conf. on Next-Gen Structural Health Monitoring Systems (SHMS-2026)*, Paper ID 123 | 2026 | `Presented (Oct 2026)` | [**PhysioFM Code**](https://github.com/Shashwatology/PhysioFM) |
 
 <br>
@@ -120,10 +132,11 @@ def generate_readme():
 | Repository | Primary Focus | Language | Architecture / Stack |
 | :-- | :-- | :-: | :-- |
 | [**PhysioFM**](https://github.com/Shashwatology/PhysioFM) | Non-contact rPPG foundation model &amp; optimization diagnostics | `Python` | Swin-V2 · STDS · UBFC-rPPG · PyTorch |
-| [**Guardian-Travel-Twin**](https://github.com/Shashwatology/Guardian-Travel-Twin-) | 25 km multimodal corridor digital twin &amp; microscopic simulation | `C# / Python` | SUMO · Unity 3D · YOLOv8 · MoHUA IMPACT |
+| [**Guardian-Travel-Twin-**](https://github.com/Shashwatology/Guardian-Travel-Twin-) | 25 km multimodal corridor digital twin &amp; microscopic simulation | `JavaScript` | SUMO · Unity 3D · YOLOv8 · MoHUA IMPACT |
 | [**semantic-drift-vlm-attacks**](https://github.com/Shashwatology/semantic-drift-vlm-attacks) | Preprocessing attack surfaces &amp; SEV defense in VLMs | `Python` | IGI Global 2026 Chapter · RGBA-to-RGB Auditing |
-| [**SentinelAI**](https://github.com/shashwatology/SentinelAI) | Zero-label behavioral anomaly detection engine for SSH streams | `Python` | Isolation Forest · CICIDS2017 · Real-Time Engine |
-| [**Semantic-Ctrl-F**](https://github.com/Shashwatology/Semantic-Ctrl-F) | Visual-semantic document retrieval &amp; contrastive indexing | `TypeScript` | CLIP · Vector Indexing · Cross-Modal Retrieval |
+| [**SentinelAI**](https://github.com/Shashwatology/SentinelAI) | Zero-label behavioral anomaly detection engine for SSH streams | `Python` | Isolation Forest · CICIDS2017 · Real-Time Engine |
+| [**JUMTA**](https://github.com/Shashwatology/JUMTA) | Jaipur integrated multimodal transit &amp; mobility architecture | `TypeScript` | IAUC 2026 · IMPACT Protocol · Public Transit |
+| [**Semantic-Ctrl-F**](https://github.com/Shashwatology/Semantic-Ctrl-F) | Visual-semantic document retrieval &amp; contrastive indexing | `Python` | CLIP · Vector Indexing · Cross-Modal Retrieval |
 
 <br>
 
@@ -136,12 +149,11 @@ def generate_readme():
 </picture>
 
 <p align="center">
-  <a href="https://github.com/shashwatology"><b>GitHub</b></a> &nbsp;·&nbsp;
+  <a href="https://github.com/Shashwatology"><b>GitHub</b></a> &nbsp;·&nbsp;
   <a href="https://scholar.google.com/citations?user=ulC0-soAAAAJ"><b>Google Scholar</b></a> &nbsp;·&nbsp;
-  <a href="https://in.linkedin.com/in/shashwatupadhyay"><b>LinkedIn</b></a> &nbsp;·&nbsp;
+  <a href="https://www.linkedin.com/in/shashwatupadhyay/"><b>LinkedIn</b></a> &nbsp;·&nbsp;
   <a href="https://www.researchgate.net/profile/Shashwat-Upadhyay-2"><b>ResearchGate</b></a> &nbsp;·&nbsp;
-  <a href="mailto:shashwatology.s@gmail.com"><b>Email</b></a> &nbsp;·&nbsp;
-  <a href="https://bento.me/shashwatupadhyay"><b>Bento</b></a>
+  <a href="mailto:shashwatology.s@gmail.com"><b>Email</b></a>
 </p>
 
 <p align="center">
@@ -153,7 +165,7 @@ def generate_readme():
 
     with open(README_PATH, "w", encoding="utf-8") as f:
         f.write(readme_content)
-    print(f"Generated Master Revision V3.0 {README_PATH} ({len(readme_content)} bytes)")
+    print(f"Generated Master Revision V3.1 {README_PATH} ({len(readme_content)} bytes)")
 
 if __name__ == "__main__":
     generate_readme()

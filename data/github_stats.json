@@ -1,93 +1,93 @@
 {
   "username": "shashwatology",
-  "public_repos": 45,
+  "public_repos": 46,
   "total_stars": 63,
   "total_forks": 18,
   "languages": [
     {
-      "name": "TypeScript",
-      "count": 8,
-      "pct": 28.6
+      "name": "Python",
+      "count": 9,
+      "pct": 30.0
     },
     {
-      "name": "Python",
-      "count": 8,
-      "pct": 28.6
+      "name": "TypeScript",
+      "count": 9,
+      "pct": 30.0
     },
     {
       "name": "HTML",
       "count": 5,
-      "pct": 17.9
+      "pct": 16.7
     },
     {
       "name": "CSS",
       "count": 4,
-      "pct": 14.3
-    },
-    {
-      "name": "Jupyter Notebook",
-      "count": 1,
-      "pct": 3.6
-    },
-    {
-      "name": "JavaScript",
-      "count": 1,
-      "pct": 3.6
+      "pct": 13.3
     },
     {
       "name": "C++",
       "count": 1,
-      "pct": 3.6
+      "pct": 3.3
+    },
+    {
+      "name": "JavaScript",
+      "count": 1,
+      "pct": 3.3
+    },
+    {
+      "name": "Jupyter Notebook",
+      "count": 1,
+      "pct": 3.3
     }
   ],
   "top_repos": [
     {
-      "name": "100DaysOfJava",
-      "desc": "In this challenge, I'm committed to honing my Java programming skills by writing solutions from scratch without referring to any online sources or relying on assistance from chat bots. I believe in the power of self-learning and aim to document my thought process and journey as I tackle each challenge. You`ll find my though process in .md file",
-      "stars": 0,
-      "forks": 0,
-      "lang": "Jupyter Notebook",
-      "url": "https://github.com/Shashwatology/100DaysOfJava"
+      "name": "IITM-Python-Grpa",
+      "desc": "This repository hosts the Python Graded Programming Assessments (GRPA) for the IIT Madras BS Data Science \"Introduction to Python\" course, created by Shashwat Upadhyay.",
+      "stars": 51,
+      "forks": 14,
+      "lang": "Python",
+      "url": "https://github.com/Shashwatology/IITM-Python-Grpa"
     },
     {
-      "name": "404-page-",
-      "desc": " This repository contains a custom 404 error page designed to enhance user experience when navigating to non-existent URLs",
-      "stars": 0,
-      "forks": 0,
-      "lang": "CSS",
-      "url": "https://github.com/Shashwatology/404-page-"
-    },
-    {
-      "name": "BreatheSync",
-      "desc": "BreathySync is an AI-powered respiratory health platform that uses 6-second voice samples to generate lung metrics, predicts risks 24\u201348 hours ahead with a Digital Twin model, and integrates air quality tracking, sleep monitoring, Lung Gym, and ABHA support.",
-      "stars": 0,
-      "forks": 0,
-      "lang": "TypeScript",
-      "url": "https://github.com/Shashwatology/BreatheSync"
-    },
-    {
-      "name": "cal.com",
-      "desc": "Scheduling infrastructure for absolutely everyone.",
-      "stars": 0,
+      "name": "IITM-BS-ALL-Question-Papers-",
+      "desc": "This Repo Contain all the question paper of IITM BS degree in JSON Format ",
+      "stars": 3,
       "forks": 0,
       "lang": "Python",
-      "url": "https://github.com/Shashwatology/cal.com"
+      "url": "https://github.com/Shashwatology/IITM-BS-ALL-Question-Papers-"
     },
     {
-      "name": "contactless-respiratory-monitoring",
+      "name": "Prepzen",
+      "desc": "PrepZen is a web-based platform designed to simplify exam preparation with streamlined resources, user-friendly tools, and performance insights. It helps users efficiently achieve their learning goals through an intuitive and responsive interface.",
+      "stars": 2,
+      "forks": 1,
+      "lang": "HTML",
+      "url": "https://github.com/Shashwatology/Prepzen"
+    },
+    {
+      "name": "SarSh",
+      "desc": "Sarsh is a privacy-first messaging app for secure, real-time connections. Using only usernames, it offers anonymous chatting, media sharing, and a sleek dark UI\u2014no phone numbers required.",
+      "stars": 2,
+      "forks": 0,
+      "lang": "TypeScript",
+      "url": "https://github.com/Shashwatology/SarSh"
+    },
+    {
+      "name": "ML-Projects",
       "desc": "",
-      "stars": 0,
+      "stars": 1,
       "forks": 0,
       "lang": "Python",
-      "url": "https://github.com/Shashwatology/contactless-respiratory-monitoring"
+      "url": "https://github.com/Shashwatology/ML-Projects"
     },
     {
-      "name": "CuraSync",
-      "desc": "CuraSync is an AI-powered telemedicine platform that offers intelligent health recommendations, allows online doctor consultations, and securely stores patient records.  It tracks history, analyses symptoms, and provides safe, individualised, and accessible care at any time with its virtual AI doctor.",
-      "stars": 0,
+      "name": "Mumbai-University-Registration-Form",
+      "desc": "This Repo contains a form i.e. user input interface that creates a form for employee entering there data ",
+      "stars": 1,
       "forks": 0,
-      "lang": "TypeScript",
-      "url": "https://github.com/Shashwatology/CuraSync"
+      "lang": "HTML",
+      "url": "https://github.com/Shashwatology/Mumbai-University-Registration-Form"
     }
   ]
 }

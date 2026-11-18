@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 """
-Render all custom SVG cards for Shashwat Upadhyay's GitHub Profile README (Master Revision V3.0 / V4.0).
+Render all custom SVG cards for Shashwat Upadhyay's GitHub Profile README (Master Revision V3.1).
 
-Strictly grounded in Shashwat_Research_Resume_2026-10-28.pdf and verified Crossref/DOI sources:
-- cards/hero.svg (880x310 compact hero with permanent cobalt #315EFF Upadhyay + cyan highlight sweep,
-                  accurate SAKEC 2024–2028 and IIT Madras 2023–2028, real blue-duotone scanline portrait)
-- cards/research-map.svg (880x320 5 distinct research pillars: 3 on top row, 2 on bottom row)
-- cards/project-physiofm.svg (horizontal card 1 of 3)
-- cards/project-digital-twins.svg (horizontal card 2 of 3)
-- cards/project-vlm-security.svg (horizontal card 3 of 3)
+Every interactive card is rendered as an individual SVG so that 100% of links in README.md
+are natively clickable on GitHub:
+- cards/hero.svg (880x295 compact hero with permanent cobalt #315EFF Upadhyay + cyan sweep)
+- cards/nav-*.svg (5 individual clickable top quick-link buttons: GitHub, Scholar, LinkedIn, ResearchGate, Email)
+- cards/domain-01..05.svg (5 individual clickable research direction cards, zero text clipping/truncation)
+- cards/project-*.svg (3 individual clickable featured project cards with clean gutters)
 - cards/research-timeline.svg (880x110 accurate 6-milestone academic & research strip)
-- cards/title-*.svg (clean section headers)
+- cards/title-*.svg (clean light/dark adaptive section headers)
 """
 
 import os
@@ -40,10 +39,10 @@ def load_json(name):
     return {}
 
 # ==============================================================================
-# 1. COMPACT HERO CARD (880 x 310)
+# 1. COMPACT HERO CARD (880 x 296)
 # ==============================================================================
 def render_hero():
-    h = 310
+    h = 296
     
     # Load processed portrait SVG content
     portrait_inner = ""
@@ -53,8 +52,6 @@ def render_hero():
             m = re.search(r"<svg[^>]*>(.*?)</svg>", p_content, re.DOTALL)
             if m:
                 portrait_inner = m.group(1)
-
-    profile_data = load_json("profile.json")
 
     # Surname Upadhyay is permanently Cobalt Blue (#315EFF) with an animated cyan sheen sweep (#7DDFFF)
     body = f"""
@@ -73,65 +70,48 @@ def render_hero():
   <!-- Card Canvas -->
   <rect width="{W}" height="{h}" rx="12" fill="{PAPER}" stroke="{RULE}" stroke-width="1"/>
 
-  <!-- Left Column: Typography & Links -->
+  <!-- Left Column: Typography & Verified Credentials -->
   <!-- Technical Identifier -->
   <g>
-    <circle class="live" cx="44" cy="40" r="3.5" fill="{COBALT}"/>
-    <text x="56" y="44" font-family="'Geist Mono', monospace" font-size="10.5" letter-spacing="1.2" fill="{MUTED}">
+    <circle class="live" cx="44" cy="36" r="3.5" fill="{COBALT}"/>
+    <text x="56" y="40" font-family="'Geist Mono', monospace" font-size="10.5" letter-spacing="1.2" fill="{MUTED}">
       INDEPENDENT AI RESEARCHER // MULTIMODAL SYSTEMS
     </text>
   </g>
 
   <!-- Editorial Headline Name -->
-  <text x="40" y="118" 
+  <text x="40" y="112" 
         font-family="'Instrument Serif', Georgia, serif" font-size="74" letter-spacing="-1" fill="{INK}">
     Shashwat
   </text>
-  <text x="40" y="184" 
+  <text x="40" y="176" 
         font-family="'Instrument Serif', Georgia, serif" font-style="italic" font-size="74" letter-spacing="-1" fill="url(#upadhyay-blue)">
     Upadhyay.
   </text>
 
   <!-- Tagline & Core Statement Grounded in Resume -->
   <g>
-    <text x="44" y="218" font-family="'Geist', sans-serif" font-weight="600" font-size="14.5" fill="{INK_SOFT}">
+    <text x="44" y="208" font-family="'Geist', sans-serif" font-weight="600" font-size="14.5" fill="{INK_SOFT}">
       Researching intelligence. Building systems.
     </text>
-    <text x="44" y="238" font-family="'Geist', sans-serif" font-size="12.5" fill="{MUTED}">
+    <text x="44" y="228" font-family="'Geist', sans-serif" font-size="12.5" fill="{MUTED}">
       Multimodal AI · Computer Vision · Digital Twins · ML Security · Quant
     </text>
-    <text x="44" y="258" font-family="'Geist Mono', monospace" font-size="11" fill="{MUTED}">
+    <text x="44" y="248" font-family="'Geist Mono', monospace" font-size="10.8" fill="{MUTED}">
       BVoc Cyber Security (SAKEC, 2024–2028) · BS Data Science (IIT Madras, 2023–2028)
     </text>
   </g>
 
   <!-- Editorial Separator -->
-  <line x1="44" y1="274" x2="610" y2="274" stroke="{RULE}" stroke-width="0.8"/>
+  <line x1="44" y1="262" x2="610" y2="262" stroke="{RULE}" stroke-width="0.8"/>
 
-  <!-- Clickable Professional Links -->
-  <g font-family="'Geist Mono', monospace" font-size="11" fill="{INK}">
-    <text x="44" y="295">GitHub</text>
-    <text class="n" x="84" y="295" fill="{COBALT}">&#8599;</text>
-    
-    <text x="102" y="295" fill="{MUTED}">·</text>
-    <text x="114" y="295">LinkedIn</text>
-    <text class="n" x="162" y="295" fill="{COBALT}">&#8599;</text>
-
-    <text x="180" y="295" fill="{MUTED}">·</text>
-    <text x="192" y="295">Scholar</text>
-    <text class="n" x="236" y="295" fill="{COBALT}">&#8599;</text>
-
-    <text x="254" y="295" fill="{MUTED}">·</text>
-    <text x="266" y="295">ResearchGate</text>
-    <text class="n" x="346" y="295" fill="{COBALT}">&#8599;</text>
-
-    <text x="364" y="295" fill="{MUTED}">·</text>
-    <text x="376" y="295">Email</text>
-    <text class="n" x="410" y="295" fill="{COBALT}">&#8599;</text>
-  </g>
+  <!-- Research Affiliations Strip (Real clickable links are rendered directly below as individual SVG buttons) -->
+  <text x="44" y="280" font-family="'Geist Mono', monospace" font-size="10" letter-spacing="0.4" fill="{MUTED}">
+    <tspan fill="{COBALT}" font-weight="600">AFFILIATIONS //</tspan> MNIT Jaipur (MoHUA) · IIT (ISM) Dhanbad · WorldQuant · Mumbai, India
+  </text>
 
   <!-- Right Column: Real Blue-Duotone Scanline Portrait (200 x 245) -->
-  <g transform="translate(642, 28)">
+  <g transform="translate(642, 24)">
     <g transform="scale(0.95)">
       {portrait_inner}
     </g>
@@ -150,139 +130,166 @@ def render_hero():
     print("wrote cards/hero.svg & assets/hero.svg")
 
 # ==============================================================================
-# 2. COMPACT 5-PILLAR RESEARCH MAP (3 on Row 1, 2 on Row 2; 880 x 320)
+# 1B. FIVE INDIVIDUAL CLICKABLE HERO QUICK-LINK PILLS (176 x 38 EACH)
 # ==============================================================================
-def render_research_map():
-    h = 320
-    research_data = load_json("research.json")
-    domains = research_data.get("domains", [])
+def render_nav_links():
+    items = [
+        ("github", "GitHub"),
+        ("scholar", "Google Scholar"),
+        ("linkedin", "LinkedIn"),
+        ("researchgate", "ResearchGate"),
+        ("email", "Email"),
+    ]
+    pw = 176
+    ph = 38
 
-    cards_svg = []
-    
-    # Row 1: 3 cards (Domains 01, 02, 03)
-    r1_w = (W - 28 - 24) / 3  # 276.0 px
-    r1_h = 148
-    r1_y = 12
+    for slug, label in items:
+        body = f"""
+  <rect x="3" y="3" width="{pw - 6}" height="{ph - 6}" rx="7" fill="{PAPER}" stroke="{RULE}" stroke-width="1"/>
+  <text x="{pw / 2 - 6:.1f}" y="23" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="11" font-weight="600" fill="{INK}">
+    {escape(label)}
+  </text>
+  <text class="n" x="{pw - 18}" y="23" text-anchor="end" font-family="'Geist Mono', monospace" font-size="11.5" fill="{COBALT}">&#8599;</text>
+"""
+        svg_out = make_card_svg(
+            pw, ph, body,
+            font_keys=["mono"],
+            label=f"Open Shashwat Upadhyay's {label}"
+        )
+        with open(os.path.join(CARDS_DIR, f"nav-{slug}.svg"), "w", encoding="utf-8") as f:
+            f.write(svg_out)
+    print("wrote cards/nav-*.svg (5 individual clickable nav buttons)")
+
+# ==============================================================================
+# 2. FIVE INDIVIDUAL CLICKABLE RESEARCH DOMAIN CARDS (Zero truncation/overflow)
+# ==============================================================================
+def render_research_domains():
+    # Row 1: 3 cards (293 x 162 each, rendered side-by-side at width="33.333%")
+    r1_w = 293
+    r1_h = 162
+    pad = 4
+    inner_w = r1_w - 2 * pad  # 285
+    inner_h = r1_h - 2 * pad  # 154
 
     row1_domains = [
         {
+            "slug": "domain-01",
             "num": "01",
             "title_1": "Multimodal AI &",
             "title_2": "Physiological Computing",
-            "summary": "Non-contact physiological monitoring through video, spatial-temporal transformers, and multimodal sensor fusion.",
+            "summary": "Non-contact vital monitoring via video, spatial-temporal models, and multimodal sensor fusion.",
             "foci": "PhysioFM · rPPG · WardOS · Fusion",
-            "url": "https://github.com/Shashwatology/PhysioFM"
         },
         {
+            "slug": "domain-02",
             "num": "02",
             "title_1": "Intelligent Infrastructure",
             "title_2": "& Digital Twins",
-            "summary": "Synchronized simulation testbeds and edge computer vision for connected urban transit networks.",
-            "foci": "IMPACT · SUMO · Unity 3D · 25km Twin",
-            "url": "https://github.com/Shashwatology/Guardian-Travel-Twin-"
+            "summary": "Synchronized 3D simulation testbeds and edge computer vision for connected urban transit.",
+            "foci": "IMPACT · SUMO · Unity 3D · YOLO",
         },
         {
+            "slug": "domain-03",
             "num": "03",
             "title_1": "Trustworthy AI &",
             "title_2": "ML Security",
-            "summary": "Investigating preprocessing attack surfaces, prompt injection vectors, and zero-label behavioral risk modeling.",
-            "foci": "VLM Preprocessing · SEV · SentinelAI",
-            "url": "https://github.com/Shashwatology/semantic-drift-vlm-attacks"
+            "summary": "Auditing VLM preprocessing attack surfaces, alpha-channel drift, and zero-label behavioral risk.",
+            "foci": "VLM Security · SEV · SentinelAI",
         }
     ]
 
-    for idx, d in enumerate(row1_domains):
-        cx = 14 + idx * (r1_w + 12)
-        summary_lines = wrap_text(d["summary"], 32)
-        cards_svg.append(f"""
-    <g transform="translate({cx:.1f}, {r1_y})">
-      <rect width="{r1_w:.1f}" height="{r1_h}" rx="8" fill="{PAPER}" stroke="{RULE}" stroke-width="1"/>
-      
-      <!-- Top header line with number & link arrow -->
-      <text x="16" y="24" font-family="'Geist Mono', monospace" font-size="10" font-weight="600" fill="{COBALT}">{d['num']} //</text>
-      <text class="n" x="{r1_w - 22:.1f}" y="24" font-family="'Geist Mono', monospace" font-size="11" fill="{COBALT}">&#8599;</text>
+    for d in row1_domains:
+        summary_lines = wrap_text(d["summary"], 35)
+        body = f"""
+  <rect x="{pad}" y="{pad}" width="{inner_w}" height="{inner_h}" rx="8" fill="{PAPER}" stroke="{RULE}" stroke-width="1"/>
+  
+  <!-- Header number & arrow -->
+  <text x="{pad + 16}" y="{pad + 24}" font-family="'Geist Mono', monospace" font-size="10" font-weight="600" fill="{COBALT}">{d['num']} //</text>
+  <text class="n" x="{pad + inner_w - 18}" y="{pad + 24}" text-anchor="end" font-family="'Geist Mono', monospace" font-size="11.5" fill="{COBALT}">&#8599;</text>
 
-      <!-- 2-line title for zero overflow -->
-      <text x="16" y="42" font-family="'Geist', sans-serif" font-weight="600" font-size="13" fill="{INK}">{escape(d['title_1'])}</text>
-      <text x="16" y="58" font-family="'Geist', sans-serif" font-weight="600" font-size="13" fill="{INK}">{escape(d['title_2'])}</text>
+  <!-- 2-line title -->
+  <text x="{pad + 16}" y="{pad + 43}" font-family="'Geist', sans-serif" font-weight="600" font-size="13.5" fill="{INK}">{escape(d['title_1'])}</text>
+  <text x="{pad + 16}" y="{pad + 60}" font-family="'Geist', sans-serif" font-weight="600" font-size="13.5" fill="{INK}">{escape(d['title_2'])}</text>
 
-      <!-- Concise description -->
-      {render_lines(16, 78, summary_lines[:2], 15, f'font-family="\'Geist\', sans-serif" font-size="11" fill="{INK_SOFT}"')}
-      
-      <!-- Focus technical labels -->
-      <line x1="16" y1="{r1_h - 26}" x2="{r1_w - 16:.1f}" y2="{r1_h - 26}" stroke="{RULE}" stroke-width="0.7"/>
-      <text x="16" y="{r1_h - 10}" font-family="'Geist Mono', monospace" font-size="9.5" fill="{MUTED}">{escape(d['foci'])}</text>
-    </g>
-        """)
+  <!-- Complete 3-line summary (never truncated) -->
+  {render_lines(pad + 16, pad + 80, summary_lines, 15, f'font-family="\'Geist\', sans-serif" font-size="11" fill="{INK_SOFT}"')}
 
-    # Row 2: 2 cards (Domains 04, 05)
-    r2_w = (W - 28 - 12) / 2  # 420.0 px
-    r2_h = 136
-    r2_y = r1_y + r1_h + 12  # 172 px
+  <!-- Divider & technical tags -->
+  <line x1="{pad + 16}" y1="{pad + inner_h - 28}" x2="{pad + inner_w - 16}" y2="{pad + inner_h - 28}" stroke="{RULE}" stroke-width="0.7"/>
+  <text x="{pad + 16}" y="{pad + inner_h - 11}" font-family="'Geist Mono', monospace" font-size="9.5" fill="{MUTED}">{escape(d['foci'])}</text>
+"""
+        svg_out = make_card_svg(
+            r1_w, r1_h, body,
+            font_keys=["sans", "sans-b", "mono"],
+            label=f"Research Direction {d['num']}: {d['title_1']} {d['title_2']}"
+        )
+        with open(os.path.join(CARDS_DIR, f"{d['slug']}.svg"), "w", encoding="utf-8") as f:
+            f.write(svg_out)
+
+    # Row 2: 2 cards (440 x 140 each, rendered side-by-side at width="50%")
+    r2_w = 440
+    r2_h = 140
+    inner2_w = r2_w - 2 * pad  # 432
+    inner2_h = r2_h - 2 * pad  # 132
 
     row2_domains = [
         {
+            "slug": "domain-04",
             "num": "04",
             "title": "Computer Vision & Document Intelligence",
             "summary": "Object detection, CNN scientific image segmentation, and end-to-end OCR document parsing pipelines.",
-            "foci": "YOLOv8 12k+ Corpus (92% acc) · OCR Pipeline (96% acc) · CLIP Embeddings",
-            "url": "https://github.com/Shashwatology/Semantic-Ctrl-F"
+            "foci": "YOLOv8 12k+ (92% acc) · OCR (96% acc) · CLIP",
         },
         {
+            "slug": "domain-05",
             "num": "05",
             "title": "Quantitative Research & Financial Modelling",
-            "summary": "Mathematical alpha signal discovery, multi-year equity backtesting, and systematic risk variance reduction.",
-            "foci": "Alpha Signals (10+ indicators) · Equity Backtests (Sharpe > 1.5) · WorldQuant",
-            "url": "https://github.com/Shashwatology"
+            "summary": "Statistical alpha signal discovery, multi-year equity backtesting, and systematic variance reduction.",
+            "foci": "Alpha Signals · Sharpe > 1.5 · 22% Variance Cut",
         }
     ]
 
-    for idx, d in enumerate(row2_domains):
-        cx = 14 + idx * (r2_w + 12)
-        summary_lines = wrap_text(d["summary"], 52)
-        cards_svg.append(f"""
-    <g transform="translate({cx:.1f}, {r2_y})">
-      <rect width="{r2_w:.1f}" height="{r2_h}" rx="8" fill="{PAPER}" stroke="{RULE}" stroke-width="1"/>
-      
-      <!-- Subtle Technical XY Grid Motif in Corner -->
-      <path d="M {r2_w-36:.1f} 14 L {r2_w-14:.1f} 14 M {r2_w-14:.1f} 14 L {r2_w-14:.1f} 36" 
-            fill="none" stroke="{COBALT}" stroke-width="1.2" stroke-opacity="0.5"/>
-      <circle cx="{r2_w-14:.1f}" cy="14" r="2" fill="{COBALT}"/>
+    for d in row2_domains:
+        summary_lines = wrap_text(d["summary"], 54)
+        body = f"""
+  <rect x="{pad}" y="{pad}" width="{inner2_w}" height="{inner2_h}" rx="8" fill="{PAPER}" stroke="{RULE}" stroke-width="1"/>
+  
+  <!-- Subtle Technical XY Grid Motif in Corner -->
+  <path d="M {pad + inner2_w - 36} {pad + 14} L {pad + inner2_w - 14} {pad + 14} M {pad + inner2_w - 14} {pad + 14} L {pad + inner2_w - 14} {pad + 36}" 
+        fill="none" stroke="{COBALT}" stroke-width="1.2" stroke-opacity="0.45"/>
+  <circle cx="{pad + inner2_w - 14}" cy="{pad + 14}" r="2" fill="{COBALT}"/>
 
-      <!-- Header Number & Title -->
-      <text x="18" y="26" font-family="'Geist Mono', monospace" font-size="10.5" font-weight="600" fill="{COBALT}">{d['num']} //</text>
-      <text x="52" y="26" font-family="'Geist', sans-serif" font-weight="600" font-size="13.5" fill="{INK}">{escape(d['title'])}</text>
-      <text class="n" x="{r2_w - 46:.1f}" y="26" font-family="'Geist Mono', monospace" font-size="12" fill="{COBALT}">&#8599;</text>
-      
-      <!-- Concise description -->
-      {render_lines(18, 48, summary_lines[:2], 16, f'font-family="\'Geist\', sans-serif" font-size="11.5" fill="{INK_SOFT}"')}
-      
-      <!-- Focus technical labels -->
-      <line x1="18" y1="{r2_h - 26}" x2="{r2_w - 18:.1f}" y2="{r2_h - 26}" stroke="{RULE}" stroke-width="0.7"/>
-      <text x="18" y="{r2_h - 10}" font-family="'Geist Mono', monospace" font-size="9.5" fill="{MUTED}">{escape(d['foci'])}</text>
-    </g>
-        """)
+  <!-- Header Number & Title -->
+  <text x="{pad + 18}" y="{pad + 27}" font-family="'Geist Mono', monospace" font-size="10.5" font-weight="600" fill="{COBALT}">{d['num']} //</text>
+  <text x="{pad + 52}" y="{pad + 27}" font-family="'Geist', sans-serif" font-weight="600" font-size="13.5" fill="{INK}">{escape(d['title'])}</text>
+  <text class="n" x="{pad + inner2_w - 42}" y="{pad + 27}" font-family="'Geist Mono', monospace" font-size="11.5" fill="{COBALT}">&#8599;</text>
 
-    body = f"""
-  <rect width="{W}" height="{h}" rx="10" fill="none"/>
-  {''.join(cards_svg)}
+  <!-- Complete 2-line description -->
+  {render_lines(pad + 18, pad + 52, summary_lines, 17, f'font-family="\'Geist\', sans-serif" font-size="11.5" fill="{INK_SOFT}"')}
+
+  <!-- Divider & focus tags (generous right margin) -->
+  <line x1="{pad + 18}" y1="{pad + inner2_h - 28}" x2="{pad + inner2_w - 18}" y2="{pad + inner2_h - 28}" stroke="{RULE}" stroke-width="0.7"/>
+  <text x="{pad + 18}" y="{pad + inner2_h - 11}" font-family="'Geist Mono', monospace" font-size="9.5" fill="{MUTED}">{escape(d['foci'])}</text>
 """
+        svg_out = make_card_svg(
+            r2_w, r2_h, body,
+            font_keys=["sans", "sans-b", "mono"],
+            label=f"Research Direction {d['num']}: {d['title']}"
+        )
+        with open(os.path.join(CARDS_DIR, f"{d['slug']}.svg"), "w", encoding="utf-8") as f:
+            f.write(svg_out)
 
-    svg_out = make_card_svg(
-        W, h, body,
-        font_keys=["sans", "sans-b", "mono"],
-        label="Five Core Research Directions: Multimodal AI, Digital Twins, ML Security, Document Intelligence, Quantitative Research"
-    )
-    with open(os.path.join(CARDS_DIR, "research-map.svg"), "w", encoding="utf-8") as f:
-        f.write(svg_out)
-    print("wrote cards/research-map.svg")
+    print("wrote cards/domain-01..05.svg (5 individual clickable research direction cards)")
 
 # ==============================================================================
-# 3. THREE COMPACT FEATURED PROJECT CARDS (ROW OF 3, ~285px EACH)
+# 3. THREE COMPACT FEATURED PROJECT CARDS (ROW OF 3, 293 x 186 EACH WITH GUTTERS)
 # ==============================================================================
 def render_three_featured_projects():
-    tile_w = (W - 24) / 3  # 285.33px
-    tile_h = 175
+    tile_w = 293
+    tile_h = 186
+    pad = 4
+    inner_w = tile_w - 2 * pad  # 285
+    inner_h = tile_h - 2 * pad  # 178
 
     projects = [
         {
@@ -290,51 +297,49 @@ def render_three_featured_projects():
             "name": "PhysioFM",
             "subtitle": "rPPG Foundation Model",
             "desc": "Hierarchical Swin-V2 + STDS framework diagnosing optimization mode collapse in continuous physiological waveforms.",
-            "tech": "Swin-V2 · STDS · UBFC-rPPG · SHMS 2026",
+            "tech": "Swin-V2 · STDS · UBFC-rPPG · SHMS",
             "color": COBALT,
-            "url": "https://github.com/Shashwatology/PhysioFM"
         },
         {
             "id": "digital-twins",
             "name": "Urban Digital Twins",
             "subtitle": "Smart Mobility & Transit Testbeds",
-            "desc": "GIS-integrated Unity 3D digital twin of a 25 km Jaipur corridor coupling SUMO microscopic traffic with edge YOLO detection (18% peak load reduction).",
-            "tech": "SUMO · Unity 3D · YOLO · MoHUA IMPACT",
+            "desc": "GIS-integrated Unity 3D twin of a 25 km Jaipur corridor coupling SUMO traffic with edge YOLO (18% peak load cut).",
+            "tech": "SUMO · Unity 3D · YOLO · IMPACT",
             "color": "#00C2A8",
-            "url": "https://github.com/Shashwatology/Guardian-Travel-Twin-"
         },
         {
             "id": "vlm-security",
             "name": "Semantic Drift in VLMs",
             "subtitle": "Preprocessing Attack Surface (IGI Global)",
-            "desc": "Exposing RGBA-to-RGB alpha-channel flattening vulnerabilities in Vision-Language Models with SEV defense verification (Accepted Book Chapter).",
-            "tech": "VLM Security · SEV Defense · DOI: 10.4018",
+            "desc": "Exposing RGBA-to-RGB alpha-channel flattening vulnerabilities in VLMs with SEV defense verification (Accepted Chapter).",
+            "tech": "VLM Security · SEV · DOI: 10.4018",
             "color": VIOLET,
-            "url": "https://github.com/Shashwatology/semantic-drift-vlm-attacks"
         }
     ]
 
-    for idx, p in enumerate(projects):
+    for p in projects:
+        desc_lines = wrap_text(p["desc"], 34)
         body = f"""
-  <rect width="{tile_w:.1f}" height="{tile_h}" rx="10" fill="{PAPER}" stroke="{RULE}" stroke-width="1"/>
+  <rect x="{pad}" y="{pad}" width="{inner_w}" height="{inner_h}" rx="10" fill="{PAPER}" stroke="{RULE}" stroke-width="1"/>
   
   <g>
     <!-- Header Indicator & Link Arrow -->
-    <rect x="20" y="20" width="8" height="8" rx="2" fill="{p['color']}"/>
-    <text x="36" y="28" font-family="'Geist', sans-serif" font-weight="600" font-size="15" fill="{INK}">
+    <rect x="{pad + 18}" y="{pad + 20}" width="8" height="8" rx="2" fill="{p['color']}"/>
+    <text x="{pad + 34}" y="{pad + 28}" font-family="'Geist', sans-serif" font-weight="600" font-size="14.5" fill="{INK}">
       {escape(p['name'])}
     </text>
-    <text class="n" x="{tile_w - 24:.1f}" y="28" font-family="'Geist Mono', monospace" font-size="12" fill="{p['color']}">&#8599;</text>
+    <text class="n" x="{pad + inner_w - 18}" y="{pad + 28}" text-anchor="end" font-family="'Geist Mono', monospace" font-size="12" fill="{p['color']}">&#8599;</text>
 
     <!-- Subtitle -->
-    <text x="20" y="46" font-family="'Geist Mono', monospace" font-size="10" fill="{MUTED}">{escape(p['subtitle'])}</text>
+    <text x="{pad + 18}" y="{pad + 46}" font-family="'Geist Mono', monospace" font-size="9.5" fill="{MUTED}">{escape(p['subtitle'])}</text>
 
-    <!-- Description (wrapped to 2-3 lines) -->
-    {render_lines(20, 70, wrap_text(p['desc'], 34), 16, f'font-family="\'Geist\', sans-serif" font-size="11" fill="{INK_SOFT}"')}
+    <!-- Description (max 4 lines with clean bottom breathing space) -->
+    {render_lines(pad + 18, pad + 68, desc_lines, 16, f'font-family="\'Geist\', sans-serif" font-size="11" fill="{INK_SOFT}"')}
 
     <!-- Divider & Tech Label -->
-    <line x1="20" y1="{tile_h - 34}" x2="{tile_w - 20:.1f}" y2="{tile_h - 34}" stroke="{RULE}" stroke-width="0.8"/>
-    <text x="20" y="{tile_h - 16}" font-family="'Geist Mono', monospace" font-size="9.5" fill="{p['color']}">{escape(p['tech'])}</text>
+    <line x1="{pad + 18}" y1="{pad + inner_h - 32}" x2="{pad + inner_w - 18}" y2="{pad + inner_h - 32}" stroke="{RULE}" stroke-width="0.8"/>
+    <text x="{pad + 18}" y="{pad + inner_h - 14}" font-family="'Geist Mono', monospace" font-size="9.5" fill="{p['color']}">{escape(p['tech'])}</text>
   </g>
 """
         svg_out = make_card_svg(
@@ -427,11 +432,12 @@ def render_all_titles():
 def main():
     os.makedirs(CARDS_DIR, exist_ok=True)
     render_hero()
-    render_research_map()
+    render_nav_links()
+    render_research_domains()
     render_three_featured_projects()
     render_timeline()
     render_all_titles()
-    print("Rendered Master Revision V3.0 cards successfully.")
+    print("Rendered Master Revision V3.1 cards successfully.")
 
 if __name__ == "__main__":
     main()
