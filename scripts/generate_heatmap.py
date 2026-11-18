@@ -61,7 +61,7 @@ def generate():
     usable_w = w - 2 * gx  # 800
     step = usable_w / max(1, num_cols)  # ~15.09px for 53 cols
     cell_size = round(step - 3.0, 1)    # ~12.1px
-    gy = 84  # Leaves clean room for month labels at y=74
+    gy = 72  # Tight room for month labels at y=64
 
     cells = []
     months = []
@@ -104,7 +104,7 @@ def generate():
     swatch_step = 14
     legend_right = grid_right - more_w
     legend_start_x = legend_right - len(BLUE_LEVELS) * swatch_step
-    legend_y = grid_bottom + 8
+    legend_y = grid_bottom + 5
 
     legend_rects = "".join(
         f'<rect x="{legend_start_x + idx * swatch_step:.1f}" y="{legend_y:.1f}" '
@@ -112,7 +112,7 @@ def generate():
         for idx, c in enumerate(BLUE_LEVELS)
     )
 
-    card_h = 262
+    card_h = 236
 
     total_c = data.get("total_contributions", 0)
     ls = data.get("longest_streak", {}).get("length", 0)
@@ -125,17 +125,17 @@ def generate():
 
   <!-- Card Header -->
   <g>
-    <circle class="ring" cx="44" cy="36" r="4.5" fill="none" stroke="{COBALT}" stroke-width="1.2"/>
-    <circle class="live" cx="44" cy="36" r="4" fill="{COBALT}"/>
-    <text x="56" y="41" font-family="'Instrument Serif', Georgia, serif" font-size="28" fill="{INK}">
+    <circle class="ring" cx="44" cy="31" r="4.5" fill="none" stroke="{COBALT}" stroke-width="1.2"/>
+    <circle class="live" cx="44" cy="31" r="4" fill="{COBALT}"/>
+    <text x="56" y="36" font-family="'Instrument Serif', Georgia, serif" font-size="26" fill="{INK}">
       Every day, <tspan font-style="italic" fill="{COBALT}">in blue</tspan>
     </text>
-    <text x="{grid_right:.1f}" y="39" text-anchor="end" 
-          font-family="'Geist Mono', monospace" font-size="10.5" letter-spacing="0.8" fill="{MUTED}">
+    <text x="{grid_right:.1f}" y="34" text-anchor="end" 
+          font-family="'Geist Mono', monospace" font-size="10" letter-spacing="0.8" fill="{MUTED}">
       REFRESHED DAILY // SHASHWATOLOGY
     </text>
   </g>
-  <line x1="40" y1="54" x2="{grid_right:.1f}" y2="54" stroke="{RULE}" stroke-width="0.8"/>
+  <line x1="40" y1="47" x2="{grid_right:.1f}" y2="47" stroke="{RULE}" stroke-width="0.8"/>
 
   <!-- Month Headers Above Grid -->
   <g>

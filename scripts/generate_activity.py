@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Generate the monthly activity, streak, repository metrics & language distribution card (cards/activity.svg)
-using real GitHub contribution metrics from data/contributions.json and data/github_stats.json.
+Generate the tight, punchy monthly activity, streak, repository metrics & language distribution card
+(cards/activity.svg) using real GitHub telemetry from data/contributions.json and data/github_stats.json.
 """
 
 import os
@@ -20,6 +20,7 @@ SHORT_LANG = {
     "JavaScript": "JS",
     "Jupyter Notebook": "Jupyter",
 }
+
 
 def generate():
     if not os.path.exists(DATA_FILE):
@@ -40,17 +41,16 @@ def generate():
         return
 
     w = 880
-    h = 378
+    h = 322
     monthly = monthly_raw[-12:]
-    
-    # Identify highest month
+
     best_month = max(monthly, key=lambda m: m["total"])
     top_total = max(1, best_month["total"])
 
-    # Bar chart coordinates
+    # Tight Bar chart coordinates
     chart_x0, chart_x1 = 44, 580
-    base_y = 265
-    max_bar_h = 135
+    base_y = 224
+    max_bar_h = 112
     gap = 9
     bar_w = (chart_x1 - chart_x0 - gap * (len(monthly) - 1)) / len(monthly)
 
@@ -61,33 +61,33 @@ def generate():
         x = chart_x0 + i * (bar_w + gap)
         y = base_y - bh
         fill = COBALT if is_best else (INK if m["total"] > 0 else "#C9C9C4")
-        
+
         try:
             m_date = datetime.date.fromisoformat(m["month"] + "-01")
             m_label = m_date.strftime("%b")
         except Exception:
             m_label = m["month"][-2:]
 
-        delay = 0.5 + i * 0.05
+        delay = 0.35 + i * 0.04
         bars_svg.append(
             f'<rect class="g" style="animation-delay:{delay:.2f}s" '
             f'x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{bh}" rx="3" fill="{fill}">'
             f'<title>{m_label} {m["month"][:4]}: {m["total"]} contributions</title>'
             f'</rect>'
             f'<text class="f" style="animation-delay:{delay:.2f}s" '
-            f'x="{x + bar_w/2:.1f}" y="{base_y + 18}" text-anchor="middle" '
+            f'x="{x + bar_w/2:.1f}" y="{base_y + 17}" text-anchor="middle" '
             f'font-family="\'Geist Mono\', monospace" font-size="10" fill="{MUTED}">{m_label}</text>'
         )
 
         if is_best and m["total"] > 0:
             bars_svg.append(
-                f'<text class="p" style="animation-delay:1.2s" '
-                f'x="{x + bar_w/2:.1f}" y="{y - 8:.1f}" text-anchor="middle" '
+                f'<text class="p" style="animation-delay:0.9s" '
+                f'x="{x + bar_w/2:.1f}" y="{y - 7:.1f}" text-anchor="middle" '
                 f'font-family="\'Geist Mono\', monospace" font-size="10.5" font-weight="600" fill="{COBALT}">'
                 f'{m["total"]}</text>'
             )
 
-    # Right side metrics panel
+    # Right side metrics panel (tight vertical rhythm)
     cs = data.get("current_streak", {}).get("length", 0)
     ls = data.get("longest_streak", {}).get("length", 0)
     total_active = data.get("active_days", 0)
@@ -97,30 +97,30 @@ def generate():
     best_day_date = best_day.get("date", "")
 
     if cs > 0:
-        streak_note = f"current streak {cs} days · longest {ls} days"
+        streak_note = f"current streak {cs}d · longest {ls}d"
     else:
         streak_note = f"longest streak was {ls} days"
 
     stats_items = [
         (f'{ls} <tspan font-style="italic">days</tspan>', streak_note),
-        (f'{total_active}<tspan font-size="20" fill="#8E8E93"> / {total_days}</tspan>', "active contribution days"),
+        (f'{total_active}<tspan font-size="19" fill="#8E8E93"> / {total_days}</tspan>', "active contribution days"),
         (f'{best_day_count} <tspan font-style="italic">commits</tspan>', f"busiest day ({best_day_date})" if best_day_date else "on the busiest day"),
     ]
 
     side_panel = []
     panel_x = 625
     for idx, (headline, caption) in enumerate(stats_items):
-        stat_y = 95 + idx * 72
-        delay = 0.8 + idx * 0.12
+        stat_y = 74 + idx * 66
+        delay = 0.5 + idx * 0.1
         side_panel.append(
             f'<g class="r" style="animation-delay:{delay:.2f}s">'
-            f'<text x="{panel_x}" y="{stat_y}" font-family="\'Instrument Serif\', Georgia, serif" font-size="32" fill="{INK}">{headline}</text>'
-            f'<text x="{panel_x}" y="{stat_y + 20}" font-family="\'Geist\', sans-serif" font-size="11.5" fill="{MUTED}">{caption}</text>'
+            f'<text x="{panel_x}" y="{stat_y}" font-family="\'Instrument Serif\', Georgia, serif" font-size="30" fill="{INK}">{headline}</text>'
+            f'<text x="{panel_x}" y="{stat_y + 18}" font-family="\'Geist\', sans-serif" font-size="11" fill="{MUTED}">{caption}</text>'
             f'</g>'
         )
         if idx < 2:
             side_panel.append(
-                f'<line x1="{panel_x}" y1="{stat_y + 32}" x2="{w - 44}" y2="{stat_y + 32}" stroke="{RULE}" stroke-width="0.8"/>'
+                f'<line x1="{panel_x}" y1="{stat_y + 29}" x2="{w - 44}" y2="{stat_y + 29}" stroke="{RULE}" stroke-width="0.8"/>'
             )
 
     total_c = data.get("total_contributions", 0)
@@ -149,18 +149,16 @@ def generate():
         {"name": "C++", "pct": 3.3},
     ])
 
-    # Top 5 languages + aggregate remainder as Other so bar fills 100% cleanly
     display_langs = list(raw_langs[:5])
     top_sum = sum(l["pct"] for l in display_langs)
     rem = round(max(0.0, 100.0 - top_sum), 1)
     if rem >= 1.0:
         display_langs.append({"name": "Other", "pct": rem})
 
-    # Normalize segment widths to fill lang_bar_w completely
     total_pct = sum(l["pct"] for l in display_langs) or 100.0
     lang_bar_x = 450
     lang_bar_w = 386
-    lang_bar_y = 328
+    lang_bar_y = 278
     lang_bar_h = 7
 
     bar_segments = []
@@ -177,56 +175,12 @@ def generate():
         )
         cur_x += seg_w
 
-    # Compact, guaranteed-non-overflowing caption (rounded whole %)
     lang_labels = " · ".join(
         f"{SHORT_LANG.get(l['name'], l['name'])} {round(l['pct'])}%"
         for l in display_langs
     )
 
     body = f"""
-  <!-- Card Background -->
-  <rect width="{w}" height="{h}" rx="12" fill="{PAPER}" stroke="{RULE}" stroke-width="1"/>
-
-  <!-- Left Header -->
-  <text class="f" style="animation-delay:0.1s" x="44" y="44" 
-        font-family="'Geist Mono', monospace" font-size="10.5" letter-spacing="1" fill="{MUTED}">
-    THE LAST 12 MONTHS ON GITHUB
-  </text>
-  <text class="r" style="animation-delay:0.2s" x="42" y="86" 
-        font-family="'Instrument Serif', Georgia, serif" font-size="40" fill="{INK}">
-    {total_c:,} <tspan font-style="italic" fill="{COBALT}">contributions</tspan>
-  </text>
-
-  <!-- Left Chart Baseline -->
-  <line x1="{chart_x0}" y1="{base_y + 2}" x2="{chart_x1}" y2="{base_y + 2}" stroke="{RULE}" stroke-width="1"/>
-
-  <!-- Monthly Bars -->
-  {''.join(bars_svg)}
-
-  <!-- Vertical Divider Between Chart and Stats -->
-  <line x1="600" y1="40" x2="600" y2="290" stroke="{RULE}" stroke-width="1" stroke-dasharray="3 3"/>
-
-  <!-- Right Metrics Panel -->
-  {''.join(side_panel)}
-
-  <!-- Bottom Horizontal Divider -->
-  <line x1="44" y1="306" x2="{w - 44}" y2="306" stroke="{RULE}" stroke-width="1"/>
-
-  <!-- Bottom Strip: Repository Stats on Left -->
-  <g font-family="'Geist Mono', monospace" font-size="11" fill="{INK}">
-    <text x="44" y="335">
-      <tspan font-weight="600" fill="{COBALT}">{public_repos}</tspan> Repositories
-      <tspan fill="{MUTED}">·</tspan>
-      <tspan font-weight="600" fill="{COBALT}">{total_stars}</tspan> Stars
-      <tspan fill="{MUTED}">·</tspan>
-      <tspan font-weight="600" fill="{COBALT}">{total_forks}</tspan> Forks
-    </text>
-    <text x="44" y="356" font-family="'Geist', sans-serif" font-size="11" fill="{MUTED}">
-      Primary ecosystems: Research prototypes, AI tooling, multimodal digital twins
-    </text>
-  </g>
-
-  <!-- Bottom Strip: Stacked Language Bar on Right -->
   <defs>
     <linearGradient id="lang-sheen" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
@@ -237,13 +191,57 @@ def generate():
       <rect x="{lang_bar_x}" y="{lang_bar_y}" width="{lang_bar_w}" height="{lang_bar_h}" rx="3.5"/>
     </clipPath>
   </defs>
+
+  <!-- Card Background -->
+  <rect width="{w}" height="{h}" rx="12" fill="{PAPER}" stroke="{RULE}" stroke-width="1"/>
+
+  <!-- Left Header -->
+  <text class="f" style="animation-delay:0.05s" x="44" y="36"
+        font-family="'Geist Mono', monospace" font-size="10" letter-spacing="1" fill="{MUTED}">
+    THE LAST 12 MONTHS ON GITHUB
+  </text>
+  <text class="r" style="animation-delay:0.12s" x="42" y="74"
+        font-family="'Instrument Serif', Georgia, serif" font-size="38" fill="{INK}">
+    {total_c:,} <tspan font-style="italic" fill="{COBALT}">contributions</tspan>
+  </text>
+
+  <!-- Left Chart Baseline -->
+  <line x1="{chart_x0}" y1="{base_y + 2}" x2="{chart_x1}" y2="{base_y + 2}" stroke="{RULE}" stroke-width="1"/>
+
+  <!-- Monthly Bars -->
+  {''.join(bars_svg)}
+
+  <!-- Vertical Divider Between Chart and Stats -->
+  <line x1="600" y1="30" x2="600" y2="244" stroke="{RULE}" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- Right Metrics Panel -->
+  {''.join(side_panel)}
+
+  <!-- Bottom Horizontal Divider -->
+  <line x1="44" y1="258" x2="{w - 44}" y2="258" stroke="{RULE}" stroke-width="1"/>
+
+  <!-- Bottom Strip: Repository Stats on Left -->
+  <g font-family="'Geist Mono', monospace" font-size="11" fill="{INK}">
+    <text x="44" y="284">
+      <tspan font-weight="600" fill="{COBALT}">{public_repos}</tspan> Repositories
+      <tspan fill="{MUTED}">·</tspan>
+      <tspan font-weight="600" fill="{COBALT}">{total_stars}</tspan> Stars
+      <tspan fill="{MUTED}">·</tspan>
+      <tspan font-weight="600" fill="{COBALT}">{total_forks}</tspan> Forks
+    </text>
+    <text x="44" y="304" font-family="'Geist', sans-serif" font-size="10.8" fill="{MUTED}">
+      Primary ecosystems: Research prototypes, AI tooling, multimodal digital twins
+    </text>
+  </g>
+
+  <!-- Bottom Strip: Stacked Language Bar on Right -->
   <g>
     <rect x="{lang_bar_x}" y="{lang_bar_y}" width="{lang_bar_w}" height="{lang_bar_h}" rx="3.5" fill="#E2E2DE"/>
     <g clip-path="url(#lang-clip)">
       {''.join(bar_segments)}
       <rect class="sh" x="{lang_bar_x}" y="{lang_bar_y - 2}" width="64" height="{lang_bar_h + 4}" fill="url(#lang-sheen)"/>
     </g>
-    <text x="{lang_bar_x + lang_bar_w}" y="356" text-anchor="end" font-family="'Geist Mono', monospace" font-size="9.5" fill="{MUTED}">
+    <text x="{lang_bar_x + lang_bar_w}" y="304" text-anchor="end" font-family="'Geist Mono', monospace" font-size="9.5" fill="{MUTED}">
       {lang_labels}
     </text>
   </g>
@@ -258,7 +256,8 @@ def generate():
     os.makedirs(os.path.dirname(OUT_FILE), exist_ok=True)
     with open(OUT_FILE, "w", encoding="utf-8") as f:
         f.write(svg_out)
-    print(f"Generated {OUT_FILE} ({len(svg_out)} bytes)")
+    print(f"Generated tight {OUT_FILE} ({len(svg_out)} bytes)")
+
 
 if __name__ == "__main__":
     generate()

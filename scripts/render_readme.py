@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Generate the streamlined, compact Master Revision V3.1 GitHub Profile README.md for Shashwat Upadhyay.
-Every navigation pill, research direction card, project card, publication DOI, and repository link
-is natively clickable on GitHub and verified against resume/API ground truth.
+Generate the ultra-tight, zero-wasted-space Master Revision V3.3 GitHub Profile README.md
+for Shashwat Upadhyay. Every <br><br> dead gap is eliminated and side-by-side image rows
+use subpixel-safe percentage widths (19.8%, 33%, 49.6%) so they never orphan-wrap on GitHub.
 """
 
 import os
@@ -13,6 +13,7 @@ ROOT = os.path.join(HERE, "..")
 README_PATH = os.path.join(ROOT, "README.md")
 STATS_PATH = os.path.join(ROOT, "data", "github_stats.json")
 
+
 def generate_readme():
     public_repos = 46
     if os.path.exists(STATS_PATH):
@@ -21,78 +22,60 @@ def generate_readme():
             public_repos = stats.get("public_repos", 46)
 
     readme_content = f"""<!--
-  SHASHWAT UPADHYAY — RESEARCH IN MOTION (Master Revision V3.1)
-  Compact Editorial AI Research Portfolio & Automated Design System
+  SHASHWAT UPADHYAY — RESEARCH IN MOTION (Master Revision V3.3)
+  Compact Swiss Editorial AI Research Portfolio & Automated Design System
   Ground Truth: Shashwat_Research_Resume_2026-10-28.pdf
 -->
 
 <div align="center">
 
-<!-- 01 · COMPACT HERO CARD + CLICKABLE QUICK-LINK BAR -->
-<a href="https://github.com/Shashwatology">
-  <img src="./cards/hero.svg" width="100%" alt="Shashwat Upadhyay — Research in Motion. Independent AI Researcher." />
-</a>
+<!-- 00 · COMPACT HERO CARD + ICON QUICK-LINK BAR -->
+<a href="https://github.com/Shashwatology"><img src="./cards/hero.svg" width="100%" alt="Shashwat Upadhyay — Research in Motion. Independent AI Researcher." /></a><br><a href="https://github.com/Shashwatology"><img src="./cards/nav-github.svg" width="19.8%" alt="GitHub" /></a><a href="https://scholar.google.com/citations?user=ulC0-soAAAAJ"><img src="./cards/nav-scholar.svg" width="19.8%" alt="Google Scholar" /></a><a href="https://www.linkedin.com/in/shashwatupadhyay/"><img src="./cards/nav-linkedin.svg" width="19.8%" alt="LinkedIn" /></a><a href="https://www.researchgate.net/profile/Shashwat-Upadhyay-2"><img src="./cards/nav-researchgate.svg" width="19.8%" alt="ResearchGate" /></a><a href="mailto:shashwatology.s@gmail.com"><img src="./cards/nav-email.svg" width="19.8%" alt="Email" /></a>
 
-<a href="https://github.com/Shashwatology"><img src="./cards/nav-github.svg" width="20%" alt="GitHub" /></a><a href="https://scholar.google.com/citations?user=ulC0-soAAAAJ"><img src="./cards/nav-scholar.svg" width="20%" alt="Google Scholar" /></a><a href="https://www.linkedin.com/in/shashwatupadhyay/"><img src="./cards/nav-linkedin.svg" width="20%" alt="LinkedIn" /></a><a href="https://www.researchgate.net/profile/Shashwat-Upadhyay-2"><img src="./cards/nav-researchgate.svg" width="20%" alt="ResearchGate" /></a><a href="mailto:shashwatology.s@gmail.com"><img src="./cards/nav-email.svg" width="20%" alt="Email" /></a>
-
-<br><br>
-
-<!-- 02 · 5 CORE RESEARCH DIRECTIONS (INDIVIDUALLY CLICKABLE) -->
+<!-- 01 · 5 CORE RESEARCH DIRECTIONS (INDIVIDUALLY CLICKABLE) -->
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./cards/title-research-dark.svg" />
-  <img src="./cards/title-research-light.svg" width="100%" alt="Research Directions" />
+  <img src="./cards/title-research-light.svg" width="100%" alt="01 Research Directions" />
 </picture>
+<a href="https://github.com/Shashwatology/PhysioFM"><img src="./cards/domain-01.svg" width="33%" alt="01 Multimodal AI & Physiological Computing" /></a><a href="https://github.com/Shashwatology/Guardian-Travel-Twin-"><img src="./cards/domain-02.svg" width="33%" alt="02 Intelligent Infrastructure & Digital Twins" /></a><a href="https://github.com/Shashwatology/semantic-drift-vlm-attacks"><img src="./cards/domain-03.svg" width="33%" alt="03 Trustworthy AI & ML Security" /></a><br><a href="https://github.com/Shashwatology/Semantic-Ctrl-F"><img src="./cards/domain-04.svg" width="49.6%" alt="04 Computer Vision & Document Intelligence" /></a><a href="https://github.com/Shashwatology?tab=repositories"><img src="./cards/domain-05.svg" width="49.6%" alt="05 Quantitative Research & Financial Modelling" /></a>
 
-<a href="https://github.com/Shashwatology/PhysioFM"><img src="./cards/domain-01.svg" width="33.333%" alt="01 Multimodal AI & Physiological Computing" /></a><a href="https://github.com/Shashwatology/Guardian-Travel-Twin-"><img src="./cards/domain-02.svg" width="33.333%" alt="02 Intelligent Infrastructure & Digital Twins" /></a><a href="https://github.com/Shashwatology/semantic-drift-vlm-attacks"><img src="./cards/domain-03.svg" width="33.333%" alt="03 Trustworthy AI & ML Security" /></a>
-<a href="https://github.com/Shashwatology/Semantic-Ctrl-F"><img src="./cards/domain-04.svg" width="50%" alt="04 Computer Vision & Document Intelligence" /></a><a href="https://github.com/Shashwatology?tab=repositories"><img src="./cards/domain-05.svg" width="50%" alt="05 Quantitative Research & Financial Modelling" /></a>
-
-<br><br>
-
-<!-- 03 · FEATURED RESEARCH PROJECTS (ROW OF 3 CLICKABLE CARDS) -->
+<!-- 02 · FEATURED RESEARCH PROJECTS (ROW OF 3 CLICKABLE CARDS) -->
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./cards/title-projects-dark.svg" />
-  <img src="./cards/title-projects-light.svg" width="100%" alt="Featured Research Projects" />
+  <img src="./cards/title-projects-light.svg" width="100%" alt="02 Featured Research Projects" />
 </picture>
+<a href="https://github.com/Shashwatology/PhysioFM"><img src="./cards/project-physiofm.svg" width="33%" alt="PhysioFM: Foundation Models in rPPG" /></a><a href="https://github.com/Shashwatology/Guardian-Travel-Twin-"><img src="./cards/project-digital-twins.svg" width="33%" alt="Digital Twins in Urban Mobility" /></a><a href="https://github.com/Shashwatology/semantic-drift-vlm-attacks"><img src="./cards/project-vlm-security.svg" width="33%" alt="Semantic Drift in VLMs" /></a>
+<p align="right"><sub><a href="https://github.com/Shashwatology?tab=repositories">Explore all {public_repos} public repositories &#8599;</a></sub></p>
 
-<a href="https://github.com/Shashwatology/PhysioFM"><img src="./cards/project-physiofm.svg" width="33.333%" alt="PhysioFM: Foundation Models in rPPG" /></a><a href="https://github.com/Shashwatology/Guardian-Travel-Twin-"><img src="./cards/project-digital-twins.svg" width="33.333%" alt="Digital Twins in Urban Mobility" /></a><a href="https://github.com/Shashwatology/semantic-drift-vlm-attacks"><img src="./cards/project-vlm-security.svg" width="33.333%" alt="Semantic Drift in VLMs" /></a>
-
-<p align="right">
-  <sub><a href="https://github.com/Shashwatology?tab=repositories">Explore all {public_repos} public repositories &#8599;</a></sub>
-</p>
-
-<!-- 04 · PUBLICATIONS & SCHOLARLY MILESTONES -->
+<!-- 03 · PUBLICATIONS & SCHOLARLY MILESTONES -->
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./cards/title-publications-dark.svg" />
-  <img src="./cards/title-publications-light.svg" width="100%" alt="Publications and Milestones" />
+  <img src="./cards/title-publications-light.svg" width="100%" alt="03 Publications and Milestones" />
 </picture>
 
 </div>
 
 | Manuscript / Publication Title | Venue / Publisher | Year | Status | Verified Link |
 | :-- | :-- | :-: | :-: | :-: |
-| **Semantic Drift Before Inference: A Preprocessing Attack Surface in Vision–Language Models**<br><sub>S.A.K. Upadhyay, S.B. Sharma, R.A. Borgalli, R. Vairagade</sub> | *Adaptive Defense and Intelligent Security Architectures for AI-Driven Cybersecurity (IGI Global)*, Ch. 6, pp. 171–202 | 2026 | `Accepted / DOI Assigned` | [**DOI: 10.4018/979-8-2600-5116-0.ch006**](https://doi.org/10.4018/979-8-2600-5116-0.ch006) · [Code](https://github.com/Shashwatology/semantic-drift-vlm-attacks) |
+| **Semantic Drift Before Inference: A Preprocessing Attack Surface in Vision–Language Models**<br><sub>S.A.K. Upadhyay, S.B. Sharma, R.A. Borgalli, R. Vairagade</sub> | *Adaptive Defense and Intelligent Security Architectures for AI-Driven Cybersecurity (IGI Global)*, Ch. 6, pp. 171–202 | 2026 | `Accepted / DOI` | [**DOI: 10.4018/979-8-2600-5116-0.ch006**](https://doi.org/10.4018/979-8-2600-5116-0.ch006) · [Code](https://github.com/Shashwatology/semantic-drift-vlm-attacks) |
 | **Fake news detection using deep learning models: A novel approach**<br><sub>Sachin Kumar, Rohan Asthana, Shashwat Upadhyay, N. Upreti, M. Akbar</sub> | *Transactions on Emerging Telecommunications Technologies (Wiley)* | 2020 | `Published` | [**DOI: 10.1002/ett.3767**](https://doi.org/10.1002/ett.3767) |
 | **Protocol-Driven Framework for Implementing an Integrated Multimodal Transportation System in Jaipur, India**<br><sub>S.A.K. Upadhyay (mentor: Prof. Nand Kumar)</sub> | *Proceedings of the 18th International Asian Urbanization Conference (IAUC 2026)*, p. 122 | 2026 | `Published` | [**JUMTA Framework**](https://github.com/Shashwatology/JUMTA) |
-| **An IoMT-Based Wearable Prototype for Sustainable Remote Patient Monitoring**<br><sub>S.A.K. Upadhyay, A.K. Singh, A.A. Tiwari, R. Borgalli</sub> | *National Conference on Data-Centric AI (DASDA 2025)* | 2025 | `Best Paper Award` | [**ResearchGate**](https://www.researchgate.net/publication/397178065_An_IoMT-Based_Wearable_Prototype_Sustainable_Remote_Patient_Monitoring) |
+| **An IoMT-Based Wearable Prototype for Sustainable Remote Patient Monitoring**<br><sub>S.A.K. Upadhyay, A.K. Singh, A.A. Tiwari, R. Borgalli</sub> | *National Conference on Data-Centric AI (DASDA 2025)* | 2025 | `Best Paper` | [**ResearchGate**](https://www.researchgate.net/publication/397178065_An_IoMT-Based_Wearable_Prototype_Sustainable_Remote_Patient_Monitoring) |
 | **Technology Intervention for an Efficient Judicial System**<br><sub>Y. Jain, S.A.K. Upadhyay</sub> | *Conference Proceedings (ResearchGate Verified)* | 2025 | `Published` | [**ResearchGate**](https://www.researchgate.net/publication/394205684_Technology_Intervention_for_an_Efficient_Judicial_System) |
 | **SentinelAI: Adaptive Behavioral Risk Framework for Real-Time SSH Threat Detection**<br><sub>S.A.K. Upadhyay</sub> | *Cybersecurity Systems Venue* | 2026 | `Under Review` | [**SentinelAI Code**](https://github.com/Shashwatology/SentinelAI) |
-| **PhysioFM: A Diagnostic Framework for Transformer-Based Remote Photoplethysmography**<br><sub>S.A.K. Upadhyay, S.B. Sharma, N. Kumar, S. Kumar, Bhoomika</sub> | *Int’l Conf. on Next-Gen Structural Health Monitoring Systems (SHMS-2026)*, Paper ID 123 | 2026 | `Presented (Oct 2026)` | [**PhysioFM Code**](https://github.com/Shashwatology/PhysioFM) |
+| **PhysioFM: A Diagnostic Framework for Transformer-Based Remote Photoplethysmography**<br><sub>S.A.K. Upadhyay, S.B. Sharma, N. Kumar, S. Kumar, Bhoomika</sub> | *Int’l Conf. on Next-Gen Structural Health Monitoring Systems (SHMS-2026)*, Paper ID 123 | 2026 | `Presented` | [**PhysioFM Code**](https://github.com/Shashwatology/PhysioFM) |
 
-<br>
-
-<!-- 05 · ACADEMIC & RESEARCH MILESTONES -->
 <div align="center">
-  <img src="./cards/research-timeline.svg" width="100%" alt="Academic and Research Milestones" />
-</div>
 
-<br>
+<!-- ACADEMIC & RESEARCH MILESTONES -->
+<img src="./cards/research-timeline.svg" width="100%" alt="Academic and Research Milestones" />
 
-<!-- 06 · TECHNOLOGY TOOLKIT -->
-<div align="center">
+<!-- 04 · TECHNOLOGY TOOLKIT -->
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./cards/title-stack-dark.svg" />
-  <img src="./cards/title-stack-light.svg" width="100%" alt="Technology Toolkit" />
+  <img src="./cards/title-stack-light.svg" width="100%" alt="04 Technology Toolkit" />
 </picture>
+
 </div>
 
 | Domain | Core Tools &amp; Frameworks |
@@ -103,28 +86,19 @@ def generate_readme():
 | **Cyber &amp; ML Security** | `VLM Preprocessing Auditing (SEV)` · `Isolation Forests (Zero-Label)` · `SSH Threat Modeling` · `CICIDS2017 Benchmark` |
 | **Infrastructure &amp; Systems** | `SUMO Traffic Simulation` · `Unity 3D Engine` · `GIS Integration` · `Docker` · `Git &amp; GitHub Actions CI/CD` · `LaTeX` |
 
-<br>
-
 <div align="center">
 
-<!-- 07 · GITHUB TELEMETRY & BLUE HEATMAP -->
+<!-- 05 · GITHUB TELEMETRY & BLUE HEATMAP -->
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./cards/title-activity-dark.svg" />
-  <img src="./cards/title-activity-light.svg" width="100%" alt="GitHub Telemetry and Heatmap" />
+  <img src="./cards/title-activity-light.svg" width="100%" alt="05 GitHub Telemetry and Heatmap" />
 </picture>
+<img src="./cards/heatmap.svg" width="100%" alt="Shashwat's contribution calendar in electric cobalt blue, refreshed daily with integrated telemetry" /><br><img src="./cards/activity.svg" width="100%" alt="12-month GitHub activity chart, contribution streak metrics, repository metrics, and language distribution" />
 
-<img src="./cards/heatmap.svg" width="100%" alt="Shashwat's contribution calendar in electric cobalt blue, refreshed daily with integrated telemetry" />
-
-<br><br>
-
-<img src="./cards/activity.svg" width="100%" alt="12-month GitHub activity chart, contribution streak metrics, repository metrics, and language distribution" />
-
-<br><br>
-
-<!-- 08 · FEATURED REPOSITORIES -->
+<!-- 06 · FEATURED REPOSITORIES -->
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./cards/title-repos-dark.svg" />
-  <img src="./cards/title-repos-light.svg" width="100%" alt="Featured Repositories" />
+  <img src="./cards/title-repos-light.svg" width="100%" alt="06 Featured Repositories" />
 </picture>
 
 </div>
@@ -138,34 +112,23 @@ def generate_readme():
 | [**JUMTA**](https://github.com/Shashwatology/JUMTA) | Jaipur integrated multimodal transit &amp; mobility architecture | `TypeScript` | IAUC 2026 · IMPACT Protocol · Public Transit |
 | [**Semantic-Ctrl-F**](https://github.com/Shashwatology/Semantic-Ctrl-F) | Visual-semantic document retrieval &amp; contrastive indexing | `Python` | CLIP · Vector Indexing · Cross-Modal Retrieval |
 
-<br>
-
 <div align="center">
 
-<!-- 09 · CONNECT & COLLABORATE FOOTER -->
+<!-- 07 · CONNECT & COLLABORATE FOOTER -->
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./cards/title-connect-dark.svg" />
-  <img src="./cards/title-connect-light.svg" width="100%" alt="Connect and Collaborate" />
+  <img src="./cards/title-connect-light.svg" width="100%" alt="07 Connect and Collaborate" />
 </picture>
 
-<p align="center">
-  <a href="https://github.com/Shashwatology"><b>GitHub</b></a> &nbsp;·&nbsp;
-  <a href="https://scholar.google.com/citations?user=ulC0-soAAAAJ"><b>Google Scholar</b></a> &nbsp;·&nbsp;
-  <a href="https://www.linkedin.com/in/shashwatupadhyay/"><b>LinkedIn</b></a> &nbsp;·&nbsp;
-  <a href="https://www.researchgate.net/profile/Shashwat-Upadhyay-2"><b>ResearchGate</b></a> &nbsp;·&nbsp;
-  <a href="mailto:shashwatology.s@gmail.com"><b>Email</b></a>
-</p>
-
-<p align="center">
-  <sub>RESEARCHING INTELLIGENCE. BUILDING SYSTEMS. &copy; 2026 SHASHWAT UPADHYAY.</sub>
-</p>
+<a href="https://github.com/Shashwatology"><b>GitHub</b></a> &nbsp;·&nbsp; <a href="https://scholar.google.com/citations?user=ulC0-soAAAAJ"><b>Google Scholar</b></a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/shashwatupadhyay/"><b>LinkedIn</b></a> &nbsp;·&nbsp; <a href="https://www.researchgate.net/profile/Shashwat-Upadhyay-2"><b>ResearchGate</b></a> &nbsp;·&nbsp; <a href="mailto:shashwatology.s@gmail.com"><b>Email</b></a><br><sub>RESEARCHING INTELLIGENCE. BUILDING SYSTEMS. &copy; 2026 SHASHWAT UPADHYAY.</sub>
 
 </div>
 """
 
     with open(README_PATH, "w", encoding="utf-8") as f:
         f.write(readme_content)
-    print(f"Generated Master Revision V3.1 {README_PATH} ({len(readme_content)} bytes)")
+    print(f"Generated tight Master Revision V3.3 {README_PATH} ({len(readme_content)} bytes)")
+
 
 if __name__ == "__main__":
     generate_readme()
