@@ -82,8 +82,9 @@ def generate():
         x = gx + col * step
         y = gy + row * step
 
+        twinkle_attr = f' class="twinkle" style="animation-delay:{(col * 0.13 + row * 0.25) % 3.2:.2f}s"' if level >= 3 else ""
         cells.append(
-            f'<rect x="{x:.1f}" y="{y:.1f}" width="{cell_size}" height="{cell_size}" rx="2" fill="{fill}">'
+            f'<rect{twinkle_attr} x="{x:.1f}" y="{y:.1f}" width="{cell_size}" height="{cell_size}" rx="2" fill="{fill}">'
             f'<title>{d["date"]}: {count} contribution{"s" if count != 1 else ""}</title>'
             f'</rect>'
         )
@@ -124,6 +125,7 @@ def generate():
 
   <!-- Card Header -->
   <g>
+    <circle class="ring" cx="44" cy="36" r="4.5" fill="none" stroke="{COBALT}" stroke-width="1.2"/>
     <circle class="live" cx="44" cy="36" r="4" fill="{COBALT}"/>
     <text x="56" y="41" font-family="'Instrument Serif', Georgia, serif" font-size="28" fill="{INK}">
       Every day, <tspan font-style="italic" fill="{COBALT}">in blue</tspan>

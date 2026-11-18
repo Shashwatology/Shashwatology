@@ -227,13 +227,21 @@ def generate():
   </g>
 
   <!-- Bottom Strip: Stacked Language Bar on Right -->
+  <defs>
+    <linearGradient id="lang-sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="lang-clip">
+      <rect x="{lang_bar_x}" y="{lang_bar_y}" width="{lang_bar_w}" height="{lang_bar_h}" rx="3.5"/>
+    </clipPath>
+  </defs>
   <g>
     <rect x="{lang_bar_x}" y="{lang_bar_y}" width="{lang_bar_w}" height="{lang_bar_h}" rx="3.5" fill="#E2E2DE"/>
     <g clip-path="url(#lang-clip)">
-      <clipPath id="lang-clip">
-        <rect x="{lang_bar_x}" y="{lang_bar_y}" width="{lang_bar_w}" height="{lang_bar_h}" rx="3.5"/>
-      </clipPath>
       {''.join(bar_segments)}
+      <rect class="sh" x="{lang_bar_x}" y="{lang_bar_y - 2}" width="64" height="{lang_bar_h + 4}" fill="url(#lang-sheen)"/>
     </g>
     <text x="{lang_bar_x + lang_bar_w}" y="356" text-anchor="end" font-family="'Geist Mono', monospace" font-size="9.5" fill="{MUTED}">
       {lang_labels}

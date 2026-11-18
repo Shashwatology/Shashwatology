@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 SVG utility module for generating high-end editorial SVG cards with embedded fonts,
-refined animation keyframes, and Swiss typographic grids.
+refined animation keyframes, CSS hover micro-interactions, and Swiss typographic grids.
 """
 
 import os
@@ -60,24 +60,39 @@ def get_font_css(keys=None):
     return "".join(css)
 
 BASE_CSS = """
-@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-@keyframes pop { 0% { opacity: 0; transform: scale(.4); } 70% { opacity: 1; transform: scale(1.1); } 100% { opacity: 1; transform: none; } }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
-@keyframes nudge { 0%, 100% { transform: none; } 50% { transform: translateX(3px); } }
-@keyframes sheen { 0% { transform: translateX(-300px) skewX(-20deg); } 20%, 100% { transform: translateX(500px) skewX(-20deg); } }
+@keyframes pop { 0% { opacity: 0; transform: scale(.6); } 70% { opacity: 1; transform: scale(1.08); } 100% { opacity: 1; transform: none; } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .28; } }
+@keyframes pulse-ring { 0% { transform: scale(0.8); opacity: 0.65; } 100% { transform: scale(2.4); opacity: 0; } }
+@keyframes nudge { 0%, 100% { transform: none; } 50% { transform: translate(2.5px, -2px); } }
+@keyframes sheen { 0% { transform: translateX(-340px) skewX(-22deg); opacity: 0; } 12% { opacity: 0.55; } 34% { transform: translateX(620px) skewX(-22deg); opacity: 0; } 100% { transform: translateX(620px) skewX(-22deg); opacity: 0; } }
+@keyframes border-glide { 0% { stroke-dashoffset: 240; opacity: 0; } 15% { opacity: 0.9; } 85% { opacity: 0.9; } 100% { stroke-dashoffset: -240; opacity: 0; } }
+@keyframes accent-wave { 0%, 100% { opacity: 0.18; } 50% { opacity: 0.95; } }
+@keyframes cell-shimmer { 0%, 100% { opacity: 1; } 50% { opacity: 0.62; } }
 
-.r { opacity: 1; transform-box: fill-box; }
-.f { opacity: 1; }
-.g { transform-box: fill-box; transform-origin: bottom; }
-.p { opacity: 1; transform-box: fill-box; transform-origin: center; }
-.live { animation: pulse 2s ease-in-out infinite; }
-.n { transform-box: fill-box; animation: nudge 2s ease-in-out infinite; }
-.sh { animation: sheen 6s ease-in-out infinite; }
+.r { animation: rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both; transform-box: fill-box; }
+.f { animation: fade 0.6s ease both; }
+.g { animation: grow 0.75s cubic-bezier(0.22, 1, 0.36, 1) both; transform-box: fill-box; transform-origin: bottom; }
+.p { animation: pop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; transform-box: fill-box; transform-origin: center; }
+.live { animation: pulse 2.2s ease-in-out infinite; }
+.ring { transform-box: fill-box; transform-origin: center; animation: pulse-ring 2.6s cubic-bezier(0.2, 0.8, 0.4, 1) infinite; }
+.n { transform-box: fill-box; animation: nudge 2.6s ease-in-out infinite; transition: transform 0.25s ease; }
+.sh { animation: sheen 7.5s ease-in-out infinite; pointer-events: none; }
+.accent-bar { animation: accent-wave 4.2s ease-in-out infinite; }
+.twinkle { animation: cell-shimmer 3.2s ease-in-out infinite; }
+
+/* Interactive Hover Micro-Effects (active on direct SVG view and local preview) */
+.card-interactive { cursor: pointer; }
+.card-interactive .card-bg { transition: fill 0.25s ease, stroke 0.25s ease, stroke-width 0.25s ease; }
+.card-interactive:hover .card-bg { fill: #FAFAF7; stroke: #315EFF; stroke-width: 1.5; }
+.card-interactive:hover .n { animation: none; transform: translate(3px, -3px); }
+.card-interactive:hover .hover-accent { opacity: 1; }
+.hover-accent { transition: opacity 0.25s ease; }
 
 @media (prefers-reduced-motion: reduce) {
-  .live, .n, .sh { animation: none !important; }
+  .r, .f, .g, .p, .live, .ring, .n, .sh, .accent-bar, .twinkle { animation: none !important; }
 }
 """
 
@@ -111,4 +126,3 @@ def make_card_svg(width, height, body, font_keys=None, label="", extra_css=""):
         f'{body}\n'
         f'</svg>'
     )
-
